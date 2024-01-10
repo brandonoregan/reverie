@@ -19,11 +19,29 @@ function Header() {
             <LinkContainer to="/products">
               <Nav.Link>Products</Nav.Link>
             </LinkContainer>
+
+            {/* TODO: On Condition */}
+            <LinkContainer to="/profile">
+              <Nav.Link>Profile</Nav.Link>
+            </LinkContainer>
+
+            <LinkContainer to="/cart">
+              <Nav.Link>
+                <i
+                  style={{ fontSize: "1" }}
+                  className="fas fa-shopping-cart"
+                ></i>
+              </Nav.Link>
+            </LinkContainer>
+
             {/* TODO: Change title to user username or admin depending */}
             <NavDropdown title="Account" id="basic-nav-dropdown">
               {/* TODO: Conditionlly display login */}
               <LinkContainer to="/login">
                 <NavDropdown.Item>Login</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <NavDropdown.Item>Register</NavDropdown.Item>
               </LinkContainer>
 
               {/* TODO: Conditionally display for admin */}

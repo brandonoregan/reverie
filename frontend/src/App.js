@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 export default function App() {
   return (
@@ -22,25 +23,25 @@ export default function App() {
       <div className="app-container">
         <Header />
         <main>
-          <Container>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<AllProducts />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
 
-              {/* Authentication */}
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+            {/* Authentication */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-              {/* Admin Only */}
-              <Route path="/orders" element={<OrdersPage />} />
-              <Route path="/users" element={<UsersPage />} />
-              <Route path="/stock" element={<StockPage />} />
+            {/* Admin Only */}
+            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/stock" element={<StockPage />} />
 
-              <Route path="*" element={<NoMatchPage />} />
-            </Routes>
-          </Container>
+            {/* Error */}
+            <Route path="*" element={<NoMatchPage />} />
+          </Routes>
         </main>
         <Footer />
       </div>

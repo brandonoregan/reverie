@@ -17,3 +17,7 @@ footer {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.slider {
+  height: 18rem;
+}
