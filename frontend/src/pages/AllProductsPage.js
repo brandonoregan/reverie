@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import ProductCard from "../components/ProductCard";
+
+// const products = [];
 
 function AllProductsPage() {
+  // useEffect(() => {
+  //   console.log(products);
+  // });
   return (
-    <div>AllProductsPage</div>
-  )
+    <Container>
+      {/* <Row>
+        {products.map((product) => (
+          <Col>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row> */}
+    </Container>
+  );
 }
 
-export default AllProductsPage
+export default AllProductsPage;

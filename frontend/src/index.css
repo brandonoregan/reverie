@@ -21,3 +21,7 @@ footer {
 .slider {
   height: 18rem;
 }
+
+.productImage:hover {
+  cursor: pointer;
+}
