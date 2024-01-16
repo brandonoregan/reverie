@@ -25,3 +25,8 @@ footer {
 .productImage:hover {
   cursor: pointer;
 }
+
+.productImage {
+  max-height: 18rem;
+  min-height: 18rem;
+}
