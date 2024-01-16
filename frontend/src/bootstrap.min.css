@@ -8637,12 +8637,16 @@ fieldset:disabled .btn {
     var(--bs-bg-opacity)
   ) !important;
 }
-.bg-body-tertiary {
+/* .bg-body-tertiary {
   --bs-bg-opacity: 1;
   background-color: rgba(
     var(--bs-tertiary-bg-rgb),
     var(--bs-bg-opacity)
   ) !important;
+} */
+.bg-body-tertiary {
+  --bs-bg-opacity: 1;
+  background-color: #ece7db;
 }
 .bg-opacity-10 {
   --bs-bg-opacity: 0.1;

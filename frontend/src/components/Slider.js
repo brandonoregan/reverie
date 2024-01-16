@@ -11,7 +11,7 @@ const imageStyle = {
 export default function Slider() {
   return (
     <Carousel slide={false} pause={"hover"} interval={null}>
-      <Carousel.Item>
+      <Carousel.Item style={{ color: "ece7db" }}>
         <img
           src="https://images.pexels.com/photos/7583935/pexels-photo-7583935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="Reverie Logo"

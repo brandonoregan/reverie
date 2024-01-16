@@ -1,3 +1,11 @@
+:root {
+  --primary: #ece7db;
+}
+
+html {
+  font-family: "Judson", serif;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;

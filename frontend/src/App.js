@@ -30,7 +30,7 @@ export default function App() {
               path="products/product/:id"
               element={<ProductDetailPage />}
             />
-            <Route path="/cart" element={<CartPage />} />
+            <Route path="/cart/:id?" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
 
             {/* Authentication */}

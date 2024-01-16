@@ -4,10 +4,18 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function Header() {
   return (
-    <Navbar expand="md" className="bg-body-tertiary">
-      <Container>
+    <Navbar
+      expand="md"
+      className="bg-body-tertiary"
+      style={{ fontFamily: "Judson" }}
+    >
+      <Container style={{ fontSize: "1.3rem" }}>
         <LinkContainer to="/">
-          <Navbar.Brand>Reverie Reading</Navbar.Brand>
+          <Navbar.Brand>
+            <span style={{ fontSize: "1.7rem", fontWeight: 700 }}>
+              Reverie Reading
+            </span>
+          </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

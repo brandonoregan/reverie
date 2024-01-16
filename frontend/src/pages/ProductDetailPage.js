@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Col,
@@ -14,54 +14,64 @@ import {
 
 import Rating from "../components/Rating";
 
-const product = {
-  id: 8,
-  name: "Peter Pan",
-  image: "/media/images/peter-pan.webp",
-  category: "books",
-  description:
-    "When Peter Pan flies into the Darlings' room one dusky evening, he convinces Wendy and her brothers to come with him to the magical world of Neverland, where children never grow old.",
-  rating: "4.50",
-  review_count: 11,
-  price: "15.99",
-  stock_count: 6,
-  createdAt: "2024-01-16T09:47:49.460088Z",
-  user: 1,
-};
+// const product = {
+//   id: 8,
+//   name: "Peter Pan",
+//   image: "/media/images/peter-pan.webp",
+//   category: "books",
+//   description:
+//     "When Peter Pan flies into the Darlings' room one dusky evening, he convinces Wendy and her brothers to come with him to the magical world of Neverland, where children never grow old.",
+//   rating: "4.50",
+//   review_count: 11,
+//   price: "15.99",
+//   stock_count: 6,
+//   createdAt: "2024-01-16T09:47:49.460088Z",
+//   user: 1,
+// };
 
 function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
-  // const [products, setProducts] = useState([]);
-  // const [productDetail, setProductDetail] = useState({});
-  // const { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState({});
 
-  // useEffect(() => {
-  //   async function getProducts() {
-  //     try {
-  //       const res = await fetch("http://127.0.0.1:8000/api/products");
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  //       if (!res.ok) {
-  //         throw new Error(res.status);
-  //       }
+  const addToCartHandler = () => {
+    navigate(`/cart/${id} ? qantity=${quantity}`);
+  };
 
-  //       const data = await res.json();
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/products");
 
-  //       console.log("DATA: ", data);
+        if (!res.ok) {
+          throw new Error(res.status);
+        }
 
-  //       setProducts(data);
+        const data = await res.json();
 
-  //       // const product = data.filter((product) => product.id === id);
-  //       // setProductDetail(product);
-  //       // console.log(product);
-  //     } catch (error) {
-  //       console.log("CAUGHT ERROR: ", error);
-  //     }
-  //   }
-  //   console.log(id);
-  //   // console.log(productDetail);
+        console.log("DATA: ", data);
+        console.log("ID: ", typeof id);
 
-  //   getProducts();
-  // }, [id]);
+        setProducts(data);
+
+        const productDetail = data.filter(
+          (product) => String(product.id) === id
+        );
+        setProduct(productDetail[0]);
+
+        console.log(productDetail);
+      } catch (error) {
+        console.log("CAUGHT ERROR: ", error);
+      }
+    }
+
+    console.log(id);
+
+    getProducts();
+  }, [id]);
 
   return (
     <Container style={{ fontSize: "1.3rem" }}>
@@ -128,7 +138,6 @@ function ProductDetailPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Quantity:</Col>
-                    {/* TODO: Add drop down arrow */}
                     <Col xs="auto" className="my-1">
                       <Form.Control
                         as="select"
@@ -149,8 +158,7 @@ function ProductDetailPage() {
 
               <ListGroup.Item className="d-flex justify-content-end ">
                 <Button
-                  // onClick={addToCartHandler}
-
+                  onClick={addToCartHandler}
                   style={{ fontSize: "1.4rem" }}
                   disabled={product.stock_count === 0}
                   type="button"
