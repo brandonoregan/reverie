@@ -4,6 +4,9 @@ import ProductCard from "../components/ProductCard";
 
 function AllProductsPage() {
   const [products, setProducts] = useState([]);
+  const [bookProducts, setBookProducts] = useState([]);
+  const [candleProducts, setCandleProducts] = useState([]);
+  const [bundleProducts, setBundleProducts] = useState([]);
 
   useEffect(() => {
     async function getProducts() {
@@ -16,9 +19,22 @@ function AllProductsPage() {
 
         const data = await res.json();
 
-        console.log("DATA: ", data);
+        // console.log("DATA: ", data);
 
         setProducts(data);
+
+        const books = data.filter((product) => product.category === "books");
+        setBookProducts(books);
+
+        const candles = data.filter(
+          (product) => product.category === "candles"
+        );
+        setCandleProducts(candles);
+
+        const bundles = data.filter(
+          (product) => product.category === "bundles"
+        );
+        setBundleProducts(bundles);
       } catch (error) {
         console.log("CAUGHT ERROR: ", error);
       }
@@ -30,7 +46,24 @@ function AllProductsPage() {
   return (
     <Container>
       <Row>
-        {products.map((product) => (
+        <h1>Experiences</h1>
+        {bundleProducts.map((product) => (
+          <Col key={product.id}>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <h1>Candles</h1>
+        {candleProducts.map((product) => (
+          <Col key={product.id}>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <h1>Books</h1>
+        {bookProducts.map((product) => (
           <Col key={product.id}>
             <ProductCard product={product} />
           </Col>

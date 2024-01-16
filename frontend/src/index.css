@@ -30,3 +30,7 @@ footer {
   max-height: 18rem;
   min-height: 18rem;
 }
+
+.productSubHeading {
+  font-weight: 700;
+}
