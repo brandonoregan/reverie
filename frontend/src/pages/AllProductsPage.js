@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
 
 function AllProductsPage() {
@@ -7,6 +7,11 @@ function AllProductsPage() {
   const [bookProducts, setBookProducts] = useState([]);
   const [candleProducts, setCandleProducts] = useState([]);
   const [bundleProducts, setBundleProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("bundles");
+
+  function handleSelectCategory(category) {
+    setSelectedCategory(category);
+  }
 
   useEffect(() => {
     async function getProducts() {
@@ -45,14 +50,57 @@ function AllProductsPage() {
 
   return (
     <Container>
-      <Row>
-        <h1>Experiences</h1>
-        {bundleProducts.map((product) => (
-          <Col key={product.id}>
-            <ProductCard product={product} />
-          </Col>
-        ))}
+      <Row className="mt-3">
+        <Col md={3}>
+          <Table hover>
+            <thead className="">
+              <th>All Products</th>
+            </thead>
+            <tbody>
+              <tr onClick={() => handleSelectCategory("bundles")}>
+                <td className="ps-0">Bundles</td>
+              </tr>
+              <tr onClick={() => handleSelectCategory("candles")}>
+                <td className="ps-0">Candles</td>
+              </tr>
+              <tr onClick={() => handleSelectCategory("books")}>
+                <td className="ps-0">Books</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+        <Col md={9}>
+          {selectedCategory === "candles" ? (
+            <Row>
+              <h1>Candles</h1>
+              {candleProducts.map((product) => (
+                <Col key={product.id}>
+                  <ProductCard product={product} />
+                </Col>
+              ))}
+            </Row>
+          ) : selectedCategory === "books" ? (
+            <Row>
+              <h1>Books</h1>
+              {bookProducts.map((product) => (
+                <Col key={product.id}>
+                  <ProductCard product={product} />
+                </Col>
+              ))}
+            </Row>
+          ) : (
+            <Row>
+              <h1>Bundles</h1>
+              {bundleProducts.map((product) => (
+                <Col key={product.id}>
+                  <ProductCard product={product} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </Col>
       </Row>
+      {/* 
       <Row>
         <h1>Candles</h1>
         {candleProducts.map((product) => (
@@ -68,7 +116,7 @@ function AllProductsPage() {
             <ProductCard product={product} />
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </Container>
   );
 }
