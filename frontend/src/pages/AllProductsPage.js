@@ -72,7 +72,6 @@ function AllProductsPage() {
         <Col md={9}>
           {selectedCategory === "candles" ? (
             <Row>
-              <h1>Candles</h1>
               {candleProducts.map((product) => (
                 <Col key={product.id}>
                   <ProductCard product={product} />
@@ -81,7 +80,6 @@ function AllProductsPage() {
             </Row>
           ) : selectedCategory === "books" ? (
             <Row>
-              <h1>Books</h1>
               {bookProducts.map((product) => (
                 <Col key={product.id}>
                   <ProductCard product={product} />
@@ -90,7 +88,6 @@ function AllProductsPage() {
             </Row>
           ) : (
             <Row>
-              <h1>Bundles</h1>
               {bundleProducts.map((product) => (
                 <Col key={product.id}>
                   <ProductCard product={product} />

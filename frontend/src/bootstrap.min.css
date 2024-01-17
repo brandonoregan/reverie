@@ -2980,7 +2980,7 @@ fieldset:disabled .btn {
 }
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #2c3e50;
+  --bs-btn-bg: #cccccb;
   --bs-btn-border-color: #2c3e50;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #253544;

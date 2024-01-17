@@ -1,9 +1,12 @@
 :root {
-  --primary: #ece7db;
+  --oat: #ece7db;
+  --forest: #859784;
+  --grey: #cccccb;
+  --slate: #424142;
 }
 
 html {
-  font-family: "Judson", serif;
+  /* font-family: "Judson", serif; */
 }
 
 body {
@@ -42,3 +45,31 @@ footer {
 .productSubHeading {
   font-weight: 700;
 }
+
+/* Home Page Style */
+
+.shopNowBtn:hover {
+  transform: scale(1.1);
+}
+
+.imageStyle {
+  height: 30rem;
+  object-fit: contain;
+  display: block;
+}
+
+/* Add query set to fix responsiveness*/
+.heroText1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10rem;
+  font-family: "Judson";
+}
+
+/* .carouselItem1 {
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  background-color: var(--oat);
+} */

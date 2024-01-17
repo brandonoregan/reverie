@@ -11,17 +11,28 @@ const imageStyle = {
 export default function Slider() {
   return (
     <Carousel slide={false} pause={"hover"} interval={null}>
-      <Carousel.Item style={{ color: "ece7db" }}>
-        <img
-          src="https://images.pexels.com/photos/7583935/pexels-photo-7583935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="Reverie Logo"
-          className="d-block w-100 mh-100"
-          style={imageStyle}
-        ></img>
+      <Carousel.Item
+        style={{
+          objectFit: "contain",
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "#ece7db",
+        }}
+        className="carouselItem1"
+      >
+        <div className="heroText1">
+          <h3>Find Reverie in every book.</h3>
+        </div>
+        <div>
+          <img
+            src="http://127.0.0.1:8000/media/images/logo.jpg"
+            alt="Reverie Logo"
+            className="imageStyle"
+          ></img>
+        </div>
         <Carousel.Caption>
-          <p>Find somethiing you'll love</p>
           <LinkContainer to="/products">
-            <Button variant="secondary">View Products</Button>
+            <Button variant="outline-primary">View Products</Button>
           </LinkContainer>
         </Carousel.Caption>
       </Carousel.Item>
