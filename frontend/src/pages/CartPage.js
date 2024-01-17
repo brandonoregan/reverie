@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import Message from "../components/Message";
+import BackButton from "../components/BackButton";
 import {
   Col,
   Row,
@@ -51,11 +52,17 @@ function CartPage() {
     <Container>
       <Row>
         <h1>Shopping Cart</h1>
+        <BackButton toLink="/products" className="btn btn-primary ">
+          Conitnue Shopping
+        </BackButton>
       </Row>
 
       <Row className="d-flex justify-content-center">
         {cartItems.length === 0 ? (
-          <h1>Your cart is empty. Click here to shop.</h1>
+          <Message>
+            Your cart is empty{" "}
+            <BackButton toLink="/products">Shop now</BackButton>
+          </Message>
         ) : (
           <Table className="text-center" hover>
             <thead>

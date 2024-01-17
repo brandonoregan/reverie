@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 
 import Rating from "../components/Rating";
+import BackButton from "../components/BackButton";
 
 // const product = {
 //   id: 8,
@@ -75,9 +76,9 @@ function ProductDetailPage() {
 
   return (
     <Container style={{ fontSize: "1.3rem" }}>
-      <Link to="/products" className="btn btn-light my-3 ">
+      <BackButton toLink="/products" className="btn btn-light my-3">
         Go Back
-      </Link>
+      </BackButton>
       <Row className="d-flex justify-content-center ">
         <Col md={6}>
           <Image
