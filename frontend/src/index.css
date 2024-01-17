@@ -5,6 +5,23 @@
   --slate: #424142;
 }
 
+.btn-primary {
+  background-color: var(--oat) !important;
+  border-color: black !important;
+}
+
+.btn-outline-primary {
+  border-color: black !important;
+  color: black !important;
+  background-color: #424142;
+}
+
+.btn-outline-primary:hover {
+  border-color: black !important;
+  color: black !important;
+  background-color: #ece7db85;
+}
+
 html {
   /* font-family: "Judson", serif; */
 }
