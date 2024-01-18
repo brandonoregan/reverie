@@ -52,26 +52,26 @@ const categories = [
 function HomePage() {
   const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    async function getHello() {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/get-user");
+  // useEffect(() => {
+  //   async function getHello() {
+  //     try {
+  //       const res = await fetch("http://127.0.0.1:8000/api/get-user");
 
-        if (!res.ok) {
-          throw new Error(res.status);
-        }
+  //       if (!res.ok) {
+  //         throw new Error(res.status);
+  //       }
 
-        const data = await res.json();
+  //       const data = await res.json();
 
-        console.log("DATA: ", data);
+  //       console.log("DATA: ", data);
 
-        setUser(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getHello();
-  }, []);
+  //       setUser(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getHello();
+  // }, []);
 
   return (
     <div>
@@ -79,7 +79,7 @@ function HomePage() {
       <Container>
         <Row className="d-flex justify-content-center mt-4">
           {categories.map((cat) => (
-            <Col className="d-flex justify-content-center">
+            <Col key={cat.category} className="d-flex justify-content-center">
               <Card style={{ width: "18rem" }}>
                 <Image style={{ position: "relative" }} src={cat.image} />
                 <Link to="products">

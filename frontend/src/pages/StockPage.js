@@ -1,10 +1,10 @@
-// import React from "react";
+import React from "react";
 
-// function StockPage() {
-//   return <div>StockPage</div>;
-// }
+function StockPage() {
+  return <div>StockPage</div>;
+}
 
-// export default StockPage;
+export default StockPage;
 
 // export default function App() {
 //   const {

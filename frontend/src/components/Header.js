@@ -65,7 +65,9 @@ function Header() {
 
               {/* TODO: Conditionally display logout if logged in  */}
               <NavDropdown.Divider />
-              <NavDropdown.Item>Logout</NavDropdown.Item>
+              <LinkContainer to="/logout">
+                <NavDropdown.Item>Logout</NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

@@ -10,11 +10,13 @@ urlpatterns = [
     path("products/", views.get_all_products, name="get_all_products"),
 
     path(
-        "user/login/", views.MyTokenObtainPairView.as_view(), name="token_obtain_pair"
-    ),
-    path(
         "user/register/", views.register_user, name="register_user"
     ),
 
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
+    path("user/logout/blacklist/", views.BlacklistTokenUpdateView.as_view(), name="blacklist"
+         )
 ]
