@@ -7,7 +7,13 @@ from .models import Product
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email',]
+        fields = [
+            "id",
+            "username",
+            "email",
+            "first_name", 
+            "last_name",
+        ]
 
 
 class UserSerializerWithToken(UserSerializer):
@@ -15,8 +21,8 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'token']
-    
+        fields = ["id", "username", "email", "first_name", "last_name", "token"]
+
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token)
