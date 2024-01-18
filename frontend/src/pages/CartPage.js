@@ -29,20 +29,20 @@ const products = [
     createdAt: "2024-01-16T09:47:49.460088Z",
     user: 1,
   },
-  {
-    id: 10,
-    name: "Star Crossed Lovers",
-    image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
-    category: "candles",
-    description:
-      "A soothing combination of coconut milk, soft florals, thrift & sea salt. Perfect for a relaxing Sunday night.",
-    rating: "4.00",
-    review_count: 16,
-    price: "19.99",
-    stock_count: 11,
-    createdAt: "2024-01-16T09:53:39.021046Z",
-    user: 1,
-  },
+  // {
+  //   id: 10,
+  //   name: "Star Crossed Lovers",
+  //   image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
+  //   category: "candles",
+  //   description:
+  //     "A soothing combination of coconut milk, soft florals, thrift & sea salt. Perfect for a relaxing Sunday night.",
+  //   rating: "4.00",
+  //   review_count: 16,
+  //   price: "19.99",
+  //   stock_count: 11,
+  //   createdAt: "2024-01-16T09:53:39.021046Z",
+  //   user: 1,
+  // },
 ];
 
 function CartPage() {
@@ -51,8 +51,12 @@ function CartPage() {
   return (
     <Container>
       <Row>
-        <h1>Shopping Cart</h1>
-        <BackButton toLink="/products" className="btn btn-primary ">
+        <h1 className="text-center">Shopping Cart</h1>
+        <BackButton
+          // variant="outline-secondary"
+          toLink="/products"
+          className="btn btn-secondary w-25  ms-auto me-auto  "
+        >
           Conitnue Shopping
         </BackButton>
       </Row>
@@ -127,7 +131,9 @@ function CartPage() {
                 <td></td>
                 <td></td>
                 <td colSpan={2}>
-                  <Button className="w-100">Proceed to Checkout</Button>
+                  <Button variant="secondary" className="w-100 ">
+                    Proceed to Checkout
+                  </Button>
                 </td>
               </tr>
             </tbody>

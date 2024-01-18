@@ -5,6 +5,10 @@
   --slate: #424142;
 }
 
+.bg-body {
+  background-color: var(--oat);
+}
+
 .btn-primary {
   background-color: var(--oat) !important;
   border-color: black !important;
@@ -39,6 +43,9 @@ footer {
   margin-top: auto;
 }
 
+nav {
+  background-color: var(--oat);
+}
 /* For footer placement */
 .app-container {
   display: flex;

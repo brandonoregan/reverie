@@ -36,7 +36,7 @@ const products = [
 
 const categories = [
   {
-    image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
+    image: "http://127.0.0.1:8000/media/images/hamper-2.jpg",
     category: "bundles",
   },
   {
@@ -44,7 +44,7 @@ const categories = [
     category: "candles",
   },
   {
-    image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
+    image: "http://127.0.0.1:8000/media/images/peter-pan.webp",
     category: "books",
   },
 ];
@@ -80,8 +80,16 @@ function HomePage() {
         <Row className="d-flex justify-content-center mt-4">
           {categories.map((cat) => (
             <Col key={cat.category} className="d-flex justify-content-center">
-              <Card style={{ width: "18rem" }}>
-                <Image style={{ position: "relative" }} src={cat.image} />
+              <Card style={{ width: "18rem", height: "18rem" }}>
+                <Image
+                  style={{
+                    position: "relative",
+                    maxHeight: "18rem",
+                    objectFit: "cover",
+                    opacity: 0.7,
+                  }}
+                  src={cat.image}
+                />
                 <Link to="products">
                   <p
                     className="shopNowBtn"
@@ -94,6 +102,7 @@ function HomePage() {
                       left: 40,
                       right: 40,
                       textAlign: "center",
+                      zIndex: 99,
                     }}
                   >
                     Shop{" "}

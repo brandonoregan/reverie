@@ -163,6 +163,7 @@ function ProductDetailPage() {
                   style={{ fontSize: "1.4rem" }}
                   disabled={product.stock_count === 0}
                   type="button"
+                  variant="outline-secondary"
                 >
                   Add to cart
                 </Button>

@@ -32,7 +32,7 @@ export default function Slider() {
         </div>
         <Carousel.Caption>
           <LinkContainer to="/products">
-            <Button variant="outline-primary">View Products</Button>
+            <Button variant="outline-secondary">View Products</Button>
           </LinkContainer>
         </Carousel.Caption>
       </Carousel.Item>

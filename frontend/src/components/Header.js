@@ -6,7 +6,7 @@ function Header() {
   return (
     <Navbar
       expand="md"
-      className="bg-body-tertiary"
+      className="bg-body-primary"
       style={{ fontFamily: "Judson" }}
     >
       <Container style={{ fontSize: "1.3rem" }}>
@@ -29,9 +29,9 @@ function Header() {
             </LinkContainer>
 
             {/* TODO: On Condition */}
-            <LinkContainer to="/profile">
+            {/* <LinkContainer to="/profile">
               <Nav.Link>Profile</Nav.Link>
-            </LinkContainer>
+            </LinkContainer> */}
 
             <LinkContainer to="/cart">
               <Nav.Link>
