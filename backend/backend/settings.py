@@ -189,3 +189,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+REACT_SITE_URL = 'http://localhost:3000/'

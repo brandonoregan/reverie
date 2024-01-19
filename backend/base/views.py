@@ -18,6 +18,10 @@ from rest_framework import status
 
 from django.contrib.auth.hashers import make_password
 
+import stripe
+from django.conf import settings
+from django.shortcuts import redirect
+
 
 @api_view(["POST"])
 def register_user(request):
@@ -63,4 +67,29 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+# This is your test secret API key.
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+class StripeChechOutView(APIView):
+    def post(self, request):
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                line_items=[
+                    {
+                        'price': 'price_1OaF8fC4qoH0c9CccBwhJ86z',
+                        'quantity': 1,
+                    },
+                ],
+                payment_method_types=['card'],
+                mode='payment',
+                success_url=settings.REACT_SITE_URL + 'll?success=true&session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=settings.REACT_SITE_URL + 'cart?canceled=true',
+            )
+            return redirect(checkout_session.url)
+        except:
+            return Response(
+                {'error': 'Something went wrong when creating stripe checkout session'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 

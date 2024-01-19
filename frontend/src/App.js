@@ -17,6 +17,7 @@ import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import PaymentPage from "./pages/PaymentPage";
 
 export default function App() {
   return (
@@ -38,6 +39,9 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/logout" element={<Logout />} />
+
+            {/* Payment */}
+            <Route path="/payment" element={<PaymentPage />} />
 
             {/* Admin Only */}
             <Route path="/orders" element={<OrdersPage />} />
