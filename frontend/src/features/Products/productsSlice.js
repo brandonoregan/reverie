@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  products: [],
+  allProducts: [],
+  selectedProduct: null,
   isLoading: false,
 };
 
-const allProductsSlice = createSlice({
+const productsSlice = createSlice({
   name: "products",
   initialState: initialState,
   reducers: {
@@ -15,13 +16,17 @@ const allProductsSlice = createSlice({
     },
     getProducts(state, action) {
       state.isLoading = false;
-      state.products = action.payload;
+      state.allProducts = action.payload;
+    },
+    selectProduct(state, action) {
+      state.selectedProduct = action.payload;
     },
   },
 });
 
-console.log("ALL PRODUCTS SLICE:", allProductsSlice);
-export const { loadingProducts } = allProductsSlice.actions;
+console.log("ALL PRODUCTS SLICE:", productsSlice);
+
+export const { loadingProducts, selectProduct } = productsSlice.actions;
 
 // Custom Async Action Creator
 export function getProducts() {
@@ -36,4 +41,4 @@ export function getProducts() {
   };
 }
 
-export default allProductsSlice.reducer;
+export default productsSlice.reducer;

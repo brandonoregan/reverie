@@ -15,21 +15,6 @@ import {
 import Rating from "../components/Rating";
 import BackButton from "../components/BackButton";
 
-// const product = {
-//   id: 8,
-//   name: "Peter Pan",
-//   image: "/media/images/peter-pan.webp",
-//   category: "books",
-//   description:
-//     "When Peter Pan flies into the Darlings' room one dusky evening, he convinces Wendy and her brothers to come with him to the magical world of Neverland, where children never grow old.",
-//   rating: "4.50",
-//   review_count: 11,
-//   price: "15.99",
-//   stock_count: 6,
-//   createdAt: "2024-01-16T09:47:49.460088Z",
-//   user: 1,
-// };
-
 function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [products, setProducts] = useState([]);

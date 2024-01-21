@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import HomePage from "./pages/HomePage";
-import AllProducts from "./pages/AllProductsPage";
+import AllProducts from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import NoMatchPage from "./pages/NoMatchPage";
 import ProfilePage from "./pages/ProfilePage";

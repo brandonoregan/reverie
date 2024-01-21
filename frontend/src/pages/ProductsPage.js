@@ -6,21 +6,24 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getProducts,
   loadingProducts,
-} from "../features/Products/allProductsSlice";
+  selectProduct,
+} from "../features/Products/productsSlice";
 
-function AllProductsPage() {
+function ProductsPage() {
   // Redux Global Store State
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.allProducts);
-  const { products, isLoading } = allProducts;
+  const products = useSelector((state) => state.products);
+  const { allProducts, isLoading } = products;
 
   // Derived State
-  const books = products.filter((products) => products.category === "books");
-  const candles = products.filter(
-    (products) => products.category === "candles"
+  const books = allProducts.filter(
+    (allProducts) => allProducts.category === "books"
   );
-  const bundles = products.filter(
-    (products) => products.category === "bundles"
+  const candles = allProducts.filter(
+    (allProducts) => allProducts.category === "candles"
+  );
+  const bundles = allProducts.filter(
+    (allProducts) => allProducts.category === "bundles"
   );
 
   // Local State
@@ -29,6 +32,10 @@ function AllProductsPage() {
   // Event Handler Functions
   function handleSelectCategory(category) {
     setSelectedCategory(category);
+  }
+
+  function handleSelectProduct(id) {
+    dispatch(selectProduct(id));
   }
 
   useEffect(() => {
@@ -64,7 +71,7 @@ function AllProductsPage() {
             <Row>
               {candles.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard product={product} />
+                  <ProductCard onClick={handleSelectProduct(product.id)} />
                 </Col>
               ))}
             </Row>
@@ -72,7 +79,7 @@ function AllProductsPage() {
             <Row>
               {books.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard product={product} />
+                  <ProductCard onClick={handleSelectProduct(product.id)} />
                 </Col>
               ))}
             </Row>
@@ -80,7 +87,7 @@ function AllProductsPage() {
             <Row>
               {bundles.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard product={product} />
+                  <ProductCard onClick={handleSelectProduct(product.id)} />
                 </Col>
               ))}
             </Row>
@@ -91,7 +98,7 @@ function AllProductsPage() {
   );
 }
 
-export default AllProductsPage;
+export default ProductsPage;
 
 // const [products, setProducts] = useState([]);
 // const [bookProducts, setBookProducts] = useState([]);
