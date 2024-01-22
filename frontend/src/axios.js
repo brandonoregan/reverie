@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    console.log("INTERCEPTOR RES:", response);
     return response;
   },
   async function (error) {
@@ -38,6 +39,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    //
     if (
       error.response.data.code === "token_not_valid" &&
       error.response.status === 401 &&

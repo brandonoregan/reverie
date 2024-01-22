@@ -13,10 +13,10 @@ function RegisterPage() {
     password: "",
   });
 
-  const [formData, updateFormData] = useState(initialFormData);
+  const [formData, srtFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
-    updateFormData({
+    srtFormData({
       ...formData,
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
@@ -37,7 +37,7 @@ function RegisterPage() {
       })
       .then((res) => {
         navigate("/");
-        console.log(res);
+        console.log("REGISTER POST RESPONSE:", res);
         console.log(res.data);
       });
   };

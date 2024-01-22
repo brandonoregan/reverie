@@ -11,8 +11,12 @@ import {
   loadingProducts,
   selectProduct,
 } from "../features/Products/productsSlice";
+import { useParams } from "react-router-dom";
 
 function ProductsPage() {
+  // React Router Hooks
+  const { category } = useParams();
+
   // Redux Global Store State
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
@@ -40,7 +44,14 @@ function ProductsPage() {
   // React Hooks
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
+
+    if (category) {
+      console.log("CATEGORY", category);
+      setSelectedCategory(category);
+    }
+
+    console.log("CATEGORY", category);
+  }, [dispatch, category]);
 
   return (
     <Container>
@@ -102,44 +113,3 @@ function ProductsPage() {
 }
 
 export default ProductsPage;
-
-// const [products, setProducts] = useState([]);
-// const [bookProducts, setBookProducts] = useState([]);
-// const [candleProducts, setCandleProducts] = useState([]);
-// const [bundleProducts, setBundleProducts] = useState([]);
-// const [selectedCategory, setSelectedCategory] = useState("bundles");
-
-// useEffect(() => {
-//   async function getProducts() {
-//     try {
-//       const res = await fetch("http://127.0.0.1:8000/api/products");
-
-//       if (!res.ok) {
-//         throw new Error(res.status);
-//       }
-
-//       const data = await res.json();
-
-//       // console.log("DATA: ", data);
-
-//       setProducts(data);
-
-//       const books = data.filter((product) => product.category === "books");
-//       setBookProducts(books);
-
-//       const candles = data.filter(
-//         (product) => product.category === "candles"
-//       );
-//       setCandleProducts(candles);
-
-//       const bundles = data.filter(
-//         (product) => product.category === "bundles"
-//       );
-//       setBundleProducts(bundles);
-//     } catch (error) {
-//       console.log("CAUGHT ERROR: ", error);
-//     }
-//   }
-
-//   getProducts();
-// }, []);

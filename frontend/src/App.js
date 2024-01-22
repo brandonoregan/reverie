@@ -17,6 +17,7 @@ import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductsPage from "./pages/ProductsPage";
 
 export default function App() {
   return (
@@ -26,7 +27,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<AllProducts />} />
+            <Route path="/products/:category?" element={<ProductsPage />} />
             <Route
               path="products/product/:id"
               element={<ProductDetailPage />}
