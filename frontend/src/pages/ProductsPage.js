@@ -15,6 +15,9 @@ function ProductsPage() {
   const products = useSelector((state) => state.products);
   const { allProducts, isLoading } = products;
 
+  // Local State
+  const [selectedCategory, setSelectedCategory] = useState("bundles");
+
   // Derived State
   const books = allProducts.filter(
     (allProducts) => allProducts.category === "books"
@@ -26,20 +29,14 @@ function ProductsPage() {
     (allProducts) => allProducts.category === "bundles"
   );
 
-  // Local State
-  const [selectedCategory, setSelectedCategory] = useState("bundles");
-
   // Event Handler Functions
   function handleSelectCategory(category) {
     setSelectedCategory(category);
   }
 
-  function handleSelectProduct(id) {
-    dispatch(selectProduct(id));
-  }
+  function handleSelectProduct() {}
 
   useEffect(() => {
-    dispatch(loadingProducts());
     dispatch(getProducts());
   }, [dispatch]);
 
@@ -71,7 +68,7 @@ function ProductsPage() {
             <Row>
               {candles.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard onClick={handleSelectProduct(product.id)} />
+                  <ProductCard product={product} />
                 </Col>
               ))}
             </Row>
@@ -79,7 +76,7 @@ function ProductsPage() {
             <Row>
               {books.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard onClick={handleSelectProduct(product.id)} />
+                  <ProductCard product={product} />
                 </Col>
               ))}
             </Row>
@@ -87,7 +84,7 @@ function ProductsPage() {
             <Row>
               {bundles.map((product) => (
                 <Col key={product.id}>
-                  <ProductCard onClick={handleSelectProduct(product.id)} />
+                  <ProductCard product={product} />
                 </Col>
               ))}
             </Row>

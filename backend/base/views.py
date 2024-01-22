@@ -51,6 +51,13 @@ def get_all_products(request):
     return Response(serializer.data)
 
 
+@api_view(["GET"])
+def get_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
 

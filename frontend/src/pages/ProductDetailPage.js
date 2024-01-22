@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import {
   Col,
   Row,
@@ -14,50 +13,31 @@ import {
 
 import Rating from "../components/Rating";
 import BackButton from "../components/BackButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../features/Products/productDetailSlice";
 
 function ProductDetailPage() {
+  // Local State
   const [quantity, setQuantity] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState({});
 
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const productDetail = useSelector((state) => state.productDetail);
+  const { product } = productDetail;
+
+  // Router Hooks
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // Event Handlers
   const addToCartHandler = () => {
-    navigate(`/cart/${id} ? qantity=${quantity}`);
+    navigate(`/cart/${id}?qantity=${quantity}`);
   };
 
+  // React Hooks
   useEffect(() => {
-    async function getProducts() {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/products");
-
-        if (!res.ok) {
-          throw new Error(res.status);
-        }
-
-        const data = await res.json();
-
-        console.log("DATA: ", data);
-        console.log("ID: ", typeof id);
-
-        setProducts(data);
-
-        const productDetail = data.filter(
-          (product) => String(product.id) === id
-        );
-        setProduct(productDetail[0]);
-
-        console.log(productDetail);
-      } catch (error) {
-        console.log("CAUGHT ERROR: ", error);
-      }
-    }
-
-    console.log(id);
-
-    getProducts();
-  }, [id]);
+    dispatch(getProduct(id));
+  }, [dispatch, id]);
 
   return (
     <Container style={{ fontSize: "1.3rem" }}>
