@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table } from "react-bootstrap";
+
 import ProductCard from "../components/ProductCard";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,7 +16,7 @@ function ProductsPage() {
   // Redux Global Store State
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const { allProducts, isLoading } = products;
+  const { allProducts, isLoading, error } = products;
 
   // Local State
   const [selectedCategory, setSelectedCategory] = useState("bundles");
@@ -34,8 +37,7 @@ function ProductsPage() {
     setSelectedCategory(category);
   }
 
-  function handleSelectProduct() {}
-
+  // React Hooks
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -63,7 +65,11 @@ function ProductsPage() {
         </Col>
         <Col md={9}>
           {isLoading ? (
-            <h1>Loading all products</h1>
+            <div className="d-flex vh-100 align-content-center">
+              <Loader size={"200px"} />
+            </div>
+          ) : error ? (
+            <Message variant="danger">{error}</Message>
           ) : selectedCategory === "candles" ? (
             <Row>
               {candles.map((product) => (

@@ -31,7 +31,7 @@ function ProductDetailPage() {
 
   // Event Handlers
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qantity=${quantity}`);
+    navigate(`/cart/${id}?quantity=${quantity}`);
   };
 
   // React Hooks

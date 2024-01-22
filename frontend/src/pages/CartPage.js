@@ -1,52 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import Message from "../components/Message";
 import BackButton from "../components/BackButton";
-import {
-  Col,
-  Row,
-  Button,
-  ListGroup,
-  Form,
-  Card,
-  Container,
-  Table,
-  Image,
-} from "react-bootstrap";
-
-const products = [
-  {
-    id: 8,
-    name: "Peter Pan",
-    image: "http://127.0.0.1:8000/media/images/peter-pan.webp",
-    category: "books",
-    description:
-      "When Peter Pan flies into the Darlings' room one dusky evening, he convinces Wendy and her brothers to come with him to the magical world of Neverland, where children never grow old.",
-    rating: "4.50",
-    review_count: 11,
-    price: "15.99",
-    stock_count: 6,
-    createdAt: "2024-01-16T09:47:49.460088Z",
-    user: 1,
-  },
-  // {
-  //   id: 10,
-  //   name: "Star Crossed Lovers",
-  //   image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
-  //   category: "candles",
-  //   description:
-  //     "A soothing combination of coconut milk, soft florals, thrift & sea salt. Perfect for a relaxing Sunday night.",
-  //   rating: "4.00",
-  //   review_count: 16,
-  //   price: "19.99",
-  //   stock_count: 11,
-  //   createdAt: "2024-01-16T09:53:39.021046Z",
-  //   user: 1,
-  // },
-];
+import { Row, Button, Form, Container, Table, Image } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, deleteCartItem } from "../features/Cart/cartSlice";
 
 function CartPage() {
-  const [cartItems, setCartItems] = useState(products);
+  // React Router Hooks/Functions
+  const { id } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const quantity = searchParams.has("quantity")
+    ? Number(searchParams.get("quantity"))
+    : 1;
+
+  console.log("QUANTITY:", quantity);
+
+  // Local State
+  const [selectedQuantity, setSelectedQuantity] = useState(null);
+
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, error } = cart;
+
+  // Event handlers
+  function handleDeleteItem(id) {
+    dispatch(deleteCartItem(id));
+  }
+
+  useEffect(() => {
+    if (id) {
+      dispatch(addToCart(id, quantity));
+    }
+  }, [dispatch, id, quantity]);
 
   return (
     <Container>
@@ -84,7 +72,7 @@ function CartPage() {
                 <tr className="align-middle">
                   <td>
                     <Image
-                      src={item.image}
+                      src={`http://127.0.0.1:8000/${item.image}`}
                       style={{ height: "150px", width: "150px" }}
                     ></Image>
                   </td>
@@ -94,8 +82,12 @@ function CartPage() {
                     <Form.Control
                       as="select"
                       className="form-select"
-                      value={1}
-                      // onChange={(e) => setQuantity(e.target.value)}
+                      value={item.quantity}
+                      onChange={(e) =>
+                        dispatch(
+                          addToCart(item.product_id, Number(e.target.value))
+                        )
+                      }
                     >
                       {[...Array(item.stock_count).keys()].map((x) => (
                         <option value={x + 1} key={x + 1}>
@@ -104,10 +96,14 @@ function CartPage() {
                       ))}
                     </Form.Control>
                   </td>
-                  <td>${item.price}</td>
+                  <td>${(item.price * item.quantity).toFixed(2)}</td>
                   <td>
                     {/* TODO: Add delete button logic */}
-                    <Button type="button" variant="light">
+                    <Button
+                      onClick={() => handleDeleteItem(item.product_id)}
+                      type="button"
+                      variant="light"
+                    >
                       <i className="fas fa-trash"></i>
                     </Button>
                   </td>
@@ -122,7 +118,15 @@ function CartPage() {
                   <strong>Total</strong>
                 </td>
                 <td>
-                  <strong>$35.98</strong>
+                  <strong>
+                    $
+                    {cartItems
+                      .reduce(
+                        (acc, item) => acc + item.price * item.quantity,
+                        0
+                      )
+                      .toFixed(2)}
+                  </strong>
                 </td>
               </tr>
               <tr>
