@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table, Nav } from "react-bootstrap";
 
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
@@ -55,8 +55,47 @@ function ProductsPage() {
 
   return (
     <Container>
+      <Row className="my-1 px-0 ">
+        <h1>All Products</h1>
+        <Nav className="ps-auto" variant="tabs" defaultActiveKey="/home">
+          {/* <Nav.Item className="pe-3">
+            <Nav.Link eventKey="disabled" disabled>
+              <strong>All Products</strong>
+            </Nav.Link>
+          </Nav.Item> */}
+
+          <Nav.Item style={{ color: "black" }}>
+            <Nav.Link
+              className="mb-0 text-black ms-auto"
+              onClick={() => handleSelectCategory("bundles")}
+            >
+              Bundles
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              className="text-black"
+              onClick={() => handleSelectCategory("candles")}
+              eventKey="link-1"
+            >
+              Candles
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              className="text-black"
+              onClick={() => handleSelectCategory("books")}
+              eventKey="link-2"
+            >
+              Books
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Row>
       <Row className="mt-3">
-        <Col md={3}>
+        {/* <Col md={3}>
           <Table hover>
             <thead>
               <th>All Products</th>
@@ -73,8 +112,8 @@ function ProductsPage() {
               </tr>
             </tbody>
           </Table>
-        </Col>
-        <Col md={9}>
+        </Col> */}
+        <Col md={12}>
           {isLoading ? (
             <div className="d-flex vh-100 align-content-center">
               <Loader size={"200px"} />

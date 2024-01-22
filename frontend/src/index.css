@@ -27,16 +27,13 @@
 }
 
 html {
-  /* font-family: "Judson", serif; */
+  font-family: "Judson", serif;
 }
 
 body {
   margin: 0;
   box-sizing: border-box;
   height: 100%;
-}
-
-main {
 }
 
 footer {
@@ -55,15 +52,6 @@ nav {
 
 .slider {
   height: 18rem;
-}
-
-.productImage:hover {
-  cursor: pointer;
-}
-
-.productImage {
-  max-height: 18rem;
-  min-height: 18rem;
 }
 
 .productSubHeading {

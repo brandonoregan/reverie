@@ -1,0 +1,47 @@
+.productCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.productImage {
+  height: 18rem;
+  width: 18rem;
+  width: 100%;
+  display: block;
+}
+
+.productImage:hover {
+  cursor: pointer;
+}
+
+.productCard:hover .cardBody {
+  height: 50%;
+}
+
+.cardBody {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: height 0.3s ease;
+  height: 80px;
+  overflow: hidden;
+}
+
+.moreButton {
+  margin-top: 1rem;
+  margin-left: auto;
+}
+
+.priceCol {
+  display: inline-block;
+}
+
+.price {
+  font-size: 1.2rem;
+}
+
+.priductTitle {
+  font-weight: 800;
+}
