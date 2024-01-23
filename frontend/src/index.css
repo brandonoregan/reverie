@@ -89,5 +89,23 @@ nav {
 /* regsiter page */
 
 .registerForm {
-  max-width: 800px;
+  max-width: 430px;
+}
+
+input.input-error,
+select.input-error {
+  border-color: red !important;
+}
+
+input.input-error.input-error:focus,
+select.input-error.input-error:focus {
+  box-shadow: 0 0 3px 3px #fc8181;
+}
+
+.inputErrorMessage {
+  margin-left: 0.2rem;
+  color: red;
+}
+
+.passwordInput {
 }
