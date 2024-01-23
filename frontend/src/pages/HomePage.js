@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Container, Button, Row, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Slider from "../components/Slider";
+import CategoryCard from "../components/CategoryCard";
 
 const categories = [
   {
@@ -26,37 +27,7 @@ function HomePage() {
         <Row className="d-flex justify-content-center mt-4">
           {categories.map((cat) => (
             <Col key={cat.category} className="d-flex justify-content-center">
-              <Card style={{ width: "18rem", height: "18rem" }}>
-                <Image
-                  style={{
-                    position: "relative",
-                    maxHeight: "18rem",
-                    objectFit: "cover",
-                    opacity: 0.7,
-                  }}
-                  src={cat.image}
-                />
-                <Link to={`products/${cat.category}`}>
-                  <p
-                    className="shopNowBtn"
-                    style={{
-                      fontSize: "2rem",
-                      fontWeight: 700,
-                      color: "white",
-                      position: "absolute",
-                      bottom: 50,
-                      left: 40,
-                      right: 40,
-                      textAlign: "center",
-                      zIndex: 99,
-                    }}
-                  >
-                    Shop{" "}
-                    {cat.category.charAt(0).toUpperCase() +
-                      cat.category.slice(1)}
-                  </p>
-                </Link>
-              </Card>
+              <CategoryCard cat={cat} />
             </Col>
           ))}
         </Row>

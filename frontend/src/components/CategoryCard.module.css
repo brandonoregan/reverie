@@ -1,0 +1,71 @@
+/* CategoryCard.module.css */
+.categoryCard {
+  position: relative;
+  overflow: hidden;
+  width: 18rem;
+  height: 18rem;
+  text-align: center;
+  font-family: "Judson";
+}
+
+.categoryImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.categoryImage:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  transition: height 0.3s ease;
+  height: 30px; /* Initial height */
+  overflow: hidden;
+  text-align: center;
+  padding: 3px;
+}
+
+.shopNowBtn {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  z-index: 99;
+  margin-bottom: 0;
+}
+
+.banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: height 0.4s ease;
+  height: 50px;
+  overflow: hidden;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.categoryCard:hover .banner {
+  height: 40%; /* Adjust expanded height to reveal the button */
+}
+
+.viewMoreBtn {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.categoryCard:hover .viewMoreBtn {
+  opacity: 1;
+}
