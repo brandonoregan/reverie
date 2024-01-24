@@ -1,8 +1,18 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { logoutUser } from "../features/Auth/authSlice";
 
 function Header() {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { loggedIn } = auth;
+
+  function handleLogout() {
+    dispatch(logoutUser());
+  }
+
   return (
     <Navbar
       expand="md"
@@ -44,13 +54,17 @@ function Header() {
 
             {/* TODO: Change title to user username or admin depending */}
             <NavDropdown title="Account" id="basic-nav-dropdown">
-              {/* TODO: Conditionlly display login */}
-              <LinkContainer to="/login">
-                <NavDropdown.Item>Login</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/register">
-                <NavDropdown.Item>Register</NavDropdown.Item>
-              </LinkContainer>
+              {!loggedIn && (
+                <>
+                  <LinkContainer to="/login">
+                    <NavDropdown.Item>Login</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer to="/register">
+                    <NavDropdown.Item>Register</NavDropdown.Item>
+                  </LinkContainer>
+                </>
+              )}
 
               {/* TODO: Conditionally display for admin */}
               <LinkContainer to="/users">
@@ -63,11 +77,14 @@ function Header() {
                 <NavDropdown.Item>Orders</NavDropdown.Item>
               </LinkContainer>
 
-              {/* TODO: Conditionally display logout if logged in  */}
-              <NavDropdown.Divider />
-              <LinkContainer to="/logout">
-                <NavDropdown.Item>Logout</NavDropdown.Item>
-              </LinkContainer>
+              {loggedIn && (
+                <>
+                  <NavDropdown.Divider />
+                  <LinkContainer onClick={() => handleLogout()} to="/login">
+                    <NavDropdown.Item>Logout</NavDropdown.Item>
+                  </LinkContainer>
+                </>
+              )}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

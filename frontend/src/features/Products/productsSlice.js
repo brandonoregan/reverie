@@ -25,7 +25,7 @@ const productsSlice = createSlice({
   },
 });
 
-console.log("ALL PRODUCTS SLICE:", productsSlice);
+// console.log("ALL PRODUCTS SLICE:", productsSlice);
 
 // Custom Async Action Creator
 export function getProducts() {

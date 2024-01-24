@@ -37,7 +37,6 @@ export default function App() {
             {/* Authentication */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/logout" element={<Logout />} />
 
             {/* Admin Only */}
             <Route path="/orders" element={<OrdersPage />} />

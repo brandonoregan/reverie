@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
+import React from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-import { registerSchema } from "../schemas/schema";
+import { registerSchema } from "../schemas";
 import { useFormik } from "formik";
+import { registerUser } from "../features/Auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { error, registerError } = useSelector((state) => state.auth);
+
   const {
     handleSubmit,
     values,
@@ -27,41 +32,26 @@ function RegisterPage() {
     },
     validationSchema: registerSchema,
     onSubmit: (values, actions) => {
-      axiosInstance
-        .post(`user/register/`, {
-          first_name: values.first_name,
-          last_name: values.last_name,
-          email: values.email,
-          username: values.username,
-          password: values.password,
-        })
-        .then((res) => {
+      dispatch(
+        registerUser(
+          values.username,
+          values.first_name,
+          values.last_name,
+          values.email,
+          values.password
+        )
+      ).then(() => {
+        // Check if there was an error after the promise resolves
+        // TODO: This doesn't work, there seems to be no error in registerError directly in promise so if block is executed anyway even when an error is present.
+        if (!registerError) {
+          navigate(-1);
           actions.resetForm();
-          navigate("/");
-          console.log("REGISTER POST RESPONSE:", res);
-          console.log(res.data);
-        });
+        } else {
+          console.log("Dispatch registerError: ", registerError);
+        }
+      });
     },
   });
-
-  // const onSubmit = (e, values) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-
-  //   axiosInstance
-  //     .post(`user/register/`, {
-  //       first_name: formData.first_name,
-  //       last_name: formData.last_name,
-  //       email: formData.email,
-  //       username: formData.username,
-  //       password: formData.password,
-  //     })
-  //     .then((res) => {
-  //       navigate("/");
-  //       console.log("REGISTER POST RESPONSE:", res);
-  //       console.log(res.data);
-  //     });
-  // };
 
   return (
     <Container>
@@ -111,6 +101,7 @@ function RegisterPage() {
                       errors.last_name && touched.last_name ? "input-error" : ""
                     }
                   />
+
                   {errors.last_name && touched.last_name && (
                     <Form.Text className="inputErrorMessage text-muted ">
                       {errors.last_name}
@@ -139,6 +130,11 @@ function RegisterPage() {
                   {errors.username.message}
                 </Form.Text>
               )}
+              {registerError && registerError.username && (
+                <Form.Text className="inputErrorMessage text-muted ">
+                  {registerError["username"]}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -153,9 +149,18 @@ function RegisterPage() {
                 required
                 className={errors.email && touched.email ? "input-error" : ""}
               />
+
+              {/* Client side validation check */}
               {errors.email && touched.email && (
                 <Form.Text className="inputErrorMessage text-muted ">
                   {errors.email}
+                </Form.Text>
+              )}
+
+              {/* Serverside validation check */}
+              {registerError && registerError.email && (
+                <Form.Text className="inputErrorMessage text-muted ">
+                  {registerError.email}
                 </Form.Text>
               )}
             </Form.Group>
@@ -189,7 +194,7 @@ function RegisterPage() {
               )}
             </Form.Group>
 
-            {/* <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Control
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -210,7 +215,7 @@ function RegisterPage() {
                   {errors.confirmPassword}
                 </Form.Text>
               )}
-            </Form.Group> */}
+            </Form.Group>
             <Button disabled={isSubmitting} variant="secondary" type="submit">
               Submit
             </Button>
@@ -222,6 +227,25 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+
+// const onSubmit = (e, values) => {
+//   e.preventDefault();
+//   console.log(formData);
+
+//   axiosInstance
+//     .post(`user/register/`, {
+//       first_name: formData.first_name,
+//       last_name: formData.last_name,
+//       email: formData.email,
+//       username: formData.username,
+//       password: formData.password,
+//     })
+//     .then((res) => {
+//       navigate("/");
+//       console.log("REGISTER POST RESPONSE:", res);
+//       console.log(res.data);
+//     });
+// };
 
 // const handleChange = (e) => {
 //   srtFormData({

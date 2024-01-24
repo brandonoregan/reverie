@@ -18,8 +18,15 @@ export const registerSchema = yup.object().shape({
         "Password must be at least 7 characters long and include a number, an uppercase, and a lowercase letter.",
     })
     .required("Required"),
-  // confirmPassword: yup
-  //   .string()
-  //   .oneOf([yup.ref("password"), null], "Passwords must match.")
-  //   .required("Required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match.")
+    .required("Required"),
+});
+
+export const loginSchema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  // or if you use email to login:
+  // email: yup.string().email("Please enter a valid email.").required("Email is required"),
+  password: yup.string().required("Password is required"),
 });

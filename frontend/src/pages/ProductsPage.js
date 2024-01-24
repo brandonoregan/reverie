@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table, Nav } from "react-bootstrap";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProducts,
-  loadingProducts,
-  selectProduct,
-} from "../features/Products/productsSlice";
+import { getProducts } from "../features/Products/productsSlice";
 import { useParams } from "react-router-dom";
 
 function ProductsPage() {

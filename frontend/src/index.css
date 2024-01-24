@@ -109,3 +109,7 @@ select.input-error.input-error:focus {
 
 .passwordInput {
 }
+
+button:disabled {
+  opacity: 0.35;
+}
