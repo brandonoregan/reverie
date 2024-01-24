@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // Set user info inital state
 let localStorageUserInfo = [];
+let authenticated = false;
 
 const storedAccessToken = localStorage.getItem("access_token");
 const storedRefreshToken = localStorage.getItem("refresh_token");
@@ -13,11 +14,12 @@ if (storedAccessToken && storedRefreshToken) {
     access_token: JSON.parse(storedAccessToken),
     refresh_token: JSON.parse(storedRefreshToken),
   };
+  authenticated = true;
 }
 
 const initialState = {
   userInfo: localStorageUserInfo,
-  loggedIn: false,
+  loggedIn: authenticated,
   isLoading: false,
   error: null,
   registerError: null,

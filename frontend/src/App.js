@@ -11,7 +11,6 @@ import NoMatchPage from "./pages/NoMatchPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import Logout from "./pages/Logout";
 import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";

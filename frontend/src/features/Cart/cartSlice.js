@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import axiosInstance from "../../axios";
 
 // Get cart items from local storage and store in inital cartItems state
 const localStorageCartItems = localStorage.getItem("cartItems")
@@ -44,7 +45,7 @@ const cartSlice = createSlice({
 export function addToCart(id, quantity) {
   return async function (dispatch, getState) {
     try {
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `http://127.0.0.1:8000/api/products/${id}`
       );
 

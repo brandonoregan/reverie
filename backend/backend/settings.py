@@ -158,7 +158,7 @@ MEDIA_URL = "/media/"
 
 # TODO: Fix bug: When "access" token runs out log out request view doesn't accept "Refresh ?  Weird behaviour "
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=14),
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
