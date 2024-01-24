@@ -1,76 +1,102 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import Message from "../components/Message";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../features/Auth/authSlice";
+
+import { loginSchema } from "../schemas/index";
+import { useFormik } from "formik";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const initialFormData = Object.freeze({
-    username: "",
-    password: "",
+
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { error, isLoading } = auth;
+
+  const {
+    handleSubmit,
+    values,
+    errors,
+    handleBlur,
+    handleChange,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: (values, actions) => {
+      dispatch(loginUser(values.username, values.password));
+      if (!error) {
+        navigate(-1);
+        actions.resetForm();
+      } else {
+        console.log(error);
+      }
+    },
   });
-
-  const [formData, updateFormData] = useState(initialFormData);
-
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-
-    axiosInstance
-      .post(`token/`, {
-        username: formData.username,
-        password: formData.password,
-      })
-      .then((res) => {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
-        axiosInstance.defaults.headers["Authorization"] =
-          "JWT " + localStorage.getItem("access_token");
-        navigate("/");
-        console.log("Response", res);
-        console.log("Response-Data: ", res.data);
-      });
-  };
 
   return (
     <Container>
       <Row>
         <Col className="d-flex justify-content-center">
-          <Form className="registerForm m-3">
-            <h3>Login</h3>
+          {error ? (
+            <Message variant="danger">{error}</Message>
+          ) : (
+            <Form
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              className="registerForm m-3"
+            >
+              <h3>Login</h3>
 
-            <Form.Group className="mb-3">
-              <Form.Control
-                onChange={handleChange}
-                name="username"
-                type="text"
-                placeholder="Username"
-                required
-              />
-              <Form.Text className="text-muted"></Form.Text>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  onChange={handleChange}
+                  value={values.username}
+                  onBlur={handleBlur}
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  required
+                  className={
+                    errors.username && touched.username ? "input-error" : ""
+                  }
+                />
+                {errors.username && touched.username && (
+                  <Form.Text className="inputErrorMessage text-muted ">
+                    {errors.username}
+                  </Form.Text>
+                )}
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Control
-                onChange={handleChange}
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-              />
-            </Form.Group>
-            <Button onClick={handleSubmit} variant="secondary" type="submit">
-              Submit
-            </Button>
-          </Form>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  onChange={handleChange}
+                  value={values.password}
+                  onBlur={handleBlur}
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  required
+                  className={
+                    errors.password && touched.password ? "input-error" : ""
+                  }
+                />
+              </Form.Group>
+
+              <Button disabled={isSubmitting} variant="secondary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          )}
         </Col>
       </Row>
     </Container>
@@ -78,3 +104,61 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+// WITHOUT REDUX
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   console.log("FORM DATA", formData);
+
+//   axiosInstance
+//     .post(`token/`, {
+//       username: formData.username,
+//       password: formData.password,
+//     })
+//     .then((res) => {
+//       localStorage.setItem("access_token", res.data.access);
+//       localStorage.setItem("refresh_token", res.data.refresh);
+
+//       axiosInstance.defaults.headers["Authorization"] =
+//         "JWT " + localStorage.getItem("access_token");
+//       navigate("/");
+
+//       console.log("LOGIN Response", res);
+//       console.log("LOGIN Response-Data: ", res.data);
+//     })
+//     .catch((error) => {
+//       console.log("LOGIN ERROR:", error);
+//       setError(error.message);
+//     });
+// };
+
+// WORKING FINE WITH FORMIK
+// onSubmit: (values, actions) => {
+//   console.log("VALUES:", values);
+//   console.log("USERNAME & PASSWORD:", values.username, values.password);
+
+//   console.log("FORM DATA", values);
+
+//   axiosInstance
+//     .post(`token/`, {
+//       username: values.username,
+//       password: values.password,
+//     })
+//     .then((res) => {
+//       localStorage.setItem("access_token", res.data.access);
+//       localStorage.setItem("refresh_token", res.data.refresh);
+
+//       axiosInstance.defaults.headers["Authorization"] =
+//         "JWT " + localStorage.getItem("access_token");
+//       navigate("/");
+
+//       console.log("LOGIN Response", res);
+//       console.log("LOGIN Response-Data: ", res.data);
+//     })
+//     .catch((error) => {
+//       console.log("LOGIN ERROR:", error);
+//     });
+
+//   actions.resetForm();
+// },
+// });

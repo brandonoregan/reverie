@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import {
   Col,
   Row,
@@ -14,65 +13,31 @@ import {
 
 import Rating from "../components/Rating";
 import BackButton from "../components/BackButton";
-
-// const product = {
-//   id: 8,
-//   name: "Peter Pan",
-//   image: "/media/images/peter-pan.webp",
-//   category: "books",
-//   description:
-//     "When Peter Pan flies into the Darlings' room one dusky evening, he convinces Wendy and her brothers to come with him to the magical world of Neverland, where children never grow old.",
-//   rating: "4.50",
-//   review_count: 11,
-//   price: "15.99",
-//   stock_count: 6,
-//   createdAt: "2024-01-16T09:47:49.460088Z",
-//   user: 1,
-// };
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../features/Products/productDetailSlice";
 
 function ProductDetailPage() {
+  // Local State
   const [quantity, setQuantity] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState({});
 
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const productDetail = useSelector((state) => state.productDetail);
+  const { product } = productDetail;
+
+  // Router Hooks
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // Event Handlers
   const addToCartHandler = () => {
-    navigate(`/cart/${id} ? qantity=${quantity}`);
+    navigate(`/cart/${id}?quantity=${quantity}`);
   };
 
+  // React Hooks
   useEffect(() => {
-    async function getProducts() {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/products");
-
-        if (!res.ok) {
-          throw new Error(res.status);
-        }
-
-        const data = await res.json();
-
-        console.log("DATA: ", data);
-        console.log("ID: ", typeof id);
-
-        setProducts(data);
-
-        const productDetail = data.filter(
-          (product) => String(product.id) === id
-        );
-        setProduct(productDetail[0]);
-
-        console.log(productDetail);
-      } catch (error) {
-        console.log("CAUGHT ERROR: ", error);
-      }
-    }
-
-    console.log(id);
-
-    getProducts();
-  }, [id]);
+    dispatch(getProduct(id));
+  }, [dispatch, id]);
 
   return (
     <Container style={{ fontSize: "1.3rem" }}>

@@ -25,19 +25,13 @@ from django.shortcuts import redirect
 
 @api_view(["POST"])
 def register_user(request):
-    data = request.data
-    print(data)
-    
-    user = User.objects.create(
-        username = data['username'],
-        first_name = data['first_name'],
-        last_name = data['last_name'],
-        email = data['email'],
-        password = make_password(data['password'])
-    )
-
-    serializer = UserSerializerWithToken(user, many=False)
-    return Response(serializer.data)
+    serializer = UserSerializerWithToken(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        print("ERROR ERROR:", serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET"])
@@ -55,6 +49,14 @@ def get_all_products(request):
     return Response(serializer.data)
 
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
 
@@ -65,6 +67,7 @@ class BlacklistTokenUpdateView(APIView):
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
+            print(e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

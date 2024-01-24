@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import HomePage from "./pages/HomePage";
-import AllProducts from "./pages/AllProductsPage";
 import CartPage from "./pages/CartPage";
 import NoMatchPage from "./pages/NoMatchPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -18,6 +17,7 @@ import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import PaymentPage from "./pages/PaymentPage";
+import ProductsPage from "./pages/ProductsPage";
 
 export default function App() {
   return (
@@ -27,7 +27,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<AllProducts />} />
+            <Route path="/products/:category?" element={<ProductsPage />} />
             <Route
               path="products/product/:id"
               element={<ProductDetailPage />}
@@ -38,7 +38,6 @@ export default function App() {
             {/* Authentication */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/logout" element={<Logout />} />
 
             {/* Payment */}
             <Route path="/payment" element={<PaymentPage />} />
