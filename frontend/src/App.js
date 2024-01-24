@@ -15,7 +15,7 @@ import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import StockPage from "./pages/StockPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import PaymentPage from "./pages/PaymentPage";
+// import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
 
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
             <Route path="/register" element={<RegisterPage />} />
 
             {/* Payment */}
-            <Route path="/payment" element={<PaymentPage />} />
+            {/* <Route path="/payment" element={<PaymentPage />} /> */}
 
             {/* Admin Only */}
             <Route path="/orders" element={<OrdersPage />} />

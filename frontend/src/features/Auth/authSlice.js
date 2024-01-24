@@ -144,6 +144,10 @@ export function logoutUser() {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
 
+      if (localStorage.getItem("cartItems")) {
+        localStorage.removeItem("cartItems");
+      }
+
       axiosInstance.defaults.headers["Authorization"] = null;
 
       dispatch({ type: "authentication/logoutUser" });

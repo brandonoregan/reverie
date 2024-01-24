@@ -156,10 +156,9 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 MEDIA_URL = "/media/"
 
-# TODO: Fix bug: When "access" token runs out log out request view doesn't accept "Refresh ?  Weird behaviour "
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
@@ -193,4 +192,4 @@ SIMPLE_JWT = {
 
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
-REACT_SITE_URL = 'http://localhost:3000/'
+REACT_SITE_URL = "http://localhost:3000/"

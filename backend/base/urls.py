@@ -15,12 +15,12 @@ urlpatterns = [
     # JWT/User URLS
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-
-    path("user/logout/blacklist/", views.BlacklistTokenUpdateView.as_view(), name="blacklist"
-         ),
-
-    path("stripe/", views.StripeChechOutView.as_view(), name="stripe"
-         )
+    path(
+        "user/logout/blacklist/",
+        views.BlacklistTokenUpdateView.as_view(),
+        name="blacklist",
+    ),
+    path("stripe/", views.StripeChechOutView.as_view(), name="stripe")
     # path(
     #     "user/logout/blacklist/",
     #     views.BlacklistTokenUpdateView.as_view(),

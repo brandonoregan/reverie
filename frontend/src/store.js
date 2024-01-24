@@ -4,6 +4,7 @@ import productsReducer from "./features/Products/productsSlice";
 import productDetailReducer from "./features/Products/productDetailSlice";
 import cartReducer from "./features/Cart/cartSlice";
 import authReducer from "./features/Auth/authSlice";
+import paymentReducer from "./features/Payment/paymentSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     productDetail: productDetailReducer,
     cart: cartReducer,
     auth: authReducer,
+    payment: paymentReducer,
   },
 });
 

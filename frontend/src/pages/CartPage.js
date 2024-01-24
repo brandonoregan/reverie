@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import Message from "../components/Message";
 import BackButton from "../components/BackButton";
 import { Row, Button, Form, Container, Table, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteCartItem } from "../features/Cart/cartSlice";
+
+import { checkout } from "../features/Payment/paymentSlice";
 
 function CartPage() {
   // React Router Hooks/Functions
@@ -15,11 +17,6 @@ function CartPage() {
     ? Number(searchParams.get("quantity"))
     : 1;
 
-  console.log("QUANTITY:", quantity);
-
-  // Local State
-  const [selectedQuantity, setSelectedQuantity] = useState(null);
-
   // Redux Hooks
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -28,6 +25,17 @@ function CartPage() {
   // Event handlers
   function handleDeleteItem(id) {
     dispatch(deleteCartItem(id));
+  }
+
+  function handleCheckout() {
+    dispatch(checkout(cartItems)).then((checkoutUrl) => {
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl; // Redirect to Stripe Checkout
+      } else {
+        // Handle error or notify the user
+        console.error("Checkout URL not received");
+      }
+    });
   }
 
   useEffect(() => {
@@ -69,7 +77,7 @@ function CartPage() {
             </thead>
             <tbody>
               {cartItems.map((item) => (
-                <tr className="align-middle">
+                <tr key={item.product_id} className="align-middle">
                   <td>
                     <Image
                       src={`http://127.0.0.1:8000/${item.image}`}
@@ -135,7 +143,11 @@ function CartPage() {
                 <td></td>
                 <td></td>
                 <td colSpan={2}>
-                  <Button variant="secondary" className="w-100 ">
+                  <Button
+                    onClick={() => handleCheckout(cartItems)}
+                    variant="secondary"
+                    className="w-100 "
+                  >
                     Proceed to Checkout
                   </Button>
                 </td>

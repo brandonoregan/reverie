@@ -33,7 +33,7 @@ function LoginPage() {
     onSubmit: (values, actions) => {
       dispatch(loginUser(values.username, values.password));
       if (!error) {
-        navigate(-1);
+        navigate("/");
         actions.resetForm();
       } else {
         console.log(error);

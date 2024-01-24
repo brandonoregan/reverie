@@ -22,7 +22,6 @@ class UserSerializerWithToken(UserSerializer):
     refresh_token = serializers.SerializerMethodField(read_only=True)
     access_token = serializers.SerializerMethodField(read_only=True)
 
-
     class Meta:
         model = User
         fields = [
@@ -35,8 +34,7 @@ class UserSerializerWithToken(UserSerializer):
             "refresh_token",
             "access_token",
         ]
-        extra_kwargs = {'password': {'write_only': True}}
-
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         # Create a new user with hashed password
@@ -59,9 +57,7 @@ class UserSerializerWithToken(UserSerializer):
 
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
-            raise serializers.ValidationError(
-                "This username is already in use."
-            )
+            raise serializers.ValidationError("This username is already in use.")
         elif len(value) < 7 or len(value) > 20:
             raise serializers.ValidationError(
                 "Username must be between 7 and 20 characters."
@@ -72,7 +68,7 @@ class UserSerializerWithToken(UserSerializer):
         if User.objects.filter(email=value).exists():
             raise serializers.ValidationError("This email is already in use.")
         return value
-    
+
     def validate_password(self, value):
         # Using Django's built-in validators
         try:
