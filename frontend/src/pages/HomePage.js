@@ -24,9 +24,12 @@ function HomePage() {
     <div>
       <Slider />
       <Container>
-        <Row className="d-flex justify-content-center mt-4">
+        <Row className="d-flex justify-content-center my-4">
           {categories.map((cat) => (
-            <Col key={cat.category} className="d-flex justify-content-center">
+            <Col
+              key={cat.category}
+              className="d-flex justify-content-center mb-4 "
+            >
               <CategoryCard cat={cat} />
             </Col>
           ))}

@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../features/Products/productsSlice";
 import { useParams } from "react-router-dom";
 
+import styles from "./ProductsPage.module.css";
+
 function ProductsPage() {
   // React Router Hooks
   const { category } = useParams();
@@ -54,12 +56,6 @@ function ProductsPage() {
       <Row className="my-1 px-0 ">
         <h1>All Products</h1>
         <Nav className="ps-auto" variant="tabs" defaultActiveKey="/home">
-          {/* <Nav.Item className="pe-3">
-            <Nav.Link eventKey="disabled" disabled>
-              <strong>All Products</strong>
-            </Nav.Link>
-          </Nav.Item> */}
-
           <Nav.Item style={{ color: "black" }}>
             <Nav.Link
               className="mb-0 text-black ms-auto"
@@ -90,25 +86,7 @@ function ProductsPage() {
           </Nav.Item>
         </Nav>
       </Row>
-      <Row className="mt-3">
-        {/* <Col md={3}>
-          <Table hover>
-            <thead>
-              <th>All Products</th>
-            </thead>
-            <tbody>
-              <tr onClick={() => handleSelectCategory("bundles")}>
-                <td className="ps-0">Bundles</td>
-              </tr>
-              <tr onClick={() => handleSelectCategory("candles")}>
-                <td className="ps-0">Candles</td>
-              </tr>
-              <tr onClick={() => handleSelectCategory("books")}>
-                <td className="ps-0">Books</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Col> */}
+      <Row>
         <Col md={12}>
           {isLoading ? (
             <div className="d-flex vh-100 align-content-center">
@@ -119,7 +97,7 @@ function ProductsPage() {
           ) : selectedCategory === "candles" ? (
             <Row>
               {candles.map((product) => (
-                <Col key={product.id}>
+                <Col md="auto" key={product.id}>
                   <ProductCard product={product} />
                 </Col>
               ))}
@@ -127,7 +105,7 @@ function ProductsPage() {
           ) : selectedCategory === "books" ? (
             <Row>
               {books.map((product) => (
-                <Col key={product.id}>
+                <Col md="auto" key={product.id}>
                   <ProductCard product={product} />
                 </Col>
               ))}
@@ -135,7 +113,7 @@ function ProductsPage() {
           ) : (
             <Row>
               {bundles.map((product) => (
-                <Col key={product.id}>
+                <Col md="auto" key={product.id}>
                   <ProductCard product={product} />
                 </Col>
               ))}
