@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Card, Container, Button, Row, Col, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Slider from "../components/Slider";
 import CategoryCard from "../components/CategoryCard";
 

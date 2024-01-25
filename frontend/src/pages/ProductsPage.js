@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../features/Products/productsSlice";
-import { useParams } from "react-router-dom";
 
 import styles from "./ProductsPage.module.css";
 
@@ -22,6 +22,7 @@ function ProductsPage() {
 
   // Local State
   const [selectedCategory, setSelectedCategory] = useState("bundles");
+  const [message, setMessage] = useState();
 
   // Derived State
   const books = allProducts.filter(
@@ -48,12 +49,20 @@ function ProductsPage() {
       setSelectedCategory(category);
     }
 
-    console.log("CATEGORY", category);
+    // Handle success message StripeAPI
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Your purchase was successful.");
+    } else {
+      setMessage();
+    }
   }, [dispatch, category]);
 
   return (
     <Container>
       <Row className="my-1 px-0 ">
+        {message && <Message variant="success">{message}</Message>}
         <h1>All Products</h1>
         <Nav className="ps-auto" variant="tabs" defaultActiveKey="/home">
           <Nav.Item style={{ color: "black" }}>
