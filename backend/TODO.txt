@@ -21,3 +21,7 @@ Payment:
 TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
 
 TODO: Add tax prices and shipping cost to stripe checkout
+
+TODO: Add cancelled purchase message?
+
+TODO: If params contain success after purchase dispatch action to clear cart. 

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
@@ -17,6 +18,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
 from .view_utils import formatStripeLineItem
+
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 
 import stripe
@@ -73,13 +77,71 @@ class BlacklistTokenUpdateView(APIView):
 
 # This is your test secret API key.
 stripe.api_key = settings.STRIPE_SECRET_KEY
+WEBHOOK_SIGNING_SECRET = settings.WEBHOOK_SIGNING_SECRET
+
+
+@csrf_exempt
+@require_POST
+def stripe_webhook(request):
+    event = None
+    payload = request.body
+    sig_header = request.headers['STRIPE_SIGNATURE']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, WEBHOOK_SIGNING_SECRET
+        )
+
+    except ValueError as e:
+        # Invalid payload
+        print("INVALID PAYLOAD")
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        print("INVALID SIGNATURE")
+        return HttpResponse(status=400)
+
+
+        # Handle the event
+    if event.type == 'payment_intent.succeeded':
+      payment_intent = event.data.object
+      print("HANDLE DB UPDATE: ", payment_intent)
+    else:
+      print('Unhandled event type {}'.format(event.type))
+
+    if event.type == 'checkout.session.completed':
+      session = event.data.object
+
+      print("STRIPE SESSION LIST DATA", stripe.checkout.Session.list_line_items(session.id, limit=100))
+
+      purchased_products = stripe.checkout.Session.list_line_items(session.id, limit=100)
+
+      for product in purchased_products:
+          db_product = Product.objects.get(name=product.description)
+          db_product.stock_count -= product.quantity
+          db_product.save()
+
+      
+
+    # Retrieve line items for the session
+    # try:
+    #     line_items = stripe.checkout.Session.list_line_items(session.id, limit=100)
+    #     for item in line_items.data:
+    #         print("Product:", item.description, "Quantity:", item.quantity)
+    #         # Additional processing based on line item details
+    # except stripe.error.StripeError as e:
+    #     print("Error retrieving line items:", e)
+    else:
+      print('Unhandled event type {}'.format(event.type))
+    return HttpResponse(status=200)
+
 
 
 class StripeChechOutView(APIView):
     def post(self, request):
-        print("REQUEST DATA: ", request.data)
+
         line_items = formatStripeLineItem(request.data)
-        print("CUSTOM LINE ITEMS: ", line_items)
+        
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
@@ -96,3 +158,5 @@ class StripeChechOutView(APIView):
                 {"error": "Something went wrong when creating stripe checkout session"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+

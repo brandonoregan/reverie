@@ -192,4 +192,6 @@ SIMPLE_JWT = {
 
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
+WEBHOOK_SIGNING_SECRET = os.environ.get("WEBHOOK_SIGNING_SECRET")
+
 REACT_SITE_URL = "http://localhost:3000/"
