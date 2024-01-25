@@ -15,3 +15,9 @@ FIX BUG: When redirected for no auth user is redirect back to blocked page, trig
 TODO: ADD shopping cart item counter to nav
 
 FIXBUG: When user logs out cartItems are removed but the redux state isn't updated yet so the items are still visible in the cart page. 
+
+Payment:
+
+TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
+
+TODO: Add tax prices and shipping cost to stripe checkout

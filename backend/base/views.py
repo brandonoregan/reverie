@@ -16,7 +16,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
-from django.contrib.auth.hashers import make_password
+from .view_utils import formatStripeLineItem
+
 
 import stripe
 from django.conf import settings
@@ -73,26 +74,6 @@ class BlacklistTokenUpdateView(APIView):
 # This is your test secret API key.
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-def formatStripeLineItem(cartItems):
-    print("CART ITEMS: ", cartItems)
-    line_items = []
-    for item in cartItems:
-        unit_amount = int(float(item["price"]) * 100)
-
-        line_items.append({
-            "price_data": {
-                "currency": "aud",
-                "unit_amount": unit_amount,
-                "product_data": {
-                    "name": item["name"]
-                },
-            },
-            "quantity": item["quantity"],
-        })
-
-    return line_items
-
-
 
 class StripeChechOutView(APIView):
     def post(self, request):
@@ -102,19 +83,14 @@ class StripeChechOutView(APIView):
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
-                # [
-                #     {
-                #         "price": "price_1OaF8fC4qoH0c9CccBwhJ86z",
-                #         "quantity": 1,
-                #     },
-                # ],
                 payment_method_types=["card"],
                 mode="payment",
+                shipping_address_collection={'allowed_countries': ['AU', 'US', 'CA'],},
                 success_url=settings.REACT_SITE_URL
-                + "ll?success=true&session_id={CHECKOUT_SESSION_ID}",
+                + "products?success=true&session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=settings.REACT_SITE_URL + "cart?canceled=true",
             )
-            return Response({"url": checkout_session.url})
+            return Response({"checkout_url": checkout_session.url})
         except:
             return Response(
                 {"error": "Something went wrong when creating stripe checkout session"},

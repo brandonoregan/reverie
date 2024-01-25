@@ -28,9 +28,9 @@ function CartPage() {
   }
 
   function handleCheckout() {
-    dispatch(checkout(cartItems)).then((checkoutUrl) => {
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl; // Redirect to Stripe Checkout
+    dispatch(checkout(cartItems)).then((checkout_url) => {
+      if (checkout_url) {
+        window.location.href = checkout_url; // Redirect to Stripe Checkout
       } else {
         // Handle error or notify the user
         console.error("Checkout URL not received");

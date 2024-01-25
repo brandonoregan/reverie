@@ -34,8 +34,8 @@ export function checkout() {
 
       dispatch(checkout());
 
-      const checkoutUrl = data.url;
-      return checkoutUrl; // Return the URL
+      const checkout_url = data.checkout_url;
+      return checkout_url; // Return the URL
     } catch (error) {
       console.log("CHECKOUT ERROR: ", error);
     }
