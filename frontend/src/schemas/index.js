@@ -7,17 +7,11 @@ export const registerSchema = yup.object().shape({
   last_name: yup.string().required("Required"),
   username: yup
     .string()
-    .min(7, { message: "Username must be atleast 7 characters" })
-    .max(20),
+    .required("Required")
+    .min(7, { message: "Username must be atleast 7 characters." })
+    .max(20, { message: "Username is too long, maximum 20 characters." }),
   email: yup.string().email("Please enter a valid email.").required("Required"),
-  password: yup
-    .string()
-    .min(7)
-    .matches(passwordRules, {
-      message:
-        "Password must be at least 7 characters long and include a number, an uppercase, and a lowercase letter.",
-    })
-    .required("Required"),
+  password: yup.string().matches(passwordRules).required("Required"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match.")
@@ -25,8 +19,8 @@ export const registerSchema = yup.object().shape({
 });
 
 export const loginSchema = yup.object().shape({
-  username: yup.string().required("Username is required"),
+  username: yup.string().required("Username is required."),
   // or if you use email to login:
   // email: yup.string().email("Please enter a valid email.").required("Email is required"),
-  password: yup.string().required("Password is required"),
+  password: yup.string().required("Password is required."),
 });

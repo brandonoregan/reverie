@@ -1,27 +1,25 @@
-FIX BUG: The refresh token is needed to succesfully logout and add to token black list. So when the token expires naturally and the user hits logout it fails and the local storage isn't cleared. 
-HOW: Implement logout timer or figure timer at refresh_token expiration
+FIXBUG: The refresh token is needed to succesfully logout and add to token black list. So when the token expires naturally and the user hits logout it fails and the local storage isn't cleared. 
+
+TODO: HOW: Implement logout timer or figure timer at refresh_token expiration
 WORK AROUND: Increased lifespan of tokens in settings.
 
 TODO: ADD elegant error handling of unauthorised request. 
 
-TODO: Store cart for specific user 
+CONSIDER: Store cart for specific user 
 
-TODO: clear persistant cart on logout 
-
-TODO: If redirect to login was because user was not authorized then make sure post login redirect is back to there 
-
-FIX BUG: When redirected for no auth user is redirect back to blocked page, triggering a loop. 
+TODO: FIX BUG: Register server side validation errors aren't being displaying in front end, but are visible in console log
 
 TODO: ADD shopping cart item counter to nav
 
-FIXBUG: When user logs out cartItems are removed but the redux state isn't updated yet so the items are still visible in the cart page. 
-
-Payment:
+FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page. 
 
 TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
 
-TODO: Add tax prices and shipping cost to stripe checkout
+CONSIDER: Add tax prices and shipping cost to stripe checkout
 
-TODO: Add cancelled purchase message?
+CONSIDER: Add cancelled purchase message?
 
-TODO: If params contain success after purchase dispatch action to clear cart. 
+TODO: Change Go Back Button Product detail to navigate(-1)
+
+TODO: Add server side validation for passwordConfirm
+

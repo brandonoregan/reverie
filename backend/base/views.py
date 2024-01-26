@@ -1,19 +1,16 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django.contrib.auth.models import User
 
 from base.serializers import UserSerializer, ProductSerializer, UserSerializerWithToken
 
 from .models import Product
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
@@ -22,10 +19,8 @@ from .view_utils import formatStripeLineItem
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-
 import stripe
 from django.conf import settings
-from django.shortcuts import redirect
 
 
 @api_view(["POST"])
@@ -121,16 +116,6 @@ def stripe_webhook(request):
           db_product.stock_count -= product.quantity
           db_product.save()
 
-      
-
-    # Retrieve line items for the session
-    # try:
-    #     line_items = stripe.checkout.Session.list_line_items(session.id, limit=100)
-    #     for item in line_items.data:
-    #         print("Product:", item.description, "Quantity:", item.quantity)
-    #         # Additional processing based on line item details
-    # except stripe.error.StripeError as e:
-    #     print("Error retrieving line items:", e)
     else:
       print('Unhandled event type {}'.format(event.type))
     return HttpResponse(status=200)
@@ -138,6 +123,8 @@ def stripe_webhook(request):
 
 
 class StripeChechOutView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
 
         line_items = formatStripeLineItem(request.data)

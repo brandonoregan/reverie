@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 import { getProducts } from "../features/Products/productsSlice";
+import { clearCart } from "../features/Cart/cartSlice";
 
 import styles from "./ProductsPage.module.css";
 
@@ -17,8 +18,9 @@ function ProductsPage() {
 
   // Redux Global Store State
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
-  const { allProducts, isLoading, error } = products;
+  const { allProducts, isLoading, error } = useSelector(
+    (state) => state.products
+  );
 
   // Local State
   const [selectedCategory, setSelectedCategory] = useState("bundles");
@@ -54,6 +56,8 @@ function ProductsPage() {
 
     if (query.get("success")) {
       setMessage("Your purchase was successful.");
+
+      dispatch(clearCart());
     } else {
       setMessage();
     }

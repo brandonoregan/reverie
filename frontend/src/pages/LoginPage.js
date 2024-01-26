@@ -32,12 +32,6 @@ function LoginPage() {
     validationSchema: loginSchema,
     onSubmit: (values, actions) => {
       dispatch(loginUser(values.username, values.password));
-      if (!error) {
-        navigate("/");
-        actions.resetForm();
-      } else {
-        console.log(error);
-      }
     },
   });
 

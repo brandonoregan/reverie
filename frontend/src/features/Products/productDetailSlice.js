@@ -23,9 +23,10 @@ const productDetailSlice = createSlice({
     },
   },
 });
+//
 
 export function getProduct(id) {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch(loadingProduct());
 
     try {

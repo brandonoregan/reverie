@@ -6,8 +6,7 @@ import { logoutUser } from "../features/Auth/authSlice";
 
 function Header() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const { loggedIn } = auth;
+  const { loggedIn } = useSelector((state) => state.auth);
 
   function handleLogout() {
     dispatch(logoutUser());

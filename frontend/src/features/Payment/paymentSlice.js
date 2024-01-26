@@ -21,6 +21,7 @@ const paymentSlice = createSlice({
 export function checkout() {
   return async function (dispatch, getState) {
     dispatch(loading());
+
     const currentState = getState();
     const cartItems = currentState.cart.cartItems;
 

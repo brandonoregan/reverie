@@ -103,11 +103,7 @@ select.input-error.input-error:focus {
 }
 
 .inputErrorMessage {
-  margin-left: 0.2rem;
   color: red;
-}
-
-.passwordInput {
 }
 
 button:disabled {

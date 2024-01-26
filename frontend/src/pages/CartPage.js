@@ -60,7 +60,7 @@ function CartPage() {
       <Row className="d-flex justify-content-center">
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty{" "}
+            Your cart is empty.{" "}
             <BackButton toLink="/products">Shop now</BackButton>
           </Message>
         ) : (

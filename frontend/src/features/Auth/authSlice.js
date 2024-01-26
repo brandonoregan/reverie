@@ -78,6 +78,16 @@ export function loginUser(username, password) {
           });
 
           console.log("RETURNED LOGIN DATA:", res.data);
+
+          const preLoginURL = localStorage.getItem("preLoginURL");
+
+          if (preLoginURL) {
+            window.location.href = preLoginURL; // Redirect to the stored URL
+            localStorage.removeItem("preLoginURL"); // Clear the stored URL
+          } else {
+            // Redirect to a default page if no specific URL was saved
+            window.location.href = "/";
+          }
         });
     } catch (error) {
       console.log("LOGIN ERROR:", error);
@@ -102,20 +112,20 @@ export function registerUser(username, first_name, last_name, email, password) {
         console.log("REGISTER POST RESPONSE:", res);
         console.log(res.data);
 
-        if (res.data !== undefined) {
-          localStorage.setItem(
-            "refresh_token",
-            JSON.stringify(res.data.refresh_token)
-          );
-          localStorage.setItem(
-            "access_token",
-            JSON.stringify(res.data.access_token)
-          );
-        }
+        localStorage.setItem(
+          "refresh_token",
+          JSON.stringify(res.data.refresh_token)
+        );
+        localStorage.setItem(
+          "access_token",
+          JSON.stringify(res.data.access_token)
+        );
 
+        // Is this necessary or is it handles in axiosInstance?
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + res.data.access_token;
 
+        // Update userInfo state
         dispatch({
           type: "authentication/registerUser",
           payload: {
@@ -123,6 +133,11 @@ export function registerUser(username, first_name, last_name, email, password) {
             access_token: res.data.access_token,
           },
         });
+
+        window.location.href = "/";
+
+        // Reset Error Message to null
+        dispatch(registerError(null));
       })
       .catch((error) => {
         console.log("REGISTER ERROR:", error.response.data);

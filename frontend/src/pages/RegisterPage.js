@@ -40,16 +40,8 @@ function RegisterPage() {
           values.email,
           values.password
         )
-      ).then(() => {
-        // Check if there was an error after the promise resolves
-        // TODO: This doesn't work, there seems to be no error in registerError directly in promise so if block is executed anyway even when an error is present.
-        if (!registerError) {
-          navigate(-1);
-          actions.resetForm();
-        } else {
-          console.log("Dispatch registerError: ", registerError);
-        }
-      });
+      );
+      actions.resetForm();
     },
   });
 
@@ -179,19 +171,14 @@ function RegisterPage() {
                   errors.password && touched.password ? "input-error" : ""
                 }
               />
-              {!errors.password ? (
-                <Form.Text className="text-muted ">
-                  Password must be at least 7 characters long and include a
-                  number, an uppercase, and a lowercase letter.
-                </Form.Text>
-              ) : (
-                errors.password &&
-                touched.password && (
-                  <Form.Text className="inputErrorMessage text-muted ">
-                    {errors.password}
-                  </Form.Text>
-                )
-              )}
+              <Form.Text
+                className={`text-muted ${
+                  errors.password && touched.password ? "inputErrorMessage" : ""
+                }`}
+              >
+                Password must be at least 7 characters long and include a
+                number, an uppercase, and a lowercase letter.
+              </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3">

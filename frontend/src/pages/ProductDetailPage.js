@@ -22,8 +22,7 @@ function ProductDetailPage() {
 
   // Redux Hooks
   const dispatch = useDispatch();
-  const productDetail = useSelector((state) => state.productDetail);
-  const { product } = productDetail;
+  const { product } = useSelector((state) => state.productDetail);
 
   // Router Hooks
   const navigate = useNavigate();
@@ -126,7 +125,7 @@ function ProductDetailPage() {
                 <Button
                   onClick={addToCartHandler}
                   style={{ fontSize: "1.4rem" }}
-                  disabled={product.stock_count === 0}
+                  disabled={product.stock_count <= 0}
                   type="button"
                   variant="outline-secondary"
                 >
