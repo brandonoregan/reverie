@@ -80,7 +80,7 @@ WEBHOOK_SIGNING_SECRET = settings.WEBHOOK_SIGNING_SECRET
 def stripe_webhook(request):
     event = None
     payload = request.body
-    sig_header = request.headers['STRIPE_SIGNATURE']
+    sig_header = request.headers["STRIPE_SIGNATURE"]
 
     try:
         event = stripe.Webhook.construct_event(
@@ -96,45 +96,49 @@ def stripe_webhook(request):
         print("INVALID SIGNATURE")
         return HttpResponse(status=400)
 
-
         # Handle the event
-    if event.type == 'payment_intent.succeeded':
-      payment_intent = event.data.object
-      print("HANDLE DB UPDATE: ", payment_intent)
+    if event.type == "payment_intent.succeeded":
+        payment_intent = event.data.object
+        print("HANDLE DB UPDATE: ", payment_intent)
     else:
-      print('Unhandled event type {}'.format(event.type))
+        print("Unhandled event type {}".format(event.type))
 
-    if event.type == 'checkout.session.completed':
-      session = event.data.object
+    if event.type == "checkout.session.completed":
+        session = event.data.object
 
-      print("STRIPE SESSION LIST DATA", stripe.checkout.Session.list_line_items(session.id, limit=100))
+        print(
+            "STRIPE SESSION LIST DATA",
+            stripe.checkout.Session.list_line_items(session.id, limit=100),
+        )
 
-      purchased_products = stripe.checkout.Session.list_line_items(session.id, limit=100)
+        purchased_products = stripe.checkout.Session.list_line_items(
+            session.id, limit=100
+        )
 
-      for product in purchased_products:
-          db_product = Product.objects.get(name=product.description)
-          db_product.stock_count -= product.quantity
-          db_product.save()
+        for product in purchased_products:
+            db_product = Product.objects.get(name=product.description)
+            db_product.stock_count -= product.quantity
+            db_product.save()
 
     else:
-      print('Unhandled event type {}'.format(event.type))
+        print("Unhandled event type {}".format(event.type))
     return HttpResponse(status=200)
-
 
 
 class StripeChechOutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-
         line_items = formatStripeLineItem(request.data)
-        
+
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
                 payment_method_types=["card"],
                 mode="payment",
-                shipping_address_collection={'allowed_countries': ['AU', 'US', 'CA'],},
+                shipping_address_collection={
+                    "allowed_countries": ["AU", "US", "CA"],
+                },
                 success_url=settings.REACT_SITE_URL
                 + "products?success=true&session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=settings.REACT_SITE_URL + "cart?canceled=true",
@@ -145,5 +149,3 @@ class StripeChechOutView(APIView):
                 {"error": "Something went wrong when creating stripe checkout session"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
-

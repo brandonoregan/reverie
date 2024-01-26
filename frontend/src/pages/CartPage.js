@@ -20,7 +20,7 @@ function CartPage() {
   // Redux Hooks
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { cartItems, error } = cart;
+  const { cartItems } = cart;
 
   // Event handlers
   function handleDeleteItem(id) {

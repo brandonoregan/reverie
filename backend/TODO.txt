@@ -23,3 +23,5 @@ TODO: Change Go Back Button Product detail to navigate(-1)
 
 TODO: Add server side validation for passwordConfirm
 
+TODO: Look over actions that don't need to be actions and can be effects
+

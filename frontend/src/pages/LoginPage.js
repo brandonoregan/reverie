@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +8,10 @@ import { loginSchema } from "../schemas/index";
 import { useFormik } from "formik";
 
 function LoginPage() {
-  const navigate = useNavigate();
-
   // Redux Hooks
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const { error, isLoading } = auth;
+  const { error } = auth;
 
   const {
     handleSubmit,

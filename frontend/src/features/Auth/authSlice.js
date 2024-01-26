@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios";
-import { useNavigate } from "react-router-dom";
 
 // Set user info inital state
 let localStorageUserInfo = [];

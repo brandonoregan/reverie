@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 import { registerSchema } from "../schemas";
@@ -8,10 +7,8 @@ import { registerUser } from "../features/Auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  const { error, registerError } = useSelector((state) => state.auth);
+  const { registerError } = useSelector((state) => state.auth);
 
   const {
     handleSubmit,
