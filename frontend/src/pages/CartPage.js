@@ -5,6 +5,7 @@ import BackButton from "../components/BackButton";
 import { Row, Button, Form, Container, Table, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteCartItem } from "../features/Cart/cartSlice";
+import { LinkContainer } from "react-router-bootstrap";
 
 import { checkout } from "../features/Payment/paymentSlice";
 
@@ -45,18 +46,13 @@ function CartPage() {
   }, [dispatch, id, quantity]);
 
   return (
-    <Container>
-      <Row>
-        <h1 className="text-center">Shopping Cart</h1>
-        <BackButton
-          // variant="outline-secondary"
-          toLink="/products"
-          className="btn btn-secondary w-25  ms-auto me-auto  "
-        >
-          Conitnue Shopping
-        </BackButton>
+    <Container fluid>
+      <Row
+        className="px-0 my-5"
+        style={{ textAlign: "center", borderRadius: "0 0 1re 1rem" }}
+      >
+        <h1>Shopping Cart</h1>
       </Row>
-
       <Row className="d-flex justify-content-center">
         {cartItems.length === 0 ? (
           <Message>
@@ -66,13 +62,12 @@ function CartPage() {
         ) : (
           <Table className="text-center" hover>
             <thead>
-              <tr>
-                <th>Product</th>
-                <th></th>
+              <tr style={{ fontSize: "1.2rem" }}>
+                <th colSpan={2}>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
-                <th></th>
+                <th>Remove Item</th>
               </tr>
             </thead>
             <tbody>
@@ -118,13 +113,11 @@ function CartPage() {
                 </tr>
               ))}
               <tr className="align-middle">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
+                <td style={{ fontSize: "1.2rem" }} colSpan={2}>
                   <strong>Total</strong>
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                   <strong>
                     $
@@ -136,25 +129,35 @@ function CartPage() {
                       .toFixed(2)}
                   </strong>
                 </td>
-              </tr>
-              <tr>
+
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colSpan={2}>
-                  <Button
-                    onClick={() => handleCheckout(cartItems)}
-                    variant="secondary"
-                    className="w-100 "
-                  >
-                    Proceed to Checkout
-                  </Button>
-                </td>
               </tr>
             </tbody>
           </Table>
         )}
+      </Row>
+      <Row className="d-flex justify-content-around ">
+        <LinkContainer to="/products">
+          <Button
+            variant="secondary"
+            className="w-25"
+            style={{
+              fontSize: "1.2rem",
+            }}
+          >
+            Continue Shopping
+          </Button>
+        </LinkContainer>
+        <Button
+          onClick={() => handleCheckout(cartItems)}
+          variant="secondary"
+          className="w-25"
+          style={{
+            fontSize: "1.2rem",
+          }}
+        >
+          Proceed to Checkout
+        </Button>
       </Row>
     </Container>
   );

@@ -65,9 +65,9 @@ function ProductsPage() {
 
   return (
     <Container>
-      <Row className="my-1 px-0 ">
+      <Row className=" px-0 text-center">
         {message && <Message variant="success">{message}</Message>}
-        <h1>All Products</h1>
+        <h1 className="text-center mt-5 mb-4">All Products</h1>
         <Nav className="ps-auto" variant="tabs" defaultActiveKey="/home">
           <Nav.Item style={{ color: "black" }}>
             <Nav.Link
@@ -102,7 +102,7 @@ function ProductsPage() {
       <Row>
         <Col md={12}>
           {isLoading ? (
-            <div className="d-flex vh-100 align-content-center">
+            <div className="d-flex vh-100 align-content-center justify-content-center ">
               <Loader size={"200px"} />
             </div>
           ) : error ? (

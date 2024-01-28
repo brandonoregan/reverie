@@ -14,6 +14,8 @@ TODO: Add server side validation for passwordConfirm
 
 TODO: Look over actions that don't need to be actions and can be effects
 
+TODO: Change message to modal 
+
 CONSIDER: Change all error message from alert to something more elegant
 
 CONSIDER: Add tax prices and shipping cost to stripe checkout
@@ -21,6 +23,8 @@ CONSIDER: Add tax prices and shipping cost to stripe checkout
 CONSIDER: Add cancelled purchase message?
 
 CONSIDER: Store cart for specific user 
+
+
 
 
 

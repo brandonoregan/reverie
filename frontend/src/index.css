@@ -5,6 +5,11 @@
   --slate: #424142;
 }
 
+.btn-secondary {
+  background-color: var(--oat) !important;
+  color: black !important;
+}
+
 .bg-body {
   background-color: var(--oat);
 }

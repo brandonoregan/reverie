@@ -14,6 +14,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
+from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView, ListAPIView
+
 from .view_utils import formatStripeLineItem
 
 from django.views.decorators.csrf import csrf_exempt
@@ -27,37 +30,48 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view(["POST"])
-def register_user(request):
-    serializer = UserSerializerWithToken(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        print("ERROR ERROR:", serializer.errors)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class RegisterUser(CreateAPIView):
+    serializer_class = UserSerializerWithToken
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print("ERROR ERROR:", serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def get_user(request):
-    user = request.user
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data)
+class GetUser(APIView):
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        user = request.user
+        serializer = self.serializer_class(user, many=False)
+        return Response(serializer.data)
 
 
-@api_view(["GET"])
-def get_all_products(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+class GetAllProducts(APIView):
+    serializer_class = ProductSerializer
+
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
 
 
-@api_view(["GET"])
-def get_product(request, pk):
-    product = Product.objects.get(pk=pk)
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data)
+class GetProduct(APIView):
+    serializer_class = ProductSerializer
+    
+    def get(self, request, pk):
+        try:
+            product = Product.objects.get(pk=pk)
+            serializer = self.serializer_class(product, many=False)
+            return Response(serializer.data)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 
 class BlacklistTokenUpdateView(APIView):
