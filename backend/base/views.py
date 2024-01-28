@@ -22,6 +22,7 @@ from django.views.decorators.http import require_POST
 import stripe
 from django.conf import settings
 
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -53,7 +54,6 @@ def get_all_products(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
 def get_product(request, pk):
     product = Product.objects.get(pk=pk)
     serializer = ProductSerializer(product, many=False)

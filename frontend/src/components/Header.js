@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logoutUser } from "../features/Auth/authSlice";
@@ -7,7 +7,7 @@ import styles from "./Header.module.css";
 
 function Header() {
   const dispatch = useDispatch();
-  const { loggedIn } = useSelector((state) => state.auth);
+  const { loggedIn, isAdmin } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
 
   function handleLogout() {
@@ -17,33 +17,74 @@ function Header() {
   return (
     <Navbar
       expand="md"
-      className="bg-body-primary"
+      className="bg-body-primary ps-3 pe-3"
       style={{ fontFamily: "Judson" }}
     >
-      <Container style={{ fontSize: "1.3rem" }}>
-        <LinkContainer to="/">
-          <Navbar.Brand>
-            <span style={{ fontSize: "1.7rem", fontWeight: 700 }}>
-              Reverie Reading
-            </span>
-          </Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <LinkContainer to="/">
-              <Nav.Link>Home</Nav.Link>
-            </LinkContainer>
+      <LinkContainer to="/">
+        <Navbar.Brand>
+          <span
+            style={{
+              fontSize: "1.7rem",
+              fontWeight: 700,
+            }}
+          >
+            Reverie Reading
+          </span>
+        </Navbar.Brand>
+      </LinkContainer>
 
-            <LinkContainer to="/products">
-              <Nav.Link>Products</Nav.Link>
-            </LinkContainer>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse style={{ fontSize: "1.3rem" }} id="basic-navbar-nav">
+        <Nav className="w-100 d-flex justify-content-around ">
+          {!isAdmin && (
+            <>
+              <LinkContainer to="/">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/products">
+                <Nav.Link>Products</Nav.Link>
+              </LinkContainer>
+            </>
+          )}
 
-            {/* TODO: On Condition */}
-            {/* <LinkContainer to="/profile">
+          {loggedIn && !isAdmin && (
+            <LinkContainer to="/profile">
               <Nav.Link>Profile</Nav.Link>
-            </LinkContainer> */}
+            </LinkContainer>
+          )}
 
+          {!loggedIn && (
+            <>
+              <LinkContainer to="/login">
+                <Nav.Link>Login</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <Nav.Link>Register</Nav.Link>
+              </LinkContainer>
+            </>
+          )}
+
+          {loggedIn && isAdmin && (
+            <>
+              <LinkContainer to="/users">
+                <Nav.Link>Users</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/stock">
+                <Nav.Link>Stock</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/orders">
+                <Nav.Link>Orders</Nav.Link>
+              </LinkContainer>
+            </>
+          )}
+
+          {loggedIn && (
+            <LinkContainer onClick={() => handleLogout()} to="/login">
+              <Nav.Link>Logout</Nav.Link>
+            </LinkContainer>
+          )}
+
+          {!isAdmin && (
             <LinkContainer to="/cart">
               <Nav.Link>
                 <div style={{ position: "relative" }}>
@@ -57,44 +98,9 @@ function Header() {
                 </div>
               </Nav.Link>
             </LinkContainer>
-
-            {/* TODO: Change title to user username or admin depending */}
-            <NavDropdown title="Account" id="basic-nav-dropdown">
-              {!loggedIn && (
-                <>
-                  <LinkContainer to="/login">
-                    <NavDropdown.Item>Login</NavDropdown.Item>
-                  </LinkContainer>
-
-                  <LinkContainer to="/register">
-                    <NavDropdown.Item>Register</NavDropdown.Item>
-                  </LinkContainer>
-                </>
-              )}
-
-              {/* TODO: Conditionally display for admin */}
-              <LinkContainer to="/users">
-                <NavDropdown.Item>Users</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/stock">
-                <NavDropdown.Item>Stock</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/orders">
-                <NavDropdown.Item>Orders</NavDropdown.Item>
-              </LinkContainer>
-
-              {loggedIn && (
-                <>
-                  <NavDropdown.Divider />
-                  <LinkContainer onClick={() => handleLogout()} to="/login">
-                    <NavDropdown.Item>Logout</NavDropdown.Item>
-                  </LinkContainer>
-                </>
-              )}
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+          )}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import { registerSchema } from "../schemas";
 import { useFormik } from "formik";
 import { registerUser } from "../features/Auth/authSlice";
@@ -43,15 +43,24 @@ function RegisterPage() {
   });
 
   return (
-    <Container>
-      <Row>
-        <Col className="d-flex justify-content-center">
+    <Container fluid style={{ position: "relative" }}>
+      <Row style={{ height: "20rem", backgroundColor: "#ece7db" }}>
+        <Col className="d-flex justify-content-center ">
           <Form
+            style={{
+              position: "absolute",
+              top: "5rem",
+              // transform: "translate(-50%, -50%)",
+              border: "1px solid",
+              padding: "2rem",
+              backgroundColor: "white",
+              borderRadius: "1rem",
+            }}
             onSubmit={handleSubmit}
             autoComplete="off"
             className="registerForm m-3"
           >
-            <h3>Register</h3>
+            <h3 className="text-center mb-3">Join Reverie Today</h3>
             <Form.Group className="mb-3">
               <Row>
                 <Col>
@@ -139,14 +148,12 @@ function RegisterPage() {
                 className={errors.email && touched.email ? "input-error" : ""}
               />
 
-              {/* Client side validation check */}
               {errors.email && touched.email && (
                 <Form.Text className="inputErrorMessage text-muted ">
                   {errors.email}
                 </Form.Text>
               )}
 
-              {/* Serverside validation check */}
               {registerError && registerError.email && (
                 <Form.Text className="inputErrorMessage text-muted ">
                   {registerError.email}
@@ -213,12 +220,29 @@ function RegisterPage() {
                 </Form.Text>
               )}
             </Form.Group>
-            <Button disabled={isSubmitting} variant="secondary" type="submit">
-              Submit
-            </Button>
+            <div className="w-100 text-center ">
+              <Link to="/login">
+                <p style={{ color: "black", textDecoration: "none" }}>
+                  Already have an account?
+                </p>
+              </Link>
+            </div>
+
+            <div className="w-100 text-center ">
+              <Button
+                className="ms-auto"
+                disabled={isSubmitting}
+                variant="secondary"
+                type="submit"
+                className="w-100 mt-2"
+              >
+                Submit
+              </Button>
+            </div>
           </Form>
         </Col>
       </Row>
+      <Row></Row>
     </Container>
   );
 }
