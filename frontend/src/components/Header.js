@@ -3,10 +3,12 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logoutUser } from "../features/Auth/authSlice";
+import styles from "./Header.module.css";
 
 function Header() {
   const dispatch = useDispatch();
   const { loggedIn } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   function handleLogout() {
     dispatch(logoutUser());
@@ -44,10 +46,15 @@ function Header() {
 
             <LinkContainer to="/cart">
               <Nav.Link>
-                <i
-                  style={{ fontSize: "1" }}
-                  className="fas fa-shopping-cart"
-                ></i>
+                <div style={{ position: "relative" }}>
+                  <i
+                    style={{ fontSize: "1" }}
+                    className="fas fa-shopping-cart"
+                  ></i>
+                  <span className={styles.cartStyle}>
+                    {cartItems.length > 0 && cartItems.length}
+                  </span>
+                </div>
               </Nav.Link>
             </LinkContainer>
 

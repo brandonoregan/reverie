@@ -1,27 +1,26 @@
 FIXBUG: The refresh token is needed to succesfully logout and add to token black list. So when the token expires naturally and the user hits logout it fails and the local storage isn't cleared. 
-
-TODO: HOW: Implement logout timer or figure timer at refresh_token expiration
+HOW: Implement logout timer or figure timer at refresh_token expiration
 WORK AROUND: Increased lifespan of tokens in settings.
+
+FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page and on the cart icon. 
 
 TODO: ADD elegant error handling of unauthorised request. 
 
-CONSIDER: Store cart for specific user 
-
-TODO: FIX BUG: Register server side validation errors aren't being displaying in front end, but are visible in console log
-
-TODO: ADD shopping cart item counter to nav
-
-FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page. 
-
 TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
-
-CONSIDER: Add tax prices and shipping cost to stripe checkout
-
-CONSIDER: Add cancelled purchase message?
 
 TODO: Change Go Back Button Product detail to navigate(-1)
 
 TODO: Add server side validation for passwordConfirm
 
 TODO: Look over actions that don't need to be actions and can be effects
+
+CONSIDER: Change all error message from alert to something more elegant
+
+CONSIDER: Add tax prices and shipping cost to stripe checkout
+
+CONSIDER: Add cancelled purchase message?
+
+CONSIDER: Store cart for specific user 
+
+
 

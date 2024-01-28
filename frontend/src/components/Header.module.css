@@ -1,0 +1,12 @@
+.cartStyle {
+  position: absolute;
+  top: -12px; /* Adjust these values as needed */
+  right: -12px;
+  background-color: black; /* Choose a color that stands out */
+  color: white;
+  font-size: 0.75em;
+  /* padding: 2px 5px; */
+  border-radius: 50%; /* Circular shape */
+  min-width: 20px; /* Minimum width */
+  text-align: center;
+}

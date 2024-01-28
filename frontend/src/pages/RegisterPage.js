@@ -168,8 +168,14 @@ function RegisterPage() {
                   errors.password && touched.password ? "input-error" : ""
                 }
               />
+              {registerError && registerError.username && (
+                <Form.Text className="inputErrorMessage">
+                  {registerError["password"]}
+                  <br></br>
+                </Form.Text>
+              )}
               <Form.Text
-                className={`text-muted ${
+                className={`${
                   errors.password && touched.password ? "inputErrorMessage" : ""
                 }`}
               >
@@ -197,6 +203,13 @@ function RegisterPage() {
               {errors.confirmPassword && touched.confirmPassword && (
                 <Form.Text className="inputErrorMessage text-muted ">
                   {errors.confirmPassword}
+                </Form.Text>
+              )}
+
+              {/* Serverside validation check */}
+              {registerError && registerError.confirmPassword && (
+                <Form.Text className="inputErrorMessage text-muted ">
+                  {registerError.confirmPassword}
                 </Form.Text>
               )}
             </Form.Group>

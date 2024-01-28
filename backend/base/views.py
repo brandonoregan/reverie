@@ -6,11 +6,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-from base.serializers import UserSerializer, ProductSerializer, UserSerializerWithToken
+from base.serializers import UserSerializer, ProductSerializer, UserSerializerWithToken, MyTokenObtainPairSerializer
 
 from .models import Product
 
-
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
@@ -21,6 +21,9 @@ from django.views.decorators.http import require_POST
 
 import stripe
 from django.conf import settings
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 @api_view(["POST"])
@@ -50,6 +53,7 @@ def get_all_products(request):
 
 
 @api_view(["GET"])
+@permission_classes([IsAdminUser])
 def get_product(request, pk):
     product = Product.objects.get(pk=pk)
     serializer = ProductSerializer(product, many=False)

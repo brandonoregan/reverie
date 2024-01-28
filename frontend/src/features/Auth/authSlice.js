@@ -1,9 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios";
+import { jwtDecode } from "jwt-decode";
+
+function checkIsAdmin(token) {
+  try {
+    // Decode the token to get its payload
+    const decodedToken = jwtDecode(token);
+
+    console.log(decodedToken);
+    // Check if isAdmin 'claim' exists and is true
+    return decodedToken.isAdmin === true;
+  } catch (error) {
+    console.error("CHECK ADMIN: ", error);
+    return false;
+  }
+}
 
 // Set user info inital state
 let localStorageUserInfo = [];
-let authenticated = false;
+let loggedIn = false;
+let isAdmin = false;
 
 const storedAccessToken = localStorage.getItem("access_token");
 const storedRefreshToken = localStorage.getItem("refresh_token");
@@ -13,12 +29,14 @@ if (storedAccessToken && storedRefreshToken) {
     access_token: JSON.parse(storedAccessToken),
     refresh_token: JSON.parse(storedRefreshToken),
   };
-  authenticated = true;
+  isAdmin = checkIsAdmin(storedAccessToken);
+  loggedIn = true;
 }
 
 const initialState = {
   userInfo: localStorageUserInfo,
-  loggedIn: authenticated,
+  loggedIn: loggedIn,
+  isAdmin: isAdmin,
   isLoading: false,
   error: null,
   registerError: null,
@@ -32,6 +50,9 @@ const authSlice = createSlice({
       state.userInfo = action.payload;
       state.loggedIn = true;
     },
+    loginAdmin(state, action) {
+      state.isAdmin = action.payload;
+    },
     registerUser(state, action) {
       state.userInfo = action.payload;
       state.loggedIn = true;
@@ -39,6 +60,7 @@ const authSlice = createSlice({
     logoutUser(state) {
       state.userInfo = [];
       state.loggedIn = false;
+      state.isAdmin = false;
     },
     registerError(state, action) {
       state.registerError = action.payload;
@@ -54,7 +76,6 @@ const authSlice = createSlice({
 
 export function loginUser(username, password) {
   return async function (dispatch) {
-    console.log("loginUser begun.");
     dispatch(loadingLogin());
 
     try {
@@ -76,13 +97,17 @@ export function loginUser(username, password) {
             payload: { access_token: access, refresh_token: refresh },
           });
 
+          console.log("Checking isAdmin dispatch: ", checkIsAdmin(access));
+          dispatch(loginAdmin(checkIsAdmin(access)));
+
+          console.log("RETURNED LOGIN RESPONSE:", res);
           console.log("RETURNED LOGIN DATA:", res.data);
 
           const preLoginURL = localStorage.getItem("preLoginURL");
 
           if (preLoginURL) {
-            window.location.href = preLoginURL; // Redirect to the stored URL
-            localStorage.removeItem("preLoginURL"); // Clear the stored URL
+            window.location.href = preLoginURL;
+            localStorage.removeItem("preLoginURL");
           } else {
             // Redirect to a default page if no specific URL was saved
             window.location.href = "/";
@@ -119,10 +144,6 @@ export function registerUser(username, first_name, last_name, email, password) {
           "access_token",
           JSON.stringify(res.data.access_token)
         );
-
-        // Is this necessary or is it handles in axiosInstance?
-        axiosInstance.defaults.headers["Authorization"] =
-          "JWT " + res.data.access_token;
 
         // Update userInfo state
         dispatch({
@@ -174,4 +195,5 @@ export function logoutUser() {
 
 export default authSlice.reducer;
 
-export const { loadingLogin, loginError, registerError } = authSlice.actions;
+export const { loadingLogin, loginError, registerError, loginAdmin } =
+  authSlice.actions;

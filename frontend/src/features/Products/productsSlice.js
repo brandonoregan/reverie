@@ -35,7 +35,7 @@ export function getProducts() {
     try {
       const { data } = await axios.get("http://127.0.0.1:8000/api/products/");
 
-      console.log("ASYNC PRODUCTS:", data);
+      // console.log("ASYNC PRODUCTS:", data);
 
       dispatch({ type: "products/getProducts", payload: data });
     } catch (error) {
