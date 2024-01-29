@@ -87,6 +87,7 @@ export function loginUser(username, password) {
         .then((res) => {
           // Handle success
           const { access, refresh } = res.data;
+
           localStorage.setItem("refresh_token", JSON.stringify(refresh));
           localStorage.setItem("access_token", JSON.stringify(access));
 
@@ -97,13 +98,9 @@ export function loginUser(username, password) {
             payload: { access_token: access, refresh_token: refresh },
           });
 
-          console.log("Checking isAdmin dispatch: ", checkIsAdmin(access));
           const isAdmin = checkIsAdmin(access);
 
           dispatch(loginAdmin(isAdmin));
-
-          console.log("RETURNED LOGIN RESPONSE:", res);
-          console.log("RETURNED LOGIN DATA:", res.data);
 
           const preLoginURL = localStorage.getItem("preLoginURL");
 

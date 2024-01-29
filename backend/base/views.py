@@ -16,7 +16,7 @@ from base.serializers import (
     OrderItemSerializer,
 )
 
-from .models import Product
+from .models import Product, Order, OrderItem
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -35,16 +35,7 @@ from django.conf import settings
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = OrderSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            self.perform_create(serializer)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            print("ERROR ERROR:", serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class CreateOrder(APIView):
@@ -57,6 +48,16 @@ class CreateOrder(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class GetOrders(APIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = self.serializer_class(orders, many=True)
+        return Response(serializer.data)
 
 
 class RegisterUser(CreateAPIView):

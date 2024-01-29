@@ -16,6 +16,7 @@ urlpatterns = [
 
     # Order URLS
     path("order/", views.CreateOrder.as_view(), name="create_order"),
+    path("orders/", views.GetOrders.as_view(), name="get_orders"),
 
     # JWT/User URLS
     path("token/", views.MyTokenObtainPairView.as_view(), name="token_obtain_pair"),

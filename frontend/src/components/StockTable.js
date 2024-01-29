@@ -63,8 +63,8 @@ function StockTable({ allProducts, setTab }) {
                 </tr>
               </thead>
               <tbody>
-                {allProducts.map((item) => (
-                  <tr key={item.product_id} className="align-middle">
+                {allProducts.map((item, index) => (
+                  <tr key={item.id} className="align-middle">
                     <td>
                       <Image
                         src={`http://127.0.0.1:8000/${item.image}`}
