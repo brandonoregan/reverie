@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../axios";
+import axiosInstance from "../../utils/axios";
 import { jwtDecode } from "jwt-decode";
 
 function checkIsAdmin(token) {

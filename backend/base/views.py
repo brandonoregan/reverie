@@ -25,7 +25,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView, ListAPIView
 
-from .view_utils import formatStripeLineItem
+from .view_utils import formatStripeLineItem, updateInventory
 
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -141,10 +141,11 @@ def stripe_webhook(request):
             session.id, limit=100
         )
 
-        for product in purchased_products:
-            db_product = Product.objects.get(name=product.description)
-            db_product.stock_count -= product.quantity
-            db_product.save()
+        
+
+        updateInventory(purchased_products)
+
+        
 
     else:
         print("Unhandled event type {}".format(event.type))

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../axios";
+import axiosInstance from "../../utils/axios";
 
 const initialState = {
   isLoading: false,

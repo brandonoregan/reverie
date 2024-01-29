@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../axios";
+import axiosInstance from "../../utils/axios";
 
 // Get cart items from local storage and store in inital cartItems state
 const localStorageCartItems = localStorage.getItem("cartItems")

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Message from "../components/Message";
-import { Row, Button, Container, Table, Image } from "react-bootstrap";
-import axiosInstance from "../axios";
+import { Row, Button, Container, Table } from "react-bootstrap";
+import axiosInstance from "../utils/axios";
 
 function UsersTable({ setTab }) {
   const [users, setUsers] = useState([]);

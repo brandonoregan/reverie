@@ -1,5 +1,7 @@
 from django.conf import settings
 
+from .models import Product
+
 
 def formatStripeLineItem(itemsArray):
     """
@@ -26,3 +28,15 @@ def formatStripeLineItem(itemsArray):
         )
 
     return line_items
+
+
+def updateInventory(purchased_products):
+    """
+    Accepts a list of products and updates the data base inventory
+    """
+    for product in purchased_products:
+            db_product = Product.objects.get(name=product.description)
+            db_product.stock_count -= product.quantity
+            db_product.save()
+
+
