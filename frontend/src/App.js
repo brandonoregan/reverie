@@ -11,9 +11,7 @@ import NoMatchPage from "./pages/NoMatchPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import OrdersPage from "./pages/OrdersPage";
-import UsersPage from "./pages/UsersPage";
-import StockPage from "./pages/StockPage";
+import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 // import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -42,9 +40,7 @@ export default function App() {
             {/* <Route path="/payment" element={<PaymentPage />} /> */}
 
             {/* Admin Only */}
-            <Route path="/orders" element={<OrdersPage />} />
-            <Route path="/users" element={<UsersPage />} />
-            <Route path="/stock" element={<StockPage />} />
+            <Route path="/admin" element={<AdminPage />} />
 
             {/* Error */}
             <Route path="*" element={<NoMatchPage />} />

@@ -24,6 +24,10 @@ CONSIDER: Add cancelled purchase message?
 
 CONSIDER: Store cart for specific user 
 
+CONSIDER: Order by for admin
+
+CONSIDER: Search bar for products in user and admin
+
 
 
 

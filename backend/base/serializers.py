@@ -8,12 +8,13 @@ from django.core.exceptions import ValidationError
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
-        token['isAdmin'] = user.is_staff
+        token["isAdmin"] = user.is_staff
 
         return token
 
@@ -27,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "first_name",
             "last_name",
+            "is_staff",
         ]
 
 
@@ -48,7 +50,7 @@ class UserSerializerWithToken(UserSerializer):
         ]
         extra_kwargs = {
             "password": {"write_only": True},
-            }
+        }
 
     def create(self, validated_data):
         # Create a new user with hashed password
@@ -90,7 +92,7 @@ class UserSerializerWithToken(UserSerializer):
         except ValidationError as e:
             raise serializers.ValidationError(e.messages)
         return value
-    
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:

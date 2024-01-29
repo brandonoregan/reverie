@@ -98,14 +98,18 @@ export function loginUser(username, password) {
           });
 
           console.log("Checking isAdmin dispatch: ", checkIsAdmin(access));
-          dispatch(loginAdmin(checkIsAdmin(access)));
+          const isAdmin = checkIsAdmin(access);
+
+          dispatch(loginAdmin(isAdmin));
 
           console.log("RETURNED LOGIN RESPONSE:", res);
           console.log("RETURNED LOGIN DATA:", res.data);
 
           const preLoginURL = localStorage.getItem("preLoginURL");
 
-          if (preLoginURL) {
+          if (isAdmin) {
+            window.location.href = "/admin";
+          } else if (preLoginURL) {
             window.location.href = preLoginURL;
             localStorage.removeItem("preLoginURL");
           } else {

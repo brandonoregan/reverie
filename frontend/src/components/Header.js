@@ -64,22 +64,26 @@ function Header() {
             </>
           )}
 
-          {loggedIn && isAdmin && (
+          {/* {loggedIn && isAdmin && (
             <>
               <LinkContainer to="/users">
                 <Nav.Link>Users</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/stock">
-                <Nav.Link>Stock</Nav.Link>
+              <LinkContainer to="/admin">
+                <Nav.Link>Admin</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/orders">
                 <Nav.Link>Orders</Nav.Link>
               </LinkContainer>
             </>
-          )}
+          )} */}
 
           {loggedIn && (
-            <LinkContainer onClick={() => handleLogout()} to="/login">
+            <LinkContainer
+              className={`${isAdmin}? ms-auto  : "" `}
+              onClick={() => handleLogout()}
+              to="/login"
+            >
               <Nav.Link>Logout</Nav.Link>
             </LinkContainer>
           )}

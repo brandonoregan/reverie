@@ -5,8 +5,16 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.contrib.auth.models import User
 
-from base.serializers import UserSerializer, ProductSerializer, UserSerializerWithToken, MyTokenObtainPairSerializer
+
+
+from base.serializers import (
+    UserSerializer,
+    ProductSerializer,
+    UserSerializerWithToken,
+    MyTokenObtainPairSerializer,
+)
 
 from .models import Product
 
@@ -43,12 +51,13 @@ class RegisterUser(CreateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GetUser(APIView):
+class GetUsers(APIView):
     serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
 
     def get(self, request):
-        user = request.user
-        serializer = self.serializer_class(user, many=False)
+        users = User.objects.all()
+        serializer = self.serializer_class(users, many=True)
         return Response(serializer.data)
 
 
@@ -63,7 +72,7 @@ class GetAllProducts(APIView):
 
 class GetProduct(APIView):
     serializer_class = ProductSerializer
-    
+
     def get(self, request, pk):
         try:
             product = Product.objects.get(pk=pk)
@@ -71,7 +80,6 @@ class GetProduct(APIView):
             return Response(serializer.data)
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
 
 
 class BlacklistTokenUpdateView(APIView):

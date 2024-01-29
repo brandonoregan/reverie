@@ -10,7 +10,6 @@ import Message from "../components/Message";
 import { getProducts } from "../features/Products/productsSlice";
 import { clearCart } from "../features/Cart/cartSlice";
 
-import styles from "./ProductsPage.module.css";
 
 function ProductsPage() {
   // React Router Hooks
