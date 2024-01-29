@@ -45,6 +45,36 @@ const cartSlice = createSlice({
   },
 });
 
+export function createOrder() {
+  return async function (dispatch, getState) {
+    try {
+      const { data } = await axiosInstance.post(
+        `http://127.0.0.1:8000/api/order/`
+      );
+
+      console.log("CREATE ORDER: ", data);
+    } catch (error) {
+      console.log("CREATE ORDER ERROR: ", error);
+    }
+  };
+}
+
+// export function createOrder() {
+//   return async function (dispatch, getState) {
+//     try {
+//       const { data } = await axiosInstance.post(
+//         `http://127.0.0.1:8000/api/order/`
+//       );
+
+//       console.log("CREATE ORDER: ", data);
+//     } catch (error) {
+//       console.log("CREATE ORDER ERROR: ", error);
+//     }
+//   };
+// }
+
+export function createOrderItem() {}
+
 export function addToCart(id, quantity) {
   return async function (dispatch, getState) {
     try {

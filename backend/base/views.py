@@ -7,13 +7,13 @@ from rest_framework.views import APIView
 
 from django.contrib.auth.models import User
 
-
-
 from base.serializers import (
     UserSerializer,
     ProductSerializer,
     UserSerializerWithToken,
     MyTokenObtainPairSerializer,
+    OrderSerializer,
+    OrderItemSerializer,
 )
 
 from .models import Product
@@ -25,7 +25,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView, ListAPIView
 
-from .view_utils import formatStripeLineItem, updateInventory
+from .view_utils import formatStripeLineItem, updateInventory, updateOrder
 
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -35,7 +35,28 @@ from django.conf import settings
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+    serializer_class = OrderSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print("ERROR ERROR:", serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateOrder(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data["user"] = request.user.id
+        serializer = OrderSerializer(data=data)
+        if serializer.is_valid():
+            order = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterUser(CreateAPIView):
@@ -125,27 +146,25 @@ def stripe_webhook(request):
         # Handle the event
     if event.type == "payment_intent.succeeded":
         payment_intent = event.data.object
-        print("HANDLE DB UPDATE: ", payment_intent)
+
+        updateOrder(payment_intent)
+
+        print("PAYMENT INTENT: ", payment_intent)
     else:
         print("Unhandled event type {}".format(event.type))
 
     if event.type == "checkout.session.completed":
         session = event.data.object
 
-        print(
-            "STRIPE SESSION LIST DATA",
-            stripe.checkout.Session.list_line_items(session.id, limit=100),
-        )
-
         purchased_products = stripe.checkout.Session.list_line_items(
-            session.id, limit=100
-        )
+                    session.id, limit=100
+                )
 
-        
+        print("PURCHASED PRODUCTS: ", purchased_products)
 
         updateInventory(purchased_products)
 
-        
+
 
     else:
         print("Unhandled event type {}".format(event.type))

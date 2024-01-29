@@ -1,10 +1,12 @@
-import { Container } from "react-bootstrap";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import NoMatchPage from "./pages/NoMatchPage";
@@ -13,10 +15,13 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-// import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
 
+import { useSelector } from "react-redux";
+
 export default function App() {
+  const { isAdmin } = useSelector((state) => state.auth);
+
   return (
     <Router>
       <div className="app-container">
@@ -36,11 +41,11 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            {/* Payment */}
-            {/* <Route path="/payment" element={<PaymentPage />} /> */}
-
             {/* Admin Only */}
-            <Route path="/admin" element={<AdminPage />} />
+            <Route
+              path="/admin"
+              element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />}
+            />
 
             {/* Error */}
             <Route path="*" element={<NoMatchPage />} />

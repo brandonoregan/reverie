@@ -10,7 +10,6 @@ import Message from "../components/Message";
 import { getProducts } from "../features/Products/productsSlice";
 import { clearCart } from "../features/Cart/cartSlice";
 
-
 function ProductsPage() {
   // React Router Hooks
   const { category } = useParams();
@@ -67,7 +66,7 @@ function ProductsPage() {
       <Row className=" px-0 text-center">
         {message && <Message variant="success">{message}</Message>}
         <h1 className="text-center mt-5 mb-4">All Products</h1>
-        <Nav className="ps-auto" variant="tabs" defaultActiveKey="/home">
+        <Nav fill className="ps-auto" variant="tabs" defaultActiveKey="/home">
           <Nav.Item style={{ color: "black" }}>
             <Nav.Link
               className="mb-0 text-black ms-auto"
@@ -99,7 +98,7 @@ function ProductsPage() {
         </Nav>
       </Row>
       <Row>
-        <Col md={12}>
+        <Col className="d-flex justify-content-center flex-shrink" md={12}>
           {isLoading ? (
             <div className="d-flex vh-100 align-content-center justify-content-center ">
               <Loader size={"200px"} />
@@ -108,7 +107,7 @@ function ProductsPage() {
             <Message variant="danger">{error}</Message>
           ) : selectedCategory === "candles" ? (
             <Row>
-              {candles.map((product) => (
+              {candles.map((product, index) => (
                 <Col md="auto" key={product.id}>
                   <ProductCard product={product} />
                 </Col>

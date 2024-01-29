@@ -4,7 +4,11 @@ import Message from "../components/Message";
 import BackButton from "../components/BackButton";
 import { Row, Button, Form, Container, Table, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, deleteCartItem } from "../features/Cart/cartSlice";
+import {
+  addToCart,
+  deleteCartItem,
+  createOrder,
+} from "../features/Cart/cartSlice";
 import { LinkContainer } from "react-router-bootstrap";
 
 import { checkout } from "../features/Payment/paymentSlice";
@@ -37,6 +41,8 @@ function CartPage() {
         console.error("Checkout URL not received");
       }
     });
+
+    dispatch(createOrder());
   }
 
   useEffect(() => {

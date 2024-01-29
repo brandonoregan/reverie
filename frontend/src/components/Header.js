@@ -80,7 +80,7 @@ function Header() {
 
           {loggedIn && (
             <LinkContainer
-              className={`${isAdmin}? ms-auto  : "" `}
+              className={`${isAdmin ? "ms-auto" : ""}`}
               onClick={() => handleLogout()}
               to="/login"
             >

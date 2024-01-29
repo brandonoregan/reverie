@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from .models import Product
+from .models import Product, Order, OrderItem
 
 
 def formatStripeLineItem(itemsArray):
@@ -40,3 +40,19 @@ def updateInventory(purchased_products):
             db_product.save()
 
 
+
+def updateOrder(payment_intent):
+     """
+     Update an order payment intent success information
+     """
+
+     last_order = Order.objects.all().order_by('-id').first()
+
+     last_order.total_price = payment_intent.amount / 100.0
+     last_order.shipping_address = f"""{payment_intent.shipping.address.line1} {payment_intent.shipping.address.line2},
+     {payment_intent.shipping.address.city},
+     {payment_intent.shipping.address.postal_code},
+     {payment_intent.shipping.address.state},
+     {payment_intent.shipping.address.country}"""
+
+     last_order.save()

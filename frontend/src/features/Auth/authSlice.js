@@ -113,7 +113,6 @@ export function loginUser(username, password) {
             window.location.href = preLoginURL;
             localStorage.removeItem("preLoginURL");
           } else {
-            // Redirect to a default page if no specific URL was saved
             window.location.href = "/";
           }
         });

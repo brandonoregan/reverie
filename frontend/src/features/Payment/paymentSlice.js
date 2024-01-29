@@ -3,6 +3,8 @@ import axiosInstance from "../../utils/axios";
 
 const initialState = {
   isLoading: false,
+  orderItems: [],
+  order: {},
 };
 
 const paymentSlice = createSlice({
@@ -14,6 +16,9 @@ const paymentSlice = createSlice({
     },
     checkout(state, actions) {
       state.isLoading = false;
+    },
+    createOrderItems(state, actions) {
+      state.orderItems = actions.payload;
     },
   },
 });
@@ -28,12 +33,19 @@ export function checkout() {
     try {
       const { data } = await axiosInstance.post("stripe/", cartItems);
 
-      console.log("DATA: ", data);
-      console.log("CART ITEMS: ", cartItems);
+      const orderItemsArray = cartItems.map((item) => ({
+        product: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      }));
 
       dispatch({ type: "payment/checkout", payload: data });
 
       dispatch(checkout());
+
+      dispatch(createOrderItems(orderItemsArray));
+
+      console.log("ORDER ITEMS ARRAY: ", orderItemsArray);
 
       const checkout_url = data.checkout_url;
       return checkout_url; // Return the URL
@@ -45,4 +57,4 @@ export function checkout() {
 
 export default paymentSlice.reducer;
 
-export const { loading } = paymentSlice.actions;
+export const { loading, createOrderItems } = paymentSlice.actions;
