@@ -20,7 +20,7 @@ TODO: Remove buttons from shopping cart when empty
 
 TODO: Fix all error from slices and handle properly 
 
-TODO: If cenceled=true in params of cart page, delete last order and order items
+TODO: If canceled=true in params of cart page, delete last order and order items
 
 CONSIDER: Change all error message from alert to something more elegant
 
@@ -33,7 +33,6 @@ CONSIDER: Store cart for specific user
 CONSIDER: Order by for admin
 
 CONSIDER: Search bar for products in user and admin
-
 
 PAYMENT INTENT:  {
   "amount": 12991,

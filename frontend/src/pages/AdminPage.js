@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import StockTable from "../components/StockTable";
 import UsersTable from "../components/UsersTable";
 import OrdersTable from "../components/OrdersTable";
+import OrderDetail from "../components/OrderDetail";
 
 import { getProducts } from "../features/Products/productsSlice";
 import EditProductForm from "../components/EditProductForm";
@@ -21,6 +22,7 @@ function AdminPage() {
 
   // Local State
   const [tab, setTab] = useState("stock");
+  const [id, setId] = useState();
 
   // Event Handler Functions
   function handleSelectedTab(tab) {
@@ -83,23 +85,31 @@ function AdminPage() {
             <Message variant="danger">{error}</Message>
           ) : tab === "stock" ? (
             <Row>
-              <StockTable allProducts={allProducts} setTab={setTab} />
+              <StockTable
+                allProducts={allProducts}
+                setTab={setTab}
+                setId={setId}
+              />
             </Row>
           ) : tab === "users" ? (
             <Row>
-              <UsersTable setTab={setTab} />
+              <UsersTable setTab={setTab} setId={setId} />
             </Row>
           ) : tab === "orders" ? (
             <Row>
-              <OrdersTable />
+              <OrdersTable setTab={setTab} setId={setId} />
             </Row>
           ) : tab === "editProduct" ? (
             <Row>
               <EditProductForm />
             </Row>
+          ) : tab === "editUser" ? (
+            <Row>
+              <EditUserForm id={id} />
+            </Row>
           ) : (
             <Row>
-              <EditUserForm />
+              <OrderDetail id={id} />
             </Row>
           )}
         </Col>

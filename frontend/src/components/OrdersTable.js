@@ -4,11 +4,14 @@ import Message from "../components/Message";
 import { Row, Button, Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-function OrdersTable() {
+function OrdersTable({ setTab, setId }) {
   const dispatch = useDispatch();
   const { allOrders } = useSelector((state) => state.order);
 
-  function handleOrderDetails() {}
+  function handleOrderDetails(order_id) {
+    setTab("orderDetail");
+    setId(order_id);
+  }
 
   useEffect(
     function () {
@@ -24,42 +27,44 @@ function OrdersTable() {
       ) : (
         <Container>
           <Row>
-            <Table className="text-center" hover>
-              <thead>
-                <tr>
-                  <th style={{ backgroundColor: "#ece7db" }}>Order ID</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>User ID</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>Order Date</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>Payment Status</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>Delivered</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>Total Price</th>
-                  <th style={{ backgroundColor: "#ece7db" }}>Order Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {allOrders.map((order) => (
-                  <tr key={order.id} className="align-middle">
-                    <td>{order.id}</td>
-                    <td>{order.user}</td>
-                    <td>
-                      {new Date(order.order_date).toLocaleDateString("en-GB")}
-                    </td>
-                    <td>{order.payment_status ? "Paid" : "Pending"}</td>
-                    <td>{order.delivered ? "Delivered" : "On Route"} </td>
-                    <td>${order.total_price}</td>
-                    <td>
-                      <Button
-                        onClick={() => handleOrderDetails(order.id)}
-                        type="button"
-                        variant="light"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </td>
+            <div className="scrollable-table-wrapper p-0 ">
+              <Table className="text-center scrollable-table" hover>
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                    <th>Payment Status</th>
+                    <th>Delivered</th>
+                    <th>Total Price</th>
+                    <th>Order Details</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {allOrders.map((order) => (
+                    <tr key={order.id} className="align-middle">
+                      <td>{order.id}</td>
+                      <td>{order.user}</td>
+                      <td>
+                        {new Date(order.order_date).toLocaleDateString("en-GB")}
+                      </td>
+                      <td>{order.payment_status ? "Paid" : "Pending"}</td>
+                      <td>{order.delivered ? "Delivered" : "On Route"} </td>
+                      <td>${order.total_price}</td>
+                      <td>
+                        <Button
+                          onClick={() => handleOrderDetails(order.id)}
+                          type="button"
+                          variant="light"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </Row>
           <Row></Row>
         </Container>

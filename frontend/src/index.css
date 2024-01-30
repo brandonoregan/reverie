@@ -114,3 +114,26 @@ select.input-error.input-error:focus {
 button:disabled {
   opacity: 0.35;
 }
+
+.scrollable-table-wrapper {
+  display: block;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.scrollable-table {
+  width: 100%;
+  table-layout: auto; /* Allows columns to size based on content */
+}
+
+.scrollable-table thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--oat); /* Ensure background isn't transparent */
+}
+
+/* Additional styling as needed */
+
+.scrollable-table thead tr th {
+  background-color: var(--oat);
+}
