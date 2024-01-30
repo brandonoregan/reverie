@@ -62,77 +62,107 @@ function ProductsPage() {
   }, [dispatch, category]);
 
   return (
-    <Container>
-      <Row className=" px-0 text-center">
-        {message && <Message variant="success">{message}</Message>}
-        <h1 className="text-center mt-5 mb-4">All Products</h1>
-        <Nav fill className="ps-auto" variant="tabs" defaultActiveKey="/home">
-          <Nav.Item style={{ color: "black" }}>
-            <Nav.Link
-              className="mb-0 text-black ms-auto"
-              onClick={() => handleSelectCategory("bundles")}
-            >
-              Bundles
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              className="text-black"
-              onClick={() => handleSelectCategory("candles")}
-              eventKey="link-1"
-            >
-              Candles
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              className="text-black"
-              onClick={() => handleSelectCategory("books")}
-              eventKey="link-2"
-            >
-              Books
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
+    <>
+      <Row
+        className="px-0"
+        style={{
+          textAlign: "center",
+          borderRadius: "0 0 1rem 1rem",
+          maxHeight: "25rem",
+          objectFit: "contain",
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),url("http://127.0.0.1:8000/media/images/cover-products.jpg")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <h1
+          style={{
+            padding: "3rem",
+            color: "black",
+            fontWeight: 900,
+            fontFamily: "Judson",
+            fontSize: "5rem",
+            letterSpacing: "2px",
+          }}
+        >
+          Products
+        </h1>
       </Row>
-      <Row>
-        <Col className="d-flex justify-content-center flex-shrink" md={12}>
-          {isLoading ? (
-            <div className="d-flex vh-100 align-content-center justify-content-center ">
-              <Loader size={"200px"} />
-            </div>
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : selectedCategory === "candles" ? (
-            <Row>
-              {candles.map((product, index) => (
-                <Col md="auto" key={product.id}>
-                  <ProductCard product={product} />
-                </Col>
-              ))}
-            </Row>
-          ) : selectedCategory === "books" ? (
-            <Row>
-              {books.map((product) => (
-                <Col md="auto" key={product.id}>
-                  <ProductCard product={product} />
-                </Col>
-              ))}
-            </Row>
-          ) : (
-            <Row>
-              {bundles.map((product) => (
-                <Col md="auto" key={product.id}>
-                  <ProductCard product={product} />
-                </Col>
-              ))}
-            </Row>
-          )}
-        </Col>
-      </Row>
-    </Container>
+      <Container>
+        <Row className=" px-0 text-center">
+          {message && <Message variant="success">{message}</Message>}
+
+          <Nav
+            fill
+            className={`ps-auto ${
+              selectedCategory === "bundles" ? "active" : ""
+            }`}
+            variant="tabs"
+            style={{ fontSize: "1.3rem", fontWeight: 700 }}
+          >
+            <Nav.Item>
+              <Nav.Link
+                className="mb-0 text-black ms-auto"
+                onClick={() => handleSelectCategory("bundles")}
+              >
+                Bundles
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                className="text-black"
+                onClick={() => handleSelectCategory("candles")}
+              >
+                Candles
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                className="text-black"
+                onClick={() => handleSelectCategory("books")}
+              >
+                Books
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Row>
+        <Row>
+          <Col>
+            {isLoading ? (
+              <div className="d-flex vh-100 align-content-center justify-content-center ">
+                <Loader size={"200px"} />
+              </div>
+            ) : error ? (
+              <Message variant="danger">{error}</Message>
+            ) : selectedCategory === "candles" ? (
+              <Row className="d-flex justify-content-center">
+                {candles.map((product, index) => (
+                  <Col md="auto" key={product.id}>
+                    <ProductCard product={product} />
+                  </Col>
+                ))}
+              </Row>
+            ) : selectedCategory === "books" ? (
+              <Row className="d-flex justify-content-center">
+                {books.map((product) => (
+                  <Col md="auto" key={product.id}>
+                    <ProductCard product={product} />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Row className="d-flex justify-content-center">
+                {bundles.map((product) => (
+                  <Col md="auto" key={product.id}>
+                    <ProductCard product={product} />
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

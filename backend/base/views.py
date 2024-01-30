@@ -60,6 +60,23 @@ class GetOrders(APIView):
         serializer = self.serializer_class(orders, many=True)
         return Response(serializer.data)
 
+class CreateOrderItems(CreateAPIView):
+    serializer_class = OrderItemSerializer
+
+    def create(self, request, *args, **kwargs):
+        cart_items = request.data  # Assuming you're sending an array of objects in the request data
+
+        order_items = []  # To store created order items
+
+        # Loop through each item in the cart and create an OrderItem
+        for item in cart_items:
+            serializer = self.get_serializer(data=item)
+            if serializer.is_valid():
+                serializer.save()  # Save the OrderItem to the database
+                order_items.append(serializer.data)  # Append the serialized data to the response
+
+        return Response(order_items, status=status.HTTP_201_CREATED)
+
 
 class RegisterUser(CreateAPIView):
     serializer_class = UserSerializerWithToken
@@ -106,6 +123,7 @@ class UpdateUser(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class DeleteUser(APIView):
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser]
@@ -135,6 +153,29 @@ class GetProduct(APIView):
             return Response(serializer.data)
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class UpdateProduct(APIView):
+    serializer_class = ProductSerializer
+    permission_classes = [IsAdminUser]
+
+    def put(self, request, id):
+        product = get_object_or_404(Product, pk=id)
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteProduct(APIView):
+    serializer_class = ProductSerializer
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request, id):
+        product = get_object_or_404(Product, pk=id)
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class BlacklistTokenUpdateView(APIView):

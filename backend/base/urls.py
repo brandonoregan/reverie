@@ -8,7 +8,9 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # Products URLS
     path("products/", views.GetAllProducts.as_view(), name="get_all_products"),
-    path("products/<str:pk>", views.GetProduct.as_view(), name="get_product"),
+    path("products/<str:pk>", views.GetProduct.as_view(), name="get_product"), 
+    path("products/update/<int:id>/", views.UpdateProduct.as_view(), name="update_product"), 
+    path("products/delete/<int:id>/", views.DeleteProduct.as_view(), name="delete_product"), 
 
     # User URLS
     path("users/", views.GetUsers.as_view(), name="get_users"),

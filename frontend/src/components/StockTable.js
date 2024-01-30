@@ -46,7 +46,7 @@ function StockTable({ allProducts, setTab, setId, setMessage }) {
                       </td>
                       <td>
                         <Button
-                          onClick={() => handleEditItem(item.product_id)}
+                          onClick={() => handleEditItem(item.id)}
                           type="button"
                           variant="light"
                         >

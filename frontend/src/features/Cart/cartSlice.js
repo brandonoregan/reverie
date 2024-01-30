@@ -59,16 +59,21 @@ export function createOrder() {
   };
 }
 
-// export function createOrder() {
+// export function createOrderItems() {
 //   return async function (dispatch, getState) {
+//     const cart_Items = JSON.parse(localStorage.getItem("cartItems"));
+
 //     try {
 //       const { data } = await axiosInstance.post(
-//         `http://127.0.0.1:8000/api/order/`
+//         `http://127.0.0.1:8000/api/order/items`,
+//         cartItems
 //       );
 
-//       console.log("CREATE ORDER: ", data);
+//       dispatch({ type: "cart/createOrderItems" });
+
+//       console.log("CREATE ORDER ITEMS: ", data);
 //     } catch (error) {
-//       console.log("CREATE ORDER ERROR: ", error);
+//       console.log("CREATE ORDER ITEMS ERROR: ", error);
 //     }
 //   };
 // }

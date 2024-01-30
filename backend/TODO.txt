@@ -24,6 +24,12 @@ TODO: Add server side validation on update user form
 
 TODO: If canceled=true in params of cart page, delete last order and order items
 
+TODO: Handle no account login error
+
+TODO: Add image to update product form
+
+TODO: Update admin page when product is updated, frontend lags behind db
+
 CONSIDER: Change all error message from alert to something more elegant
 
 CONSIDER: Add tax prices and shipping cost to stripe checkout

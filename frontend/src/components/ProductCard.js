@@ -33,7 +33,7 @@ function ProductCard({ product }) {
         </Row>
         <LinkContainer className="w-100" to={`product/${product.id}`}>
           <Button className={styles.moreButton} variant="dark">
-            Read more
+            Product Details
           </Button>
         </LinkContainer>
       </Card.Body>

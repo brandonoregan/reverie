@@ -36,100 +36,128 @@ function AdminPage() {
   }, [dispatch]);
 
   return (
-    <Container>
-      {message && <Message variant="success">{message}</Message>}
-      <Row className=" px-0 text-center">
-        <h1 className="text-center mt-5 mb-4">Admin</h1>
-        <Nav
-          fill
-          style={{ fontSize: "1.3rem", fontWeight: 700 }}
-          className="ps-auto"
-          variant="tabs"
-          defaultActiveKey="/home"
+    <>
+      <Row
+        className="px-0"
+        style={{
+          textAlign: "center",
+          borderRadius: "0 0 1rem 1rem",
+          maxHeight: "25rem",
+          objectFit: "contain",
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),url("http://127.0.0.1:8000/media/images/cover-admin.jpg")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <h1
+          style={{
+            padding: "3rem",
+            color: "black",
+            fontWeight: 900,
+            fontFamily: "Judson",
+            fontSize: "5rem",
+            letterSpacing: "2px",
+          }}
         >
-          <Nav.Item style={{ color: "black" }}>
-            <Nav.Link
-              className="mb-0 text-black ms-auto"
-              onClick={() => handleSelectedTab("stock")}
-            >
-              Stock
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              className="text-black"
-              onClick={() => handleSelectedTab("users")}
-              eventKey="link-1"
-            >
-              Users
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              className="text-black"
-              onClick={() => handleSelectedTab("orders")}
-              eventKey="link-2"
-            >
-              Orders
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
+          Admin
+        </h1>
       </Row>
-      <Row>
-        <Col md={12}>
-          {isLoading ? (
-            <div className="d-flex vh-100 align-content-center justify-content-center ">
-              <Loader size={"200px"} />
-            </div>
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : tab === "stock" ? (
-            <Row>
-              <StockTable
-                allProducts={allProducts}
-                setTab={setTab}
-                setId={setId}
-                setMessage={setMessage}
-              />
-            </Row>
-          ) : tab === "users" ? (
-            <Row>
-              <UsersTable
-                setMessage={setMessage}
-                setTab={setTab}
-                setId={setId}
-              />
-            </Row>
-          ) : tab === "orders" ? (
-            <Row>
-              <OrdersTable
-                setTab={setTab}
-                setId={setId}
-                setMessage={setMessage}
-              />
-            </Row>
-          ) : tab === "editProduct" ? (
-            <Row>
-              <EditProductForm setMessage={setMessage} />
-            </Row>
-          ) : tab === "editUser" ? (
-            <Row>
-              <EditUserForm
-                setTab={setTab}
-                userId={id}
-                setMessage={setMessage}
-              />
-            </Row>
-          ) : (
-            <Row>
-              <OrderDetail orderId={id} setMessage={setMessage} />
-            </Row>
-          )}
-        </Col>
-      </Row>
-    </Container>
+      <Container>
+        {message && <Message variant="success">{message}</Message>}
+        <Row className=" px-0 text-center">
+          <Nav
+            fill
+            style={{ fontSize: "1.3rem", fontWeight: 700 }}
+            className="ps-auto"
+            variant="tabs"
+            defaultActiveKey="/home"
+          >
+            <Nav.Item style={{ color: "black" }}>
+              <Nav.Link
+                className="mb-0 text-black ms-auto"
+                onClick={() => handleSelectedTab("stock")}
+              >
+                Stock
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                className="text-black"
+                onClick={() => handleSelectedTab("users")}
+                eventKey="link-1"
+              >
+                Users
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                className="text-black"
+                onClick={() => handleSelectedTab("orders")}
+                eventKey="link-2"
+              >
+                Orders
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Row>
+        <Row>
+          <Col md={12}>
+            {isLoading ? (
+              <div className="d-flex vh-100 align-content-center justify-content-center ">
+                <Loader size={"200px"} />
+              </div>
+            ) : error ? (
+              <Message variant="danger">{error}</Message>
+            ) : tab === "stock" ? (
+              <Row>
+                <StockTable
+                  allProducts={allProducts}
+                  setTab={setTab}
+                  setId={setId}
+                  setMessage={setMessage}
+                />
+              </Row>
+            ) : tab === "users" ? (
+              <Row>
+                <UsersTable
+                  setMessage={setMessage}
+                  setTab={setTab}
+                  setId={setId}
+                />
+              </Row>
+            ) : tab === "orders" ? (
+              <Row>
+                <OrdersTable
+                  setTab={setTab}
+                  setId={setId}
+                  setMessage={setMessage}
+                />
+              </Row>
+            ) : tab === "editProduct" ? (
+              <Row>
+                <EditProductForm
+                  setMessage={setMessage}
+                  setTab={setTab}
+                  productId={id}
+                />
+              </Row>
+            ) : tab === "editUser" ? (
+              <Row>
+                <EditUserForm
+                  setTab={setTab}
+                  userId={id}
+                  setMessage={setMessage}
+                />
+              </Row>
+            ) : (
+              <Row>
+                <OrderDetail orderId={id} setMessage={setMessage} />
+              </Row>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

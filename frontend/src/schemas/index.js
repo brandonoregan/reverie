@@ -41,3 +41,24 @@ export const loginSchema = yup.object().shape({
   // email: yup.string().email("Please enter a valid email.").required("Email is required"),
   password: yup.string().required("Password is required."),
 });
+
+export const updateProductSchema = yup.object().shape({
+  name: yup.string().required("Product name is required."),
+  // image: yup.mixed().test("fileType", "Invalid file type", (value) => {
+  //   if (!value) return true; // No file selected is allowed
+  //   return value && ["image/jpeg", "image/png"].includes(value.type);
+  // }),
+  category: yup.string().required("Product category is required."),
+  description: yup.string().required("Product description is required."),
+  price: yup
+    .number()
+    .typeError("Price must be a number")
+    .positive("Price must be a positive number")
+    .required("Price is required."),
+  stock_count: yup
+    .number()
+    .typeError("Stock count must be a number")
+    .integer("Stock count must be an integer")
+    .min(0, "Stock count must be a positive number")
+    .required("Stock count is required."),
+});
