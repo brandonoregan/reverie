@@ -11,7 +11,7 @@ import OrderDetail from "../components/OrderDetail";
 
 import { getProducts } from "../features/Products/productsSlice";
 import EditProductForm from "../components/EditProductForm";
-import EditUserForm from "../components/EditProductForm";
+import EditUserForm from "../components/EditUserForm";
 
 function AdminPage() {
   // Redux Global Store State
@@ -23,6 +23,7 @@ function AdminPage() {
   // Local State
   const [tab, setTab] = useState("stock");
   const [id, setId] = useState();
+  const [message, setMessage] = useState("");
 
   // Event Handler Functions
   function handleSelectedTab(tab) {
@@ -36,6 +37,7 @@ function AdminPage() {
 
   return (
     <Container>
+      {message && <Message variant="success">{message}</Message>}
       <Row className=" px-0 text-center">
         <h1 className="text-center mt-5 mb-4">Admin</h1>
         <Nav
@@ -89,27 +91,40 @@ function AdminPage() {
                 allProducts={allProducts}
                 setTab={setTab}
                 setId={setId}
+                setMessage={setMessage}
               />
             </Row>
           ) : tab === "users" ? (
             <Row>
-              <UsersTable setTab={setTab} setId={setId} />
+              <UsersTable
+                setMessage={setMessage}
+                setTab={setTab}
+                setId={setId}
+              />
             </Row>
           ) : tab === "orders" ? (
             <Row>
-              <OrdersTable setTab={setTab} setId={setId} />
+              <OrdersTable
+                setTab={setTab}
+                setId={setId}
+                setMessage={setMessage}
+              />
             </Row>
           ) : tab === "editProduct" ? (
             <Row>
-              <EditProductForm />
+              <EditProductForm setMessage={setMessage} />
             </Row>
           ) : tab === "editUser" ? (
             <Row>
-              <EditUserForm id={id} />
+              <EditUserForm
+                setTab={setTab}
+                userId={id}
+                setMessage={setMessage}
+              />
             </Row>
           ) : (
             <Row>
-              <OrderDetail id={id} />
+              <OrderDetail orderId={id} setMessage={setMessage} />
             </Row>
           )}
         </Col>

@@ -230,11 +230,10 @@ function RegisterPage() {
 
             <div className="w-100 text-center ">
               <Button
-                className="ms-auto"
+                className="ms-auto w-100 mt-2"
                 disabled={isSubmitting}
                 variant="secondary"
                 type="submit"
-                className="w-100 mt-2"
               >
                 Submit
               </Button>

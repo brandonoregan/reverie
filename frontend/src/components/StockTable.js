@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Message from "../components/Message";
 import { Row, Button, Container, Table, Image } from "react-bootstrap";
-function StockTable({ allProducts, setTab, setId }) {
+function StockTable({ allProducts, setTab, setId, setMessage }) {
   function handleEditItem(product_id) {
     setTab("editProduct");
     setId(product_id);
   }
+
+  useEffect(function () {}, []);
 
   return (
     <>

@@ -20,6 +20,8 @@ TODO: Remove buttons from shopping cart when empty
 
 TODO: Fix all error from slices and handle properly 
 
+TODO: Add server side validation on update user form
+
 TODO: If canceled=true in params of cart page, delete last order and order items
 
 CONSIDER: Change all error message from alert to something more elegant

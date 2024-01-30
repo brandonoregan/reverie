@@ -3,7 +3,7 @@ import Message from "../components/Message";
 import { Row, Button, Container, Table } from "react-bootstrap";
 import axiosInstance from "../utils/axios";
 
-function UsersTable({ setTab, setId }) {
+function UsersTable({ setTab, setId, setMessage }) {
   const [users, setUsers] = useState([]);
 
   function handleEditUser(user_id) {

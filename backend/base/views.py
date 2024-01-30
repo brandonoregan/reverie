@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
@@ -81,6 +82,38 @@ class GetUsers(APIView):
         users = User.objects.all()
         serializer = self.serializer_class(users, many=True)
         return Response(serializer.data)
+    
+
+class GetUser(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+
+    def get(self, request, id):
+        user = get_object_or_404(User, pk=id)
+        serializer = self.serializer_class(user, context={'request': request}, many=False)
+        return Response(serializer.data)
+
+
+class UpdateUser(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+
+    def put(self, request, id):
+        user = get_object_or_404(User, pk=id)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteUser(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request, id):
+        user = get_object_or_404(User, pk=id)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class GetAllProducts(APIView):

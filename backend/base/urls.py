@@ -11,8 +11,11 @@ urlpatterns = [
     path("products/<str:pk>", views.GetProduct.as_view(), name="get_product"),
 
     # User URLS
-    path("user/register/", views.RegisterUser.as_view(), name="register_user"),
     path("users/", views.GetUsers.as_view(), name="get_users"),
+    path("user/register/", views.RegisterUser.as_view(), name="register_user"),
+    path("user/<int:id>/", views.GetUser.as_view(), name="get_user"),
+    path('user/delete/<int:id>/', views.DeleteUser.as_view(), name='delete_user'),
+    path('user/update/<int:id>/', views.UpdateUser.as_view(), name='update_user'),
 
     # Order URLS
     path("order/", views.CreateOrder.as_view(), name="create_order"),
