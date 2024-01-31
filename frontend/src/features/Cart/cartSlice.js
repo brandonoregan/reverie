@@ -51,7 +51,7 @@ export function createOrder() {
       const cart_items = JSON.parse(localStorage.getItem("cartItems"));
 
       const order_items = cart_items.map((item) => ({
-        product: item.product_id,
+        product_id: item.product_id,
         quantity: item.quantity,
         price: item.price,
       }));

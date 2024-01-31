@@ -8,7 +8,6 @@ def formatStripeLineItem(itemsArray):
     Accepts an array of item objects and converts each object into an acceptable line item for Stripe API.
     """
 
-    print("CART ITEMS: ", itemsArray)
     line_items = []
     for item in itemsArray:
         unit_amount = int(float(item["price"]) * 100)

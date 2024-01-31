@@ -102,7 +102,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     order = serializers.PrimaryKeyRelatedField(queryset=Order.objects.all(), required=False)
-    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), write_only=True)
+    product = ProductSerializer(read_only=True)
 
 
     class Meta:
@@ -111,7 +113,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    items = OrderItemSerializer(many=True, write_only=True)
+    items = OrderItemSerializer(many=True)
 
     class Meta:
         model = Order
@@ -126,7 +128,7 @@ class OrderSerializer(serializers.ModelSerializer):
                 order=order, 
                 price=item_data["price"] * item_data["quantity"],
                 quantity=item_data['quantity'],
-                product=item_data["product"]
+                product=item_data["product_id"]
              )
         
         return order
