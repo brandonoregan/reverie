@@ -114,6 +114,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
+    user = UserSerializer(read_only=True)
+
 
     class Meta:
         model = Order

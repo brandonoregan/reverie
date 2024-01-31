@@ -36,7 +36,6 @@ function OrdersTable({ setTab, setId }) {
                     <th>Order Date</th>
                     <th>Payment Status</th>
                     <th>Delivered</th>
-                    <th>Total Price</th>
                     <th>Order Details</th>
                   </tr>
                 </thead>
@@ -44,13 +43,12 @@ function OrdersTable({ setTab, setId }) {
                   {allOrders.map((order) => (
                     <tr key={order.id} className="align-middle">
                       <td>{order.id}</td>
-                      <td>{order.user}</td>
+                      <td>{order.user.id}</td>
                       <td>
                         {new Date(order.order_date).toLocaleDateString("en-GB")}
                       </td>
                       <td>{order.payment_status ? "Paid" : "Pending"}</td>
                       <td>{order.delivered ? "Delivered" : "On Route"} </td>
-                      <td>${order.total_price}</td>
                       <td>
                         <Button
                           onClick={() => handleOrderDetails(order.id)}

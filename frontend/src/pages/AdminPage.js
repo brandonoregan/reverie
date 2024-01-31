@@ -151,7 +151,11 @@ function AdminPage() {
               </Row>
             ) : (
               <Row>
-                <OrderDetail orderId={id} setMessage={setMessage} />
+                <OrderDetail
+                  orderId={id}
+                  setMessage={setMessage}
+                  setTab={setTab}
+                />
               </Row>
             )}
           </Col>

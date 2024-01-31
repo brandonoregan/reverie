@@ -6,8 +6,6 @@ function checkIsAdmin(token) {
   try {
     // Decode the token to get its payload
     const decodedToken = jwtDecode(token);
-
-    console.log(decodedToken);
     // Check if isAdmin 'claim' exists and is true
     return decodedToken.isAdmin === true;
   } catch (error) {
@@ -106,7 +104,7 @@ export function loginUser(username, password) {
 
           if (isAdmin) {
             window.location.href = "/admin";
-          } else if (preLoginURL) {
+          } else if (preLoginURL && preLoginURL !== "http://localhost:3000/") {
             window.location.href = preLoginURL;
             localStorage.removeItem("preLoginURL");
           } else {

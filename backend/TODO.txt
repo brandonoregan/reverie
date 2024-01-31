@@ -2,7 +2,9 @@ FIXBUG: The refresh token is needed to succesfully logout and add to token black
 HOW: Implement logout timer or figure timer at refresh_token expiration
 WORK AROUND: Increased lifespan of tokens in settings.
 
-FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page and on the cart icon. 
+FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page and on the cart icon. FIXED - double check
+
+FIXBUG: If refresh was on login page, no route will be reroutedd to 
 
 TODO: ADD elegant error handling of unauthorised request. 
 
@@ -32,6 +34,13 @@ TODO: Update admin page when product is updated, frontend lags behind db
 
 TODO: Add delete confirmation for users and products
 
+TODO: Disable logo link when isAdmin
+
+TODO: Change OrderDetail into editable form
+
+
+
+
 CONSIDER: Change all error message from alert to something more elegant
 
 CONSIDER: Add tax prices and shipping cost to stripe checkout
@@ -44,170 +53,129 @@ CONSIDER: Order by for admin
 
 CONSIDER: Search bar for products in user and admin
 
-PAYMENT INTENT:  {
-  "amount": 12991,
-  "amount_capturable": 0,
-  "amount_details": {
-    "tip": {}
-  },
-  "amount_received": 12991,
-  "application": null,
-  "application_fee_amount": null,
-  "automatic_payment_methods": null,
-  "canceled_at": null,
-  "cancellation_reason": null,
-  "capture_method": "automatic",
-  "client_secret": "pi_3Oe1o6C4qoH0c9Cc0dL4VfHv_secret_VOl09cKfC6nmxICZtlVmboACr",
-  "confirmation_method": "automatic",
-  "created": 1706561514,
-  "currency": "aud",
-  "customer": null,
-  "description": null,
-  "id": "pi_3Oe1o6C4qoH0c9Cc0dL4VfHv",
-  "invoice": null,
-  "last_payment_error": null,
-  "latest_charge": "ch_3Oe1o6C4qoH0c9Cc0SHnnMEc",
-  "livemode": false,
-  "metadata": {},
-  "next_action": null,
-  "object": "payment_intent",
-  "on_behalf_of": null,
-  "payment_method": "pm_1Oe1o5C4qoH0c9CceolbtYsh",
-  "payment_method_configuration_details": null,
-  "payment_method_options": {
-    "card": {
-      "installments": null,
-      "mandate_options": null,
-      "network": null,
-      "request_three_d_secure": "automatic"
-    }
-  },
-  "payment_method_types": [
-    "card"
-  ],
-  "processing": null,
-  "receipt_email": null,
-  "review": null,
-  "setup_future_usage": null,
-  "shipping": {
-    "address": {
-      "city": "Margate",
-      "country": "AU",
-      "line1": "26",
-      "line2": "Pownall Crescent",
-      "postal_code": "4019",
-      "state": "QLD"
-    },
-    "carrier": null,
-    "name": "Brandon ORegan",
-    "phone": null,
-    "tracking_number": null
-  },
-  "source": null,
-  "statement_descriptor": null,
-  "statement_descriptor_suffix": null,
-  "status": "succeeded",
-  "transfer_data": null,
-  "transfer_group": null
-}
 
-
-PURCHASED PRODUCTS:  {
-  "data": [
-    {
-      "amount_discount": 0,
-      "amount_subtotal": 1998,
-      "amount_tax": 0,
-      "amount_total": 1998,
-      "currency": "aud",
-      "description": "Narnia",
-      "id": "li_1Oe1nmC4qoH0c9Ccbwl4cU6u",
-      "object": "item",
-      "price": {
-        "active": false,
-        "billing_scheme": "per_unit",
-        "created": 1706561494,
-        "currency": "aud",
-        "custom_unit_amount": null,
-        "id": "price_1Oe1nmC4qoH0c9CccjlmFCzX",
-        "livemode": false,
-        "lookup_key": null,
-        "metadata": {},
-        "nickname": null,
-        "object": "price",
-        "product": "prod_PSauxA0BfsekKR",
-        "recurring": null,
-        "tax_behavior": "unspecified",
-        "tiers_mode": null,
-        "transform_quantity": null,
-        "type": "one_time",
-        "unit_amount": 1998,
-        "unit_amount_decimal": "1998"
-      },
-      "quantity": 1
-    },
-    {
-      "amount_discount": 0,
-      "amount_subtotal": 4999,
-      "amount_tax": 0,
-      "amount_total": 4999,
-      "currency": "aud",
-      "description": "Weekend Bliss Experience",
-      "id": "li_1Oe1nmC4qoH0c9CcNDrDDYNm",
-      "object": "item",
-      "price": {
-        "active": false,
-        "billing_scheme": "per_unit",
-        "created": 1706561494,
-        "currency": "aud",
-        "custom_unit_amount": null,
-        "id": "price_1Oe1nmC4qoH0c9CcVsqfWKa6",
-        "livemode": false,
-        "lookup_key": null,
-        "metadata": {},
-        "nickname": null,
-        "object": "price",
-        "product": "prod_PSxjAlLEhTl8Lj",
-        "recurring": null,
-        "tax_behavior": "unspecified",
-        "tiers_mode": null,
-        "transform_quantity": null,
-        "type": "one_time",
-        "unit_amount": 4999,
-        "unit_amount_decimal": "4999"
-      },
-      "quantity": 1
-    },
-    {
-      "amount_discount": 0,
-      "amount_subtotal": 5994,
-      "amount_tax": 0,
-      "amount_total": 5994,
-      "currency": "aud",
-      "description": "Emerald City",
-      "id": "li_1Oe1nmC4qoH0c9CcnmsDseK6",
-      "object": "item",
-      "price": {
-        "active": false,
-        "billing_scheme": "per_unit",
-        "created": 1706561494,
-        "currency": "aud",
-        "custom_unit_amount": null,
-        "id": "price_1Oe1nmC4qoH0c9CcdUgoE0O8",
-        "livemode": false,
-        "lookup_key": null,
-        "metadata": {},
-        "nickname": null,
-        "object": "price",
-        "product": "prod_PSxjGM97Ry87qT",
-        "recurring": null,
-        "tax_behavior": "unspecified",
-        "tiers_mode": null,
-        "transform_quantity": null,
-        "type": "one_time",
-        "unit_amount": 1998,
-        "unit_amount_decimal": "1998"
-      },
-      "quantity": 3
-    }
-  ],
+ALLORDERS: 
+(8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+0
+: 
+delivered
+: 
+false
+id
+: 
+29
+items
+: 
+Array(3)
+0
+: 
+id
+: 
+13
+order
+: 
+29
+price
+: 
+"49.99"
+product
+: 
+category
+: 
+"bundles"
+createdAt
+: 
+"2024-01-16T10:10:31.631964Z"
+description
+: 
+"Experience true happiness as you delve into our carefully designed happiness bundle, designed to invoke pure content whilst you dive into the Fearne Cotton's, \"Happy.\""
+id
+: 
+15
+image
+: 
+"/media/images/hamper-1.jpg"
+name
+: 
+"Happiness Experience"
+price
+: 
+"49.99"
+rating
+: 
+"5.00"
+review_count
+: 
+16
+stock_count
+: 
+13
+user
+: 
+1
+[[Prototype]]
+: 
+Object
+quantity
+: 
+1
+[[Prototype]]
+: 
+Object
+1
+: 
+{id: 14, order: 29, product: {…}, quantity: 1, price: '15.99'}
+2
+: 
+{id: 15, order: 29, product: {…}, quantity: 2, price: '39.98'}
+length
+: 
+3
+[[Prototype]]
+: 
+Array(0)
+order_date
+: 
+"2024-01-31T16:17:07.913463Z"
+payment_status
+: 
+false
+shipping_address
+: 
+"26 Pownall Crescent,\n     Margate,\n     4019,\n     QLD,\n     AU"
+total_price
+: 
+"105.94"
+user
+: 
+34
+[[Prototype]]
+: 
+Object
+1
+: 
+{id: 32, items: Array(2), order_date: '2024-01-31T16:24:28.705813Z', payment_status: false, delivered: false, …}
+2
+: 
+{id: 33, items: Array(2), order_date: '2024-01-31T16:29:45.940223Z', payment_status: false, delivered: false, …}
+3
+: 
+{id: 34, items: Array(2), order_date: '2024-01-31T16:34:03.559040Z', payment_status: false, delivered: false, …}
+4
+: 
+{id: 35, items: Array(2), order_date: '2024-01-31T16:35:37.474029Z', payment_status: false, delivered: false, …}
+5
+: 
+{id: 36, items: Array(0), order_date: '2024-01-31T17:22:28.587300Z', payment_status: false, delivered: false, …}
+6
+: 
+{id: 37, items: Array(1), order_date: '2024-01-31T17:22:52.963667Z', payment_status: false, delivered: false, …}
+7
+: 
+{id: 38, items: Array(1), order_date: '2024-01-31T17:25:00.989072Z', payment_status: false, delivered: false, …}
+length
+: 
+8
+[[Prototype]]
+: 
+Arra

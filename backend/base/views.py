@@ -54,10 +54,18 @@ class CreateOrder(APIView):
 
 class GetOrders(APIView):
     serializer_class = OrderSerializer
-    permission_classes = [IsAdminUser]
 
     def get(self, request):
         orders = Order.objects.all()
+        serializer = self.serializer_class(orders, many=True)
+        return Response(serializer.data)
+
+
+class GetUserOrdersView(APIView):
+    serializer_class = OrderSerializer
+
+    def get(self, request):
+        orders = Order.objects.filter(user=request.user)
         serializer = self.serializer_class(orders, many=True)
         return Response(serializer.data)
 
