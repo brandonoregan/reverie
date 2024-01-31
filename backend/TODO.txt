@@ -30,6 +30,8 @@ TODO: Add image to update product form
 
 TODO: Update admin page when product is updated, frontend lags behind db
 
+TODO: Add delete confirmation for users and products
+
 CONSIDER: Change all error message from alert to something more elegant
 
 CONSIDER: Add tax prices and shipping cost to stripe checkout

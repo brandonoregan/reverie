@@ -91,8 +91,8 @@ function EditUserForm({ userId, setTab, setMessage }) {
 
   return (
     <Container>
-      <Row>
-        <Col className="d-flex justify-content-center mt-3">
+      <Row className="d-flex justify-content-center mt-3">
+        <Col>
           <Form
             style={{
               top: "5rem",
@@ -104,7 +104,7 @@ function EditUserForm({ userId, setTab, setMessage }) {
             }}
             onSubmit={handleSubmit}
             autoComplete="off"
-            className="registerForm m-3"
+            className=" m-3"
           >
             <h3 className="text-center mb-3">Update User</h3>
 

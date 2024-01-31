@@ -48,8 +48,21 @@ const cartSlice = createSlice({
 export function createOrder() {
   return async function (dispatch, getState) {
     try {
+      const cart_items = JSON.parse(localStorage.getItem("cartItems"));
+
+      const order_items = cart_items.map((item) => ({
+        product: item.product_id,
+        quantity: item.quantity,
+        price: item.price,
+      }));
+
+      const postData = {
+        items: order_items,
+      };
+
       const { data } = await axiosInstance.post(
-        `http://127.0.0.1:8000/api/order/`
+        `http://127.0.0.1:8000/api/order/`,
+        postData
       );
 
       console.log("CREATE ORDER: ", data);

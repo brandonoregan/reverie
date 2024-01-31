@@ -98,8 +98,8 @@ function EditForm({ productId, setTab, setMessage }) {
 
   return (
     <Container>
-      <Row>
-        <Col className="d-flex justify-content-center mt-3">
+      <Row className="d-flex justify-content-center mw-50 mt-3">
+        <Col>
           <Form onSubmit={handleSubmit} className="my-3">
             <h3 className="text-center mb-3">Product Details</h3>
 

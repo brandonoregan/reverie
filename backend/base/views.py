@@ -37,19 +37,20 @@ from django.conf import settings
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-
+        
 
 class CreateOrder(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
-        data = request.data.copy()
-        data["user"] = request.user.id
-        serializer = OrderSerializer(data=data)
+        serializer = OrderSerializer(data=request.data, context={'request': request})
+
         if serializer.is_valid():
-            order = serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+            order = serializer.save(user=request.user)
+            return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
+
+        print("SERIALIZER ERROR: ", serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GetOrders(APIView):
     serializer_class = OrderSerializer
@@ -59,23 +60,6 @@ class GetOrders(APIView):
         orders = Order.objects.all()
         serializer = self.serializer_class(orders, many=True)
         return Response(serializer.data)
-
-class CreateOrderItems(CreateAPIView):
-    serializer_class = OrderItemSerializer
-
-    def create(self, request, *args, **kwargs):
-        cart_items = request.data  # Assuming you're sending an array of objects in the request data
-
-        order_items = []  # To store created order items
-
-        # Loop through each item in the cart and create an OrderItem
-        for item in cart_items:
-            serializer = self.get_serializer(data=item)
-            if serializer.is_valid():
-                serializer.save()  # Save the OrderItem to the database
-                order_items.append(serializer.data)  # Append the serialized data to the response
-
-        return Response(order_items, status=status.HTTP_201_CREATED)
 
 
 class RegisterUser(CreateAPIView):
@@ -210,24 +194,16 @@ def stripe_webhook(request):
         )
 
     except ValueError as e:
-        # Invalid payload
-        print("INVALID PAYLOAD")
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        print("INVALID SIGNATURE")
         return HttpResponse(status=400)
 
         # Handle the event
     if event.type == "payment_intent.succeeded":
         payment_intent = event.data.object
-
         updateOrder(payment_intent)
-
-        print("PAYMENT INTENT: ", payment_intent)
     else:
         print("Unhandled event type {}".format(event.type))
-
     if event.type == "checkout.session.completed":
         session = event.data.object
 
@@ -235,12 +211,7 @@ def stripe_webhook(request):
                     session.id, limit=100
                 )
 
-        print("PURCHASED PRODUCTS: ", purchased_products)
-
         updateInventory(purchased_products)
-
-
-
     else:
         print("Unhandled event type {}".format(event.type))
     return HttpResponse(status=200)
