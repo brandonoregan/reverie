@@ -37,13 +37,13 @@ from django.conf import settings
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-        
+
 
 class CreateOrder(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        serializer = OrderSerializer(data=request.data, context={'request': request})
+        serializer = OrderSerializer(data=request.data, context={"request": request})
 
         if serializer.is_valid():
             order = serializer.save(user=request.user)
@@ -51,6 +51,7 @@ class CreateOrder(APIView):
 
         print("SERIALIZER ERROR: ", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GetOrders(APIView):
     serializer_class = OrderSerializer
@@ -69,14 +70,20 @@ class GetUserOrdersView(APIView):
         serializer = self.serializer_class(orders, many=True)
         return Response(serializer.data)
 
+
 class DeleteOrderView(APIView):
     def post(self, request):
-        order = Order.objects.all().order_by('-id').first()
+        order = Order.objects.all().order_by("-id").first()
         if order:
             order.delete()
-            return Response({'message': 'Order deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            return Response(
+                {"message": "Order deleted successfully"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
         else:
-            return Response({'error': 'No orders found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"error": "No orders found"}, status=status.HTTP_404_NOT_FOUND
+            )
 
 
 class RegisterUser(CreateAPIView):
@@ -100,7 +107,7 @@ class GetUsers(APIView):
         users = User.objects.all()
         serializer = self.serializer_class(users, many=True)
         return Response(serializer.data)
-    
+
 
 class GetUser(APIView):
     serializer_class = UserSerializer
@@ -108,7 +115,9 @@ class GetUser(APIView):
 
     def get(self, request, id):
         user = get_object_or_404(User, pk=id)
-        serializer = self.serializer_class(user, context={'request': request}, many=False)
+        serializer = self.serializer_class(
+            user, context={"request": request}, many=False
+        )
         return Response(serializer.data)
 
 
@@ -224,8 +233,8 @@ def stripe_webhook(request):
         session = event.data.object
 
         purchased_products = stripe.checkout.Session.list_line_items(
-                    session.id, limit=100
-                )
+            session.id, limit=100
+        )
 
         updateInventory(purchased_products)
     else:

@@ -1,7 +1,7 @@
 import { Alert, Button } from "react-bootstrap";
 import React, { useState } from "react";
 
-function Message({ variant, children }) {
+function Message({ variant, children, className }) {
   const [show, setShow] = useState(true);
 
   function handleClose() {
@@ -12,6 +12,7 @@ function Message({ variant, children }) {
     <>
       {show && (
         <Alert
+          className={className}
           style={{
             backgroundColor: "#ece7db",
             position: "absolute",

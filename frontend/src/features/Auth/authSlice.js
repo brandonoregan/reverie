@@ -78,43 +78,44 @@ export function loginUser(username, password) {
     dispatch(loadingLogin());
 
     try {
-      axiosInstance
-        .post("token/", {
-          username,
-          password,
-        })
-        .then((res) => {
-          // Handle success
-          const { access, refresh } = res.data;
+      const res = await axiosInstance.post("token/", {
+        username,
+        password,
+      });
 
-          localStorage.setItem("refresh_token", JSON.stringify(refresh));
-          localStorage.setItem("access_token", JSON.stringify(access));
+      console.log("LOGIN RES: ", res);
+      // Handle success
+      const { access, refresh } = res.data;
 
-          axiosInstance.defaults.headers["Authorization"] = "JWT " + access;
+      localStorage.setItem("refresh_token", JSON.stringify(refresh));
+      localStorage.setItem("access_token", JSON.stringify(access));
 
-          dispatch({
-            type: "authentication/loginUser",
-            payload: { access_token: access, refresh_token: refresh },
-          });
+      axiosInstance.defaults.headers["Authorization"] = "JWT " + access;
 
-          const isAdmin = checkIsAdmin(access);
+      dispatch({
+        type: "authentication/loginUser",
+        payload: { access_token: access, refresh_token: refresh },
+      });
 
-          dispatch(loginAdmin(isAdmin));
+      const isAdmin = checkIsAdmin(access);
 
-          const preLoginURL = localStorage.getItem("preLoginURL");
+      dispatch(loginAdmin(isAdmin));
 
-          if (isAdmin) {
-            window.location.href = "/admin";
-          } else if (preLoginURL && preLoginURL !== "http://localhost:3000/") {
-            window.location.href = preLoginURL;
-            localStorage.removeItem("preLoginURL");
-          } else {
-            window.location.href = "/";
-          }
-        });
+      const preLoginURL = localStorage.getItem("preLoginURL");
+
+      if (isAdmin) {
+        window.location.href = "/admin";
+      } else if (preLoginURL) {
+        window.location.href = preLoginURL;
+        localStorage.removeItem("preLoginURL");
+      } else {
+        window.location.href = "/";
+      }
+
+      localStorage.removeItem("loginError");
     } catch (error) {
       console.log("LOGIN ERROR:", error);
-      dispatch(loginError(error.message));
+      dispatch(loginError(error.response.data.detail));
     }
   };
 }

@@ -5,7 +5,7 @@ from .models import Product, Order, OrderItem
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
@@ -17,6 +17,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["isAdmin"] = user.is_staff
 
         return token
+
+    def validate(self, attrs):
+        try:
+            data = super().validate(attrs)
+        except AuthenticationFailed:
+
+            raise AuthenticationFailed('The provided credentials were incorrect.')
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -94,10 +102,12 @@ class UserSerializerWithToken(UserSerializer):
         except ValidationError as e:
             raise serializers.ValidationError(e.messages)
         return value
-    
+
     def validate(self, data):
-        if data['password'] != data.pop('passwordConfirm'):
-            raise serializers.ValidationError({"passwordConfirm": "Password fields did not match."})
+        if data["password"] != data.pop("passwordConfirm"):
+            raise serializers.ValidationError(
+                {"passwordConfirm": "Password fields did not match."}
+            )
         return super().validate(data)
 
 
@@ -108,40 +118,37 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    order = serializers.PrimaryKeyRelatedField(queryset=Order.objects.all(), required=False)
+    order = serializers.PrimaryKeyRelatedField(
+        queryset=Order.objects.all(), required=False
+    )
     product_id = serializers.PrimaryKeyRelatedField(
-        queryset=Product.objects.all(), write_only=True)
+        queryset=Product.objects.all(), write_only=True
+    )
     product = ProductSerializer(read_only=True)
-
 
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = "__all__"
 
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
     user = UserSerializer(read_only=True)
 
-
     class Meta:
         model = Order
         fields = "__all__"
-    
+
     def create(self, validated_data):
-        items_data = validated_data.pop('items')
+        items_data = validated_data.pop("items")
         order = Order.objects.create(**validated_data)
 
         for item_data in items_data:
             OrderItem.objects.create(
-                order=order, 
+                order=order,
                 price=item_data["price"] * item_data["quantity"],
-                quantity=item_data['quantity'],
-                product=item_data["product_id"]
-             )
-        
+                quantity=item_data["quantity"],
+                product=item_data["product_id"],
+            )
+
         return order
-
-
-
-

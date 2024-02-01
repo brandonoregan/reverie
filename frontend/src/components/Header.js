@@ -20,7 +20,7 @@ function Header() {
       className="bg-body-primary ps-3 pe-3"
       style={{ fontFamily: "Judson" }}
     >
-      <LinkContainer to="/">
+      <LinkContainer to={isAdmin ? "/admin" : "/"}>
         <Navbar.Brand>
           <span
             style={{

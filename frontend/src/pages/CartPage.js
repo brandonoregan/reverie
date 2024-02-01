@@ -55,7 +55,7 @@ function CartPage() {
     if (canceled) {
       dispatch(deleteOrder());
     }
-  }, [dispatch, id, quantity]);
+  }, [canceled, dispatch, id, quantity]);
 
   return (
     <>
@@ -88,9 +88,11 @@ function CartPage() {
       <Container fluid>
         <Row className="">
           {cartItems.length === 0 ? (
-            <Message>
+            <Message className="d-flex justify-content-center  ms-auto">
               Your cart is empty.{" "}
-              <BackButton toLink="/products">Shop now</BackButton>
+              <BackButton className="ms-1 me-auto" toLink="/products">
+                Shop now
+              </BackButton>
             </Message>
           ) : (
             <Table className="text-center scrollable-table" hover>
@@ -174,32 +176,34 @@ function CartPage() {
             </Table>
           )}
         </Row>
-        <Row className="d-flex justify-content-around ">
-          <LinkContainer
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              padding: ".5rem",
-            }}
-            to="/products"
-          >
-            <Button variant="secondary" className="w-25">
-              Continue Shopping
+        {cartItems.length > 0 && (
+          <Row className="d-flex justify-content-around ">
+            <LinkContainer
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 700,
+                padding: ".5rem",
+              }}
+              to="/products"
+            >
+              <Button variant="secondary" className="w-25">
+                Continue Shopping
+              </Button>
+            </LinkContainer>
+            <Button
+              onClick={() => handleCheckout(cartItems)}
+              variant="secondary"
+              className="w-25"
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 700,
+                padding: ".5rem",
+              }}
+            >
+              Proceed to Checkout
             </Button>
-          </LinkContainer>
-          <Button
-            onClick={() => handleCheckout(cartItems)}
-            variant="secondary"
-            className="w-25"
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              padding: ".5rem",
-            }}
-          >
-            Proceed to Checkout
-          </Button>
-        </Row>
+          </Row>
+        )}
       </Container>
     </>
   );

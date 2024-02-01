@@ -12,18 +12,12 @@ TODO: Update stripe line item image urls when site is hosted on AWS, images need
 
 TODO: Look over actions that don't need to be actions and can be effects
 
-TODO: Change message to modal 
-
 TODO: Add error messages where needed:
   Redirect, you must be logged in to checkout etc
-
-TODO: Remove buttons from shopping cart when empty
 
 TODO: Fix all error from slices and handle properly 
 
 TODO: Add server side validation on update user form
-
-TODO: If canceled=true in params of cart page, delete last order and order items
 
 TODO: Handle no account login error
 

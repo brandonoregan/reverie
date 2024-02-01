@@ -34,24 +34,23 @@ def updateInventory(purchased_products):
     Accepts a list of products and updates the data base inventory
     """
     for product in purchased_products:
-            db_product = Product.objects.get(name=product.description)
-            db_product.stock_count -= product.quantity
-            db_product.save()
-
+        db_product = Product.objects.get(name=product.description)
+        db_product.stock_count -= product.quantity
+        db_product.save()
 
 
 def updateOrder(payment_intent):
-     """
-     Update an order payment intent success information
-     """
+    """
+    Update an order payment intent success information
+    """
 
-     last_order = Order.objects.all().order_by('-id').first()
+    last_order = Order.objects.all().order_by("-id").first()
 
-     last_order.total_price = payment_intent.amount / 100.0
-     last_order.shipping_address = f"""{payment_intent.shipping.address.line1} {payment_intent.shipping.address.line2},
+    last_order.total_price = payment_intent.amount / 100.0
+    last_order.shipping_address = f"""{payment_intent.shipping.address.line1} {payment_intent.shipping.address.line2},
      {payment_intent.shipping.address.city},
      {payment_intent.shipping.address.postal_code},
      {payment_intent.shipping.address.state},
      {payment_intent.shipping.address.country}"""
 
-     last_order.save()
+    last_order.save()

@@ -8,39 +8,32 @@ import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  const { registerError, isLoading } = useSelector((state) => state.auth);
+  const { registerError } = useSelector((state) => state.auth);
 
-  const {
-    handleSubmit,
-    values,
-    errors,
-    handleBlur,
-    handleChange,
-    touched,
-    isSubmitting,
-  } = useFormik({
-    initialValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      username: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: registerSchema,
-    onSubmit: (values, actions) => {
-      dispatch(
-        registerUser(
-          values.username,
-          values.first_name,
-          values.last_name,
-          values.email,
-          values.password,
-          values.confirmPassword
-        )
-      );
-    },
-  });
+  const { handleSubmit, values, errors, handleBlur, handleChange, touched } =
+    useFormik({
+      initialValues: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validationSchema: registerSchema,
+      onSubmit: (values, actions) => {
+        dispatch(
+          registerUser(
+            values.username,
+            values.first_name,
+            values.last_name,
+            values.email,
+            values.password,
+            values.confirmPassword
+          )
+        );
+      },
+    });
 
   return (
     <Container fluid style={{ position: "relative" }}>
