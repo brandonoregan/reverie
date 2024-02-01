@@ -35,6 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserSerializerWithToken(UserSerializer):
     refresh_token = serializers.SerializerMethodField(read_only=True)
     access_token = serializers.SerializerMethodField(read_only=True)
+    passwordConfirm = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User
@@ -45,6 +46,7 @@ class UserSerializerWithToken(UserSerializer):
             "first_name",
             "last_name",
             "password",
+            "passwordConfirm",
             "refresh_token",
             "access_token",
         ]
@@ -92,6 +94,11 @@ class UserSerializerWithToken(UserSerializer):
         except ValidationError as e:
             raise serializers.ValidationError(e.messages)
         return value
+    
+    def validate(self, data):
+        if data['password'] != data.pop('passwordConfirm'):
+            raise serializers.ValidationError({"passwordConfirm": "Password fields did not match."})
+        return super().validate(data)
 
 
 class ProductSerializer(serializers.ModelSerializer):

@@ -88,7 +88,7 @@ function ProductsPage() {
           Products
         </h1>
       </Row>
-      <Container>
+      <Container fluid>
         <Row className=" px-0 text-center">
           {message && <Message variant="success">{message}</Message>}
 
@@ -98,7 +98,11 @@ function ProductsPage() {
               selectedCategory === "bundles" ? "active" : ""
             }`}
             variant="tabs"
-            style={{ fontSize: "1.3rem", fontWeight: 700 }}
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: 700,
+              backgroundColor: "#ece7db",
+            }}
           >
             <Nav.Item>
               <Nav.Link

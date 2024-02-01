@@ -10,10 +10,6 @@ TODO: ADD elegant error handling of unauthorised request.
 
 TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
 
-TODO: Change Go Back Button Product detail to navigate(-1)
-
-TODO: Add server side validation for passwordConfirm
-
 TODO: Look over actions that don't need to be actions and can be effects
 
 TODO: Change message to modal 

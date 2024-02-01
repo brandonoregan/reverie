@@ -40,8 +40,17 @@ function ProductDetailPage() {
 
   return (
     <Container style={{ fontSize: "1.3rem" }}>
-      <BackButton toLink="/products" className="btn btn-light my-3">
-        Go Back
+      <BackButton
+        toLink="/products"
+        style={{
+          backgroundColor: "#ece7db",
+          fontFamily: "Judson",
+          fontWeight: 700,
+          fontSize: "1.3rem",
+        }}
+        className="btn btn-light my-3"
+      >
+        Back
       </BackButton>
       <Row className="d-flex justify-content-center ">
         <Col md={6}>

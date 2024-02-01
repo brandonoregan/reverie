@@ -65,6 +65,7 @@ const authSlice = createSlice({
     },
     loginError(state, action) {
       state.error = action.payload;
+      state.isLoading = false;
     },
     loadingLogin(state) {
       state.isLoading = true;
@@ -118,7 +119,14 @@ export function loginUser(username, password) {
   };
 }
 
-export function registerUser(username, first_name, last_name, email, password) {
+export function registerUser(
+  username,
+  first_name,
+  last_name,
+  email,
+  password,
+  passwordConfirm
+) {
   return async function (dispatch) {
     dispatch(loadingLogin());
 
@@ -129,6 +137,7 @@ export function registerUser(username, first_name, last_name, email, password) {
         last_name,
         email,
         password,
+        passwordConfirm,
       })
       .then((res) => {
         console.log("REGISTER POST RESPONSE:", res);

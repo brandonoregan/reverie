@@ -3,10 +3,8 @@ import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/Auth/authSlice";
-
 import { loginSchema } from "../schemas/index";
 import { useFormik } from "formik";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
 function LoginPage() {

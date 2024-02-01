@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  const { registerError } = useSelector((state) => state.auth);
+  const { registerError, isLoading } = useSelector((state) => state.auth);
 
   const {
     handleSubmit,
@@ -35,10 +35,10 @@ function RegisterPage() {
           values.first_name,
           values.last_name,
           values.email,
-          values.password
+          values.password,
+          values.confirmPassword
         )
       );
-      actions.resetForm();
     },
   });
 
@@ -80,7 +80,7 @@ function RegisterPage() {
                     }
                   />
                   {errors.first_name && touched.first_name && (
-                    <Form.Text className="inputErrorMessage text-muted ">
+                    <Form.Text className="inputErrorMessage  ">
                       {errors.first_name}
                     </Form.Text>
                   )}
@@ -101,7 +101,7 @@ function RegisterPage() {
                   />
 
                   {errors.last_name && touched.last_name && (
-                    <Form.Text className="inputErrorMessage text-muted ">
+                    <Form.Text className="inputErrorMessage  ">
                       {errors.last_name}
                     </Form.Text>
                   )}
@@ -124,12 +124,12 @@ function RegisterPage() {
                 }
               />
               {errors.username && touched.username && (
-                <Form.Text className="inputErrorMessage text-muted ">
+                <Form.Text className="inputErrorMessage  ">
                   {errors.username.message}
                 </Form.Text>
               )}
               {registerError && registerError.username && (
-                <Form.Text className="inputErrorMessage text-muted ">
+                <Form.Text className="inputErrorMessage  ">
                   {registerError["username"]}
                 </Form.Text>
               )}
@@ -149,13 +149,13 @@ function RegisterPage() {
               />
 
               {errors.email && touched.email && (
-                <Form.Text className="inputErrorMessage text-muted ">
+                <Form.Text className="inputErrorMessage  ">
                   {errors.email}
                 </Form.Text>
               )}
 
               {registerError && registerError.email && (
-                <Form.Text className="inputErrorMessage text-muted ">
+                <Form.Text className="inputErrorMessage  ">
                   {registerError.email}
                 </Form.Text>
               )}
@@ -208,15 +208,18 @@ function RegisterPage() {
                 }
               />
               {errors.confirmPassword && touched.confirmPassword && (
-                <Form.Text className="inputErrorMessage text-muted ">
+                <Form.Text className="inputErrorMessage  ">
                   {errors.confirmPassword}
                 </Form.Text>
               )}
 
               {/* Serverside validation check */}
-              {registerError && registerError.confirmPassword && (
-                <Form.Text className="inputErrorMessage text-muted ">
-                  {registerError.confirmPassword}
+              {registerError && registerError.passwordConfirm && (
+                <Form.Text
+                  style={{ color: "red" }}
+                  className="inputErrorMessage "
+                >
+                  {registerError.passwordConfirm}
                 </Form.Text>
               )}
             </Form.Group>
@@ -231,7 +234,7 @@ function RegisterPage() {
             <div className="w-100 text-center ">
               <Button
                 className="ms-auto w-100 mt-2"
-                disabled={isSubmitting}
+                // disabled={isLoading}
                 variant="secondary"
                 type="submit"
               >

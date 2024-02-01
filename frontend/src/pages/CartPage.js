@@ -21,6 +21,7 @@ function CartPage() {
   const quantity = searchParams.has("quantity")
     ? Number(searchParams.get("quantity"))
     : 1;
+  const canceled = searchParams.get("canceled") === "true";
 
   // Redux Hooks
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function CartPage() {
 
   return (
     <>
+      {canceled && <Message>Your checkout was successfully canceled.</Message>}
       <Row
         className="px-0"
         style={{
@@ -78,7 +80,7 @@ function CartPage() {
           Your Cart
         </h1>
       </Row>
-      <Container>
+      <Container fluid>
         <Row className="">
           {cartItems.length === 0 ? (
             <Message>
@@ -86,7 +88,7 @@ function CartPage() {
               <BackButton toLink="/products">Shop now</BackButton>
             </Message>
           ) : (
-            <Table className="text-center" hover>
+            <Table className="text-center scrollable-table" hover>
               <thead style={{ backgroundColor: "#ece7db" }}>
                 <tr
                   style={{
@@ -167,7 +169,7 @@ function CartPage() {
             </Table>
           )}
         </Row>
-        <Row className="d-flex justify-content-between ">
+        <Row className="d-flex justify-content-around ">
           <LinkContainer
             style={{
               fontSize: "1.5rem",
