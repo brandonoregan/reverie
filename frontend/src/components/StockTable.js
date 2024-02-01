@@ -11,10 +11,10 @@ function StockTable({ allProducts, setTab, setId, setMessage }) {
 
   return (
     <>
-      {allProducts.length === 0 ? (
-        <Message>There are no items in stock. </Message>
-      ) : (
-        <Container>
+      <Container style={{ position: "relative" }}>
+        {allProducts.length === 0 ? (
+          <Message>There are no items in stock. </Message>
+        ) : (
           <Row>
             <div className="scrollable-table-wrapper p-0">
               <Table className="text-center scrollable-table" hover>
@@ -59,8 +59,8 @@ function StockTable({ allProducts, setTab, setId, setMessage }) {
               </Table>
             </div>
           </Row>
-        </Container>
-      )}
+        )}
+      </Container>
     </>
   );
 }

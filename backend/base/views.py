@@ -69,6 +69,15 @@ class GetUserOrdersView(APIView):
         serializer = self.serializer_class(orders, many=True)
         return Response(serializer.data)
 
+class DeleteOrderView(APIView):
+    def post(self, request):
+        order = Order.objects.all().order_by('-id').first()
+        if order:
+            order.delete()
+            return Response({'message': 'Order deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'error': 'No orders found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class RegisterUser(CreateAPIView):
     serializer_class = UserSerializerWithToken

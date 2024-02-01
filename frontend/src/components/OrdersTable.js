@@ -22,10 +22,10 @@ function OrdersTable({ setTab, setId }) {
 
   return (
     <>
-      {allOrders.length === 0 ? (
-        <Message>There are currently no orders. </Message>
-      ) : (
-        <Container>
+      <Container style={{ position: "relative" }}>
+        {allOrders.length === 0 ? (
+          <Message>There are currently no orders. </Message>
+        ) : (
           <Row>
             <div className="scrollable-table-wrapper p-0 ">
               <Table className="text-center scrollable-table" hover>
@@ -64,9 +64,8 @@ function OrdersTable({ setTab, setId }) {
               </Table>
             </div>
           </Row>
-          <Row></Row>
-        </Container>
-      )}
+        )}
+      </Container>
     </>
   );
 }

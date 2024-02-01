@@ -27,10 +27,10 @@ function UsersTable({ setTab, setId, setMessage }) {
 
   return (
     <>
-      {users.length === 0 ? (
-        <Message>There are currently no users. </Message>
-      ) : (
-        <Container>
+      <Container style={{ position: "relative" }}>
+        {users.length === 0 ? (
+          <Message>There are currently no users. </Message>
+        ) : (
           <Row>
             <div className="scrollable-table-wrapper p-0 ">
               <Table className="text-center scrollable-table" hover>
@@ -75,9 +75,8 @@ function UsersTable({ setTab, setId, setMessage }) {
               </Table>
             </div>
           </Row>
-          <Row></Row>
-        </Container>
-      )}
+        )}
+      </Container>
     </>
   );
 }

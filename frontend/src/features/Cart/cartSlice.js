@@ -72,6 +72,19 @@ export function createOrder() {
   };
 }
 
+export function deleteOrder() {
+  return async function (dispatch, getState) {
+    try {
+      const { data } = await axiosInstance.post(
+        `http://127.0.0.1:8000/api/order/delete/`
+      );
+      console.log("CREATE ORDER: ", data);
+    } catch (error) {
+      console.log("CREATE ORDER ERROR: ", error);
+    }
+  };
+}
+
 // export function createOrderItems() {
 //   return async function (dispatch, getState) {
 //     const cart_Items = JSON.parse(localStorage.getItem("cartItems"));

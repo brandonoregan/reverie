@@ -8,6 +8,7 @@ import {
   addToCart,
   deleteCartItem,
   createOrder,
+  deleteOrder,
 } from "../features/Cart/cartSlice";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -49,6 +50,10 @@ function CartPage() {
   useEffect(() => {
     if (id) {
       dispatch(addToCart(id, quantity));
+    }
+
+    if (canceled) {
+      dispatch(deleteOrder());
     }
   }, [dispatch, id, quantity]);
 
