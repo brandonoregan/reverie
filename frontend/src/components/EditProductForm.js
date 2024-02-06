@@ -227,7 +227,7 @@ function EditForm({ productId, setTab, setMessage }) {
                   handleDelete();
                 }}
               >
-                Delete User
+                Delete Product
               </Button>
             </div>
           </Form>

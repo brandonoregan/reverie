@@ -105,6 +105,7 @@ export function loginUser(username, password) {
 
       if (isAdmin) {
         window.location.href = "/admin";
+        localStorage.removeItem("preLoginURL");
       } else if (preLoginURL) {
         window.location.href = preLoginURL;
         localStorage.removeItem("preLoginURL");

@@ -6,6 +6,7 @@ FIXBUG: When user logs out cartItems are removed but the redux state isn't updat
 
 FIXBUG: If refresh was on login page, no route will be reroutedd to 
 
+
 TODO: ADD elegant error handling of unauthorised request. 
 
 TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
@@ -19,156 +20,21 @@ TODO: Fix all error from slices and handle properly
 
 TODO: Add server side validation on update user form
 
-TODO: Handle no account login error
-
-TODO: Add image to update product form
+TODO: Add image field to update product form
 
 TODO: Update admin page when product is updated, frontend lags behind db
 
 TODO: Add delete confirmation for users and products
-
-TODO: Disable logo link when isAdmin
 
 TODO: Change OrderDetail into editable form
 
 
 
 
-CONSIDER: Change all error message from alert to something more elegant
-
 CONSIDER: Add tax prices and shipping cost to stripe checkout
-
-CONSIDER: Add cancelled purchase message?
 
 CONSIDER: Store cart for specific user 
 
 CONSIDER: Order by for admin
 
 CONSIDER: Search bar for products in user and admin
-
-
-ALLORDERS: 
-(8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-0
-: 
-delivered
-: 
-false
-id
-: 
-29
-items
-: 
-Array(3)
-0
-: 
-id
-: 
-13
-order
-: 
-29
-price
-: 
-"49.99"
-product
-: 
-category
-: 
-"bundles"
-createdAt
-: 
-"2024-01-16T10:10:31.631964Z"
-description
-: 
-"Experience true happiness as you delve into our carefully designed happiness bundle, designed to invoke pure content whilst you dive into the Fearne Cotton's, \"Happy.\""
-id
-: 
-15
-image
-: 
-"/media/images/hamper-1.jpg"
-name
-: 
-"Happiness Experience"
-price
-: 
-"49.99"
-rating
-: 
-"5.00"
-review_count
-: 
-16
-stock_count
-: 
-13
-user
-: 
-1
-[[Prototype]]
-: 
-Object
-quantity
-: 
-1
-[[Prototype]]
-: 
-Object
-1
-: 
-{id: 14, order: 29, product: {…}, quantity: 1, price: '15.99'}
-2
-: 
-{id: 15, order: 29, product: {…}, quantity: 2, price: '39.98'}
-length
-: 
-3
-[[Prototype]]
-: 
-Array(0)
-order_date
-: 
-"2024-01-31T16:17:07.913463Z"
-payment_status
-: 
-false
-shipping_address
-: 
-"26 Pownall Crescent,\n     Margate,\n     4019,\n     QLD,\n     AU"
-total_price
-: 
-"105.94"
-user
-: 
-34
-[[Prototype]]
-: 
-Object
-1
-: 
-{id: 32, items: Array(2), order_date: '2024-01-31T16:24:28.705813Z', payment_status: false, delivered: false, …}
-2
-: 
-{id: 33, items: Array(2), order_date: '2024-01-31T16:29:45.940223Z', payment_status: false, delivered: false, …}
-3
-: 
-{id: 34, items: Array(2), order_date: '2024-01-31T16:34:03.559040Z', payment_status: false, delivered: false, …}
-4
-: 
-{id: 35, items: Array(2), order_date: '2024-01-31T16:35:37.474029Z', payment_status: false, delivered: false, …}
-5
-: 
-{id: 36, items: Array(0), order_date: '2024-01-31T17:22:28.587300Z', payment_status: false, delivered: false, …}
-6
-: 
-{id: 37, items: Array(1), order_date: '2024-01-31T17:22:52.963667Z', payment_status: false, delivered: false, …}
-7
-: 
-{id: 38, items: Array(1), order_date: '2024-01-31T17:25:00.989072Z', payment_status: false, delivered: false, …}
-length
-: 
-8
-[[Prototype]]
-: 
-Arra

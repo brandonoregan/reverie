@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Image, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logoutUser } from "../features/Auth/authSlice";
@@ -22,14 +22,20 @@ function Header() {
     >
       <LinkContainer to={isAdmin ? "/admin" : "/"}>
         <Navbar.Brand>
-          <span
-            style={{
-              fontSize: "1.7rem",
-              fontWeight: 700,
-            }}
-          >
-            Reverie Reading
-          </span>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Image
+              src={"http://127.0.0.1:8000/media/images/logo.jpg"}
+              style={{ height: "2rem", width: "2rem" }}
+            ></Image>
+            <span
+              style={{
+                fontSize: "1.7rem",
+                fontWeight: 700,
+              }}
+            >
+              Reverie Reading
+            </span>
+          </div>
         </Navbar.Brand>
       </LinkContainer>
 

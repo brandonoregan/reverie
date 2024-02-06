@@ -216,7 +216,7 @@ function RegisterPage() {
                 </Form.Text>
               )}
             </Form.Group>
-            <div className="w-100 text-center ">
+            <div className="w-100 text-center black">
               <Link to="/login">
                 <p style={{ color: "black", textDecoration: "none" }}>
                   Already have an account?
