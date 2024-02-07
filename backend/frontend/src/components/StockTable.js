@@ -33,7 +33,7 @@ function StockTable({ allProducts, setTab, setId, setMessage }) {
                     <tr key={item.id} className="align-middle">
                       <td>
                         <Image
-                          src={`http://127.0.0.1:8000/${item.image}`}
+                          src={item.image}
                           style={{ height: "75px", width: "75px" }}
                         ></Image>
                       </td>

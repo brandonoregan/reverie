@@ -6,6 +6,8 @@ FIXBUG: When user logs out cartItems are removed but the redux state isn't updat
 
 FIXBUG: If refresh was on login page, no route will be reroutedd to 
 
+FIXBUG: Updaet user form
+
 
 TODO: ADD elegant error handling of unauthorised request. 
 
@@ -28,6 +30,8 @@ TODO: Add delete confirmation for users and products
 
 TODO: Change OrderDetail into editable form
 
+TODO: Remove order upon stripe api error not just cancel
+ 
 
 
 

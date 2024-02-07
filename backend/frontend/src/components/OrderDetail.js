@@ -45,7 +45,7 @@ function OrderDetail({ orderId }) {
                 <tr key={item.id} className="align-middle">
                   <td>
                     <Image
-                      src={`http://127.0.0.1:8000/${item.product.image}`}
+                      src={item.product.image}
                       style={{ height: "150px", width: "150px" }}
                     ></Image>
                   </td>
