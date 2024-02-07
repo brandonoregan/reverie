@@ -19,6 +19,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(f"BASE_DIR: {BASE_DIR}")
 
 
 # Quick-start development settings - unsuitable for production
@@ -85,12 +86,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
+TEMPLATES_DIR = BASE_DIR / 'frontend' / 'build'
+print(f"TEMPLATES_DIR: {TEMPLATES_DIR}")
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-          BASE_DIR / 'frontend' / 'build'
-        ],
+        'DIRS': [TEMPLATES_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -102,6 +104,8 @@ TEMPLATES = [
         },
     },
 ]
+
+print(BASE_DIR / 'frontend' )
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
