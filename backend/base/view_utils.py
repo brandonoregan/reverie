@@ -19,7 +19,7 @@ def formatStripeLineItem(itemsArray):
                     "unit_amount": unit_amount,
                     "product_data": {
                         "name": item["name"],
-                        "images": [settings.REACT_SITE_URL + item["image"]],
+                        "images": [item["image"]],
                     },
                 },
                 "quantity": item["quantity"],

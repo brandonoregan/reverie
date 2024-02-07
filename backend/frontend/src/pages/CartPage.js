@@ -67,7 +67,7 @@ function CartPage() {
           borderRadius: "0 0 1rem 1rem",
           maxHeight: "25rem",
           objectFit: "contain",
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),url("http://127.0.0.1:8000/media/images/cover-bookshop.jpg")`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),url("https://reverie-bucket.s3.amazonaws.com/static/images/cover-bookshop.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -116,7 +116,7 @@ function CartPage() {
                   <tr key={item.product_id} className="align-middle">
                     <td>
                       <Image
-                        src={`http://127.0.0.1:8000/${item.image}`}
+                        src={item.image}
                         style={{ height: "150px", width: "150px" }}
                       ></Image>
                     </td>

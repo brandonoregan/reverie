@@ -25,10 +25,15 @@ export default function Slider() {
         </div>
         <div>
           <img
-            src="http://127.0.0.1:8000/media/images/logo.jpg"
+            src="https://reverie-bucket.s3.amazonaws.com/static/images/logo.jpg"
             alt="Reverie Logo"
             className="imageStyle"
           ></img>
+          {/* <img
+            src={"http://127.0.0.1:8000/media/static/images/logo.jpg"}
+            alt="Reverie Logo"
+            className="imageStyle"
+          ></img> */}
         </div>
         <Carousel.Caption>
           <LinkContainer to="/products">

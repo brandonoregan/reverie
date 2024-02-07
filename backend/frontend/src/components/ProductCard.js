@@ -12,7 +12,7 @@ function ProductCard({ product }) {
         <Card.Img
           className={styles.productImage}
           variant="top"
-          src={`http://localhost:8000${product.image}`}
+          src={product.image}
           alt={product.name}
         />
       </LinkContainer>

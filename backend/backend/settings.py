@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
+    "storages",
     # Internal Applications
     "base.apps.BaseConfig",
 ]
@@ -81,7 +82,9 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+          os.path.join(BASE_DIR, 'frontend/build')
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -101,9 +104,13 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'reveriedb',
+        'USER': 'brandonoregan',
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
+        'HOST': 'reveriedb.cxeuggg8umk3.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -142,7 +149,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -151,10 +157,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # TODO: Specify allowed urls later
 CORS_ORIGIN_ALLOW_ALL = True
-
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
-
-MEDIA_URL = "/media/"
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
@@ -195,3 +197,23 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 WEBHOOK_SIGNING_SECRET = os.environ.get("WEBHOOK_SIGNING_SECRET")
 
 REACT_SITE_URL = "http://localhost:3000/"
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = 'reverie-bucket'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+  BASE_DIR / 'frontend/build/static'
+]
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+
+MEDIA_URL = "https://reverie-bucket.s3.amazonaws.com/media/"

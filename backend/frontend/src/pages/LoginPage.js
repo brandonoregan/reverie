@@ -57,7 +57,7 @@ function LoginPage() {
                 }}
               >
                 <Image
-                  src="http://127.0.0.1:8000/media/images/logo.jpg"
+                  src="https://reverie-bucket.s3.amazonaws.com/static/images/logo.jpg"
                   alt="Reverie Logo"
                   style={{
                     borderRadius: "1rem 0 0 1rem",

@@ -248,6 +248,8 @@ class StripeChechOutView(APIView):
     def post(self, request):
         line_items = formatStripeLineItem(request.data)
 
+        print("Line items:", line_items)
+
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
@@ -256,12 +258,13 @@ class StripeChechOutView(APIView):
                 shipping_address_collection={
                     "allowed_countries": ["AU", "US", "CA"],
                 },
-                success_url=settings.REACT_SITE_URL
-                + "products?success=true&session_id={CHECKOUT_SESSION_ID}",
-                cancel_url=settings.REACT_SITE_URL + "cart?canceled=true",
+                success_url="http://127.0.0.1:8000/products?success=true&session_id={CHECKOUT_SESSION_ID}",
+                cancel_url="http://127.0.0.1:8000/cart?canceled=true",
             )
             return Response({"checkout_url": checkout_session.url})
-        except:
+        except Exception as e:
+            print("Stripe error: ", str(e))
+            error_redirect_url = "http://127.0.0.1:8000/cart?canceled=true"
             return Response(
                 {"error": "Something went wrong when creating stripe checkout session"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,

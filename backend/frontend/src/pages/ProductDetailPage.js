@@ -54,11 +54,7 @@ function ProductDetailPage() {
       </BackButton>
       <Row className="d-flex justify-content-center ">
         <Col md={6}>
-          <Image
-            src={`http://127.0.0.1:8000/${product.image}`}
-            alt={product.name}
-            fluid
-          />
+          <Image src={product.image} alt={product.name} fluid />
         </Col>
 
         <Col md={4} className="d-flex flex-column ">

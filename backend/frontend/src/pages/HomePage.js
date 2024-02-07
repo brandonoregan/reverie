@@ -5,15 +5,17 @@ import CategoryCard from "../components/CategoryCard";
 
 const categories = [
   {
-    image: "http://127.0.0.1:8000/media/images/hamper-2.jpg",
+    image: "https://reverie-bucket.s3.amazonaws.com/static/images/hamper-1.jpg",
     category: "bundles",
   },
   {
-    image: "http://127.0.0.1:8000/media/images/star-crossed-lovers.webp",
+    image:
+      "https://reverie-bucket.s3.amazonaws.com/static/images/emerald-city.webp",
     category: "candles",
   },
   {
-    image: "http://127.0.0.1:8000/media/images/peter-pan.webp",
+    image:
+      "https://reverie-bucket.s3.amazonaws.com/static/images/little-women.webp",
     category: "books",
   },
 ];
