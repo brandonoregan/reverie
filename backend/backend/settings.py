@@ -76,7 +76,6 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -95,12 +94,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         'DIRS': [
           BASE_DIR / 'frontend',
-          BASE_DIR / 'frontend' / 'build',
-          BASE_DIR / 'backend' / 'frontend' / 'build',
-          BASE_DIR / 'reverie' / 'backend' / 'backend' / 'frontend' / 'build',
-          BASE_DIR / 'backend' / 'backend' / 'frontend' / 'build',
-          Path('C:/Users/brand/OneDrive/Desktop/Programming/React/reverie/backend/frontend/build')
-        ],
+          ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -216,7 +210,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
