@@ -88,14 +88,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
-TEMPLATES_DIR = BASE_DIR / 'frontend' / 'build'
-
-print(f"TEMPLATES_DIR: {TEMPLATES_DIR}")
+print(f"TEMPLATES_DIR: {BASE_DIR / 'frontend' / 'build'}")
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [
+          BASE_DIR / 'frontend' / 'build',
+          BASE_DIR / 'backend' / 'frontend' / 'build',
+          BASE_DIR / 'reverie' / 'backend' / 'backend' / 'frontend' / 'build',
+          BASE_DIR / 'backend' / 'backend' / 'frontend' / 'build',
+          Path('C:/Users/brand/OneDrive/Desktop/Programming/React/reverie/backend/frontend/build')
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
