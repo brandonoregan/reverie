@@ -1,8 +1,6 @@
 import { Card, Col, Row, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import styles from "./ProductCard.module.css";
-import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
 function ProductCard({ product }) {

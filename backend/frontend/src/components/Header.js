@@ -24,7 +24,7 @@ function Header() {
         <Navbar.Brand>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Image
-              src="https://reverie-bucket.s3.amazonaws.com/static/images/logo.jpg"
+              src="/static/base/images/logo.jpg"
               style={{ height: "2rem", width: "2rem" }}
             ></Image>
             <span
