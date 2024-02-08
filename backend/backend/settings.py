@@ -88,7 +88,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'frontend/build')
+TEMPLATES_DIR = BASE_DIR / 'frontend' / 'build'
 
 print(f"TEMPLATES_DIR: {TEMPLATES_DIR}")
 
@@ -217,7 +217,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Tells collect static where else to look for static files
 STATICFILES_DIRS = [
-  BASE_DIR / 'frontend/build/static'
+  BASE_DIR / 'frontend' / 'build' /'static',
+  BASE_DIR / 'frontend' / 'build',
+  BASE_DIR / "static"
 ]
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
