@@ -94,6 +94,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         'DIRS': [
+          BASE_DIR / 'frontend',
           BASE_DIR / 'frontend' / 'build',
           BASE_DIR / 'backend' / 'frontend' / 'build',
           BASE_DIR / 'reverie' / 'backend' / 'backend' / 'frontend' / 'build',
