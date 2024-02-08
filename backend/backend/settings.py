@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # External Libraries
+    'whitenoise.runserver_nostatic',
     "rest_framework",
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
@@ -107,7 +108,7 @@ TEMPLATES = [
     },
 ]
 
-print(BASE_DIR / 'frontend' )
+# print(BASE_DIR / 'frontend' )
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
@@ -208,11 +209,11 @@ AWS_S3_VERITY = True
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Tells collect static where else to look for static files
 STATICFILES_DIRS = [
