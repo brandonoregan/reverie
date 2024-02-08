@@ -161,4 +161,4 @@ cython_debug/
 
 reverie/backend/TODO.txt
 
-/staticfiles/
+# /staticfiles/
