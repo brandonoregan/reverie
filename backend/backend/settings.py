@@ -86,7 +86,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
-TEMPLATES_DIR = BASE_DIR / 'backend' /  'frontend' / 'build'
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'frontend/build')
+
 print(f"TEMPLATES_DIR: {TEMPLATES_DIR}")
 
 TEMPLATES = [
