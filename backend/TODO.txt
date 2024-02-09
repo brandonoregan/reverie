@@ -4,7 +4,7 @@ WORK AROUND: Increased lifespan of tokens in settings.
 
 FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page and on the cart icon. FIXED - double check
 
-FIXBUG: If refresh was on login page, no route will be reroutedd to 
+FIXBUG: If refresh was on login page, no route will be rerouted to 
 
 FIXBUG: Updaet user form
 
