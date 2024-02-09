@@ -67,7 +67,7 @@ function CartPage() {
           borderRadius: "0 0 1rem 1rem",
           maxHeight: "25rem",
           objectFit: "contain",
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),url("https://reverie-bucket.s3.amazonaws.com/static/images/cover-bookshop.jpg")`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),url("static/images/cover-bookshop.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

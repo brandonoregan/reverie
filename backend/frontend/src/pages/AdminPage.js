@@ -44,7 +44,7 @@ function AdminPage() {
           borderRadius: "0 0 1rem 1rem",
           maxHeight: "25rem",
           objectFit: "contain",
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),url("https://reverie-bucket.s3.amazonaws.com/static/images/cover-admin.jpg")`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),url("static/images/cover-admin.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

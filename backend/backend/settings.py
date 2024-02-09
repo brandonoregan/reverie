@@ -29,7 +29,7 @@ print(f"BASE_DIR: {BASE_DIR}")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "reverie-reading.onrender.com",
@@ -94,7 +94,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         'DIRS': [
-          BASE_DIR / 'frontend',
+          BASE_DIR / 'frontend' / 'build',
           ],
         "APP_DIRS": True,
         "OPTIONS": {

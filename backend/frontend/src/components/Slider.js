@@ -25,7 +25,7 @@ export default function Slider() {
         </div>
         <div>
           <img
-            src="https://reverie-bucket.s3.amazonaws.com/static/images/logo.jpg"
+            src="static/images/logo.jpg"
             alt="Reverie Logo"
             className="imageStyle"
           ></img>

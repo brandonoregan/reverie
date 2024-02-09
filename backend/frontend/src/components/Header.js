@@ -24,7 +24,7 @@ function Header() {
         <Navbar.Brand>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Image
-              src="/static/images/logo.jpg"
+              src="static/images/logo.jpg"
               style={{ height: "2rem", width: "2rem" }}
             ></Image>
             <span

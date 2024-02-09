@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
-import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/Auth/authSlice";
 import { loginSchema } from "../schemas/index";
@@ -57,7 +56,7 @@ function LoginPage() {
                 }}
               >
                 <Image
-                  src="https://reverie-bucket.s3.amazonaws.com/static/images/logo.jpg"
+                  src="/static/images/logo.jpg"
                   alt="Reverie Logo"
                   style={{
                     borderRadius: "1rem 0 0 1rem",

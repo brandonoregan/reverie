@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Slider from "../components/Slider";
 import CategoryCard from "../components/CategoryCard";
 
 const categories = [
   {
-    image: "https://reverie-bucket.s3.amazonaws.com/static/images/hamper-1.jpg",
+    image: "static/images/hamper-1.jpg",
     category: "bundles",
   },
   {
-    image:
-      "https://reverie-bucket.s3.amazonaws.com/static/images/emerald-city.webp",
+    image: "static/images/emerald-city.webp",
     category: "candles",
   },
   {
-    image:
-      "https://reverie-bucket.s3.amazonaws.com/static/images/little-women.webp",
+    image: "static/images/little-women.webp",
     category: "books",
   },
 ];
