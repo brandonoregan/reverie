@@ -50,7 +50,7 @@ class CreateOrder(APIView):
             return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
 
         print("SERIALIZER ERROR: ", serializer.errors)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -60,6 +60,7 @@ class GetOrders(APIView):
     def get(self, request):
         orders = Order.objects.all()
         serializer = self.serializer_class(orders, many=True)
+        print(serializer.data)
         return Response(serializer.data)
 
 
@@ -75,11 +76,12 @@ class GetUserOrdersView(APIView):
 class DeleteOrderView(APIView):
     def post(self, request):
         order = Order.objects.all().order_by("-id").first()
+
         if order:
             order.delete()
             return Response(
                 {"message": "Order deleted successfully"},
-                status=status.HTTP_204_NO_CONTENT,
+                status=status.HTTP_200_OK,
             )
         else:
             return Response(

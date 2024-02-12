@@ -11,7 +11,6 @@ class TestViews(APITestCase):
 
 
     def setUp(self):
-        self.client = APIClient()
 
         self.user = User.objects.create_user(
             username='testuser', 
@@ -20,6 +19,8 @@ class TestViews(APITestCase):
             first_name='Test',
             last_name='User',
             )
+        
+        self.client = APIClient()
 
         self.product = Product.objects.create(
             user=self.user,
@@ -61,41 +62,38 @@ class TestViews(APITestCase):
 
 
     def test_get_orders(self):
-        # Make a GET request to retrieve all orders
         response = self.client.get(reverse('get_orders'))
-        
-        # Check if the response status code is 200 (OK)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
-        # Check if the response contains the list of orders
-        self.assertTrue('results' in response.data)
+
 
     def test_get_user_orders_view(self):
-        # Authenticate the user
         self.client.force_authenticate(user=self.user)
-        
-        # Make a GET request to retrieve the user's orders
+
         response = self.client.get(reverse('get_user_orders'))
-        
-        # Check if the response status code is 200 (OK)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-        # Check if the response contains the list of user's orders
-        self.assertTrue('results' in response.data)
 
     def test_delete_order_view(self):
-        # Make a POST request to delete an order
+        Order.objects.create(user=self.user)
+
         response = self.client.post(reverse('delete_order'))
         
-        # Check if the response status code is 204 (NO CONTENT)
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(Order.objects.exists())
+
 
     def test_register_user_view(self):
-        # Make a POST request to register a user
-        response = self.client.post(reverse('register_user'), data={})
+        response = self.client.post(reverse('register_user'), data={
+            "username": "TestUser23",
+            "email": "TestUser23@gmail.com",
+            "first_name": "Test",
+            "last_name": "User",
+            "password": "SomethingSpecial1",
+            "passwordConfirm": "SomethingSpecial1"
+        })
         
-        # Check if the response status code is 201 (CREATED)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        
-        # Check if the user was created successfully
+
         self.assertTrue(User.objects.exists())
