@@ -1,11 +1,10 @@
-from decimal import Decimal
-from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
+from rest_framework.test import APITestCase, APIClient
 from django.urls import reverse
 from base.models import Product, Order
-import json
 from django.contrib.auth.models import User
-from base.serializers import OrderSerializer, UserSerializerWithToken
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 class TestViews(APITestCase):
 
@@ -38,6 +37,21 @@ class TestViews(APITestCase):
             price=15.99,
             stock_count=10,
         )
+
+
+    def test_token_obtain_pair(self):
+        url = reverse("token_obtain_pair")
+
+        response = self.client.post(url, data={
+           "username": self.user.username,
+           "password": "testPassword1"
+        })
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertTrue("access" in response.data)
+
+        self.assertTrue("refresh" in response.data)
 
 
     def test_create_order(self):
@@ -157,3 +171,11 @@ class TestViews(APITestCase):
 
       self.assertFalse(User
       .objects.filter(pk=self.user.pk).exists())
+
+
+    def test_blacklist_token_update(self):
+      refresh = RefreshToken.for_user(self.user)
+
+      response = self.client.post(reverse('blacklist'), {'refresh_token': str(refresh)})
+
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
