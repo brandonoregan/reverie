@@ -11,6 +11,12 @@ class TestViews(APITestCase):
 
 
     def setUp(self):
+        
+        self.admin_user = User.objects.create_superuser(
+            username='admin', 
+            password='adminPassword', 
+            email="admin@gmail.com"
+        )
 
         self.user = User.objects.create_user(
             username='testuser', 
@@ -97,3 +103,57 @@ class TestViews(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         self.assertTrue(User.objects.exists())
+
+
+    def test_get_users(self):
+      self.client.force_authenticate(user=self.admin_user)
+
+      response = self.client.get(reverse('get_users'))
+
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+      self.assertTrue(len(response.data) > 0)
+
+    
+    def test_get_user(self):
+      self.client.force_authenticate(user=self.admin_user)
+      
+      url = reverse('get_user', args=[self.user.pk])
+
+      response = self.client.get(url)
+
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+      self.assertEqual(response.data['email'], self.user.email)
+
+
+    def test_update_user(self):
+      self.client.force_authenticate(user=self.admin_user)
+
+      url = reverse('update_user', args=[self.user.pk])
+
+      response = self.client.put(url, {
+         'username': self.user.username,
+         'first_name': 'UpdatedName',
+         'last_name': self.user.last_name,
+         'email': self.user.email,
+         'is_staff': self.user.is_staff
+         })
+
+      self.user.refresh_from_db()
+
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+      self.assertEqual(self.user.first_name, 'UpdatedName')
+
+
+    def test_delete_user(self):
+      self.client.force_authenticate(user=self.admin_user)
+
+      url = reverse('delete_user', args=[self.user.pk])
+      
+      response = self.client.delete(url)
+
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+      self.assertFalse(User
+      .objects.filter(pk=self.user.pk).exists())

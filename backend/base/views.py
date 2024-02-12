@@ -134,6 +134,7 @@ class UpdateUser(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        print(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -144,7 +145,7 @@ class DeleteUser(APIView):
     def delete(self, request, id):
         user = get_object_or_404(User, pk=id)
         user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)
 
 
 class GetAllProducts(APIView):
