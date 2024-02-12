@@ -22,8 +22,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             data = super().validate(attrs)
         except AuthenticationFailed:
-
-            raise AuthenticationFailed('The provided credentials were incorrect.')
+            raise AuthenticationFailed("The provided credentials were incorrect.")
         return data
 
 
