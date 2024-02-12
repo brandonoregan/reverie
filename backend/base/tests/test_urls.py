@@ -94,7 +94,6 @@ class TestUrls(APITestCase):
     def test_token_refresh_url_resolves(self):
         url = reverse("token_refresh")
         resolver = resolve(url)
-        print(resolver)
         self.assertEqual(resolver.func.view_class, TokenRefreshView)
 
 

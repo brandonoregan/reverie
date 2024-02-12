@@ -50,6 +50,7 @@ class CreateOrder(APIView):
             return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
 
         print("SERIALIZER ERROR: ", serializer.errors)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

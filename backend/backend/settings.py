@@ -19,7 +19,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(f"BASE_DIR: {BASE_DIR}")
+# print(f"BASE_DIR: {BASE_DIR}")
 
 
 # Quick-start development settings - unsuitable for production
@@ -87,7 +87,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
-print(f"TEMPLATES_DIR: {BASE_DIR / 'frontend' / 'build'}")
+# print(f"TEMPLATES_DIR: {BASE_DIR / 'frontend' / 'build'}")
 
 TEMPLATES = [
     {
