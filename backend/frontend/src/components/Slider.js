@@ -23,17 +23,12 @@ export default function Slider() {
         <div className="heroText1">
           <h3>Find Reverie in every book.</h3>
         </div>
-        <div>
+        <div className="logoSliderImage">
           <img
             src="static/images/logo.jpg"
             alt="Reverie Logo"
             className="imageStyle"
           ></img>
-          {/* <img
-            src={"http://127.0.0.1:8000/media/static/images/logo.jpg"}
-            alt="Reverie Logo"
-            className="imageStyle"
-          ></img> */}
         </div>
         <Carousel.Caption>
           <LinkContainer to="/products">

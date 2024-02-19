@@ -22,6 +22,8 @@ TODO: Add delete confirmation for users and products
 TODO: Change OrderDetail into editable form
 
 TODO: Remove order upon stripe api error not just cancel
+
+TODO: Fix message banner after successful sale, it was places over the tabs
  
 
 

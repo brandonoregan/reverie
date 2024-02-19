@@ -81,6 +81,7 @@ nav {
   justify-content: center;
   align-items: center;
   margin-right: 10rem;
+  margin-left: 1.3rem;
   font-family: "Judson";
 }
 
@@ -136,4 +137,14 @@ button:disabled {
 
 .scrollable-table thead tr th {
   background-color: var(--oat);
+}
+
+@media screen and (max-width: 750px) {
+  .heroText1 {
+    display: none;
+  }
+
+  .logoSliderImage {
+    padding-bottom: 4rem;
+  }
 }

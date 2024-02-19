@@ -60,7 +60,6 @@ class GetOrders(APIView):
     def get(self, request):
         orders = Order.objects.all()
         serializer = self.serializer_class(orders, many=True)
-        print(serializer.data)
         return Response(serializer.data)
 
 
@@ -202,7 +201,6 @@ class BlacklistTokenUpdateView(APIView):
             token.blacklist()
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
-            print("ERROR:", e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -252,9 +250,6 @@ class StripeChechOutView(APIView):
 
     def post(self, request):
         line_items = formatStripeLineItem(request.data)
-
-        print("Line items:", line_items)
-
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
