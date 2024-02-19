@@ -117,10 +117,10 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "reveriedb",
-        "USER": "brandonoregan",
+        "NAME": "reverie_db",
+        "USER": "reverie_db_user",
         "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": "reveriedb.cxeuggg8umk3.us-east-1.rds.amazonaws.com",
+        "HOST": "dpg-cn9jt2ev3ddc73d77nrg-a.oregon-postgres.render.com",
         "PORT": "5432",
     }
 }
