@@ -1,17 +1,8 @@
-FIXBUG: The refresh token is needed to succesfully logout and add to token black list. So when the token expires naturally and the user hits logout it fails and the local storage isn't cleared. 
-HOW: Implement logout timer or figure timer at refresh_token expiration
-WORK AROUND: Increased lifespan of tokens in settings.
-
-FIXBUG: When user logs out cartItems are removed but the redux state isn't updated until there is a refresh so the items are still visible in the cart page and on the cart icon. FIXED - double check
-
 FIXBUG: If refresh was on login page, no route will be rerouted to 
 
-FIXBUG: Updaet user form
-
+FIXBUG: Update user form to load user information
 
 TODO: ADD elegant error handling of unauthorised request. 
-
-TODO: Update stripe line item image urls when site is hosted on AWS, images need to be publicly available for them to be used in the stripe checkout session url
 
 TODO: Look over actions that don't need to be actions and can be effects
 
