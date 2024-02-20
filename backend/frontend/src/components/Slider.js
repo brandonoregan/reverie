@@ -38,28 +38,48 @@ export default function Slider() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src="https://images.pexels.com/photos/194096/pexels-photo-194096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src="static/images/cover-bookshop.jpg"
           alt="Reverie Logo"
           className="d-block w-100"
           style={imageStyle}
         ></img>
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3
+            style={{
+              fontFamily: "Judson",
+              color: "ece7db",
+              fontSize: "2.4rem",
+              fontWeight: 700,
+            }}
+          >
+            Take a look inside Reverie
+          </h3>
+          <LinkContainer to="/products/books">
+            <Button variant="secondary">Shop now</Button>
+          </LinkContainer>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src="https://images.pexels.com/photos/7265312/pexels-photo-7265312.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src="static/images/cover-products.jpg"
           alt="Reverie Logo"
           className="d-block w-100"
           style={imageStyle}
         ></img>
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+          <h3
+            style={{
+              fontFamily: "Judson",
+              color: "ece7db",
+              fontSize: "2.4rem",
+              fontWeight: 700,
+            }}
+          >
+            Reading is an experience
+          </h3>
+          <LinkContainer to="/products/books">
+            <Button variant="secondary">Shop books</Button>
+          </LinkContainer>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

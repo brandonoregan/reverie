@@ -84,13 +84,12 @@ nav {
   margin-left: 1.3rem;
   font-family: "Judson";
 }
-
-/* .carouselItem1 {
+.carouselItem {
   object-fit: contain;
   display: flex;
   justify-content: center;
   background-color: var(--oat);
-} */
+}
 
 /* regsiter page */
 
