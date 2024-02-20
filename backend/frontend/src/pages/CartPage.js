@@ -95,92 +95,94 @@ function CartPage() {
               </BackButton>
             </Message>
           ) : (
-            <Table className="text-center scrollable-table" hover>
-              <thead style={{ backgroundColor: "#ece7db" }}>
-                <tr
-                  style={{
-                    fontSize: "1.3rem",
-                    backgroundColor: "#ece7db",
-                    fontWeight: 700,
-                  }}
-                >
-                  <th colSpan={2}>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
-                  <th>Remove Item</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartItems.map((item) => (
-                  <tr key={item.product_id} className="align-middle">
-                    <td>
-                      <Image
-                        src={item.image}
-                        style={{ height: "150px", width: "150px" }}
-                      ></Image>
-                    </td>
-                    <td>{item.name}</td>
-                    <td>${item.price}</td>
-                    <td>
-                      <Form.Control
-                        as="select"
-                        className="form-select"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          dispatch(
-                            addToCart(item.product_id, Number(e.target.value))
-                          )
-                        }
-                      >
-                        {[...Array(item.stock_count).keys()].map((x) => (
-                          <option value={x + 1} key={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </Form.Control>
-                    </td>
-                    <td>${(item.price * item.quantity).toFixed(2)}</td>
-                    <td>
-                      {/* TODO: Add delete button logic */}
-                      <Button
-                        onClick={() => handleDeleteItem(item.product_id)}
-                        type="button"
-                        variant="light"
-                      >
-                        <i className="fas fa-trash"></i>
-                      </Button>
-                    </td>
+            <div class="table-container">
+              <Table className="text-center scrollable-table" hover>
+                <thead style={{ backgroundColor: "#ece7db" }}>
+                  <tr
+                    style={{
+                      fontSize: "1.3rem",
+                      backgroundColor: "#ece7db",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <th colSpan={2}>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Remove Item</th>
                   </tr>
-                ))}
-                <tr className="align-middle">
-                  <td style={{ fontSize: "1.3rem" }} colSpan={2}>
-                    <strong>Total</strong>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td style={{ fontSize: "1.3rem" }}>
-                    <strong>
-                      $
-                      {cartItems
-                        .reduce(
-                          (acc, item) => acc + item.price * item.quantity,
-                          0
-                        )
-                        .toFixed(2)}
-                    </strong>
-                  </td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {cartItems.map((item) => (
+                    <tr key={item.product_id} className="align-middle">
+                      <td>
+                        <Image
+                          src={item.image}
+                          style={{ height: "150px", width: "150px" }}
+                        ></Image>
+                      </td>
+                      <td>{item.name}</td>
+                      <td>${item.price}</td>
+                      <td>
+                        <Form.Control
+                          as="select"
+                          className="form-select"
+                          value={item.quantity}
+                          onChange={(e) =>
+                            dispatch(
+                              addToCart(item.product_id, Number(e.target.value))
+                            )
+                          }
+                        >
+                          {[...Array(item.stock_count).keys()].map((x) => (
+                            <option value={x + 1} key={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </td>
+                      <td>${(item.price * item.quantity).toFixed(2)}</td>
+                      <td>
+                        {/* TODO: Add delete button logic */}
+                        <Button
+                          onClick={() => handleDeleteItem(item.product_id)}
+                          type="button"
+                          variant="light"
+                        >
+                          <i className="fas fa-trash"></i>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="align-middle">
+                    <td style={{ fontSize: "1.3rem" }} colSpan={2}>
+                      <strong>Total</strong>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td style={{ fontSize: "1.3rem" }}>
+                      <strong>
+                        $
+                        {cartItems
+                          .reduce(
+                            (acc, item) => acc + item.price * item.quantity,
+                            0
+                          )
+                          .toFixed(2)}
+                      </strong>
+                    </td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
           )}
         </Row>
         {cartItems.length > 0 && (
           <Row className="d-flex justify-content-around ">
             <LinkContainer
               style={{
-                fontSize: "1.5rem",
+                fontSize: "1rem",
                 fontWeight: 700,
                 padding: ".5rem",
               }}
@@ -195,7 +197,7 @@ function CartPage() {
               variant="secondary"
               className="w-25"
               style={{
-                fontSize: "1.5rem",
+                fontSize: "1rem",
                 fontWeight: 700,
                 padding: ".5rem",
               }}

@@ -48,9 +48,13 @@ function LoginPage() {
                 borderRadius: "1rem",
                 display: "flex",
                 maxWidth: "800px",
+                marginLeft: "1rem",
+                marginRight: "1rem",
               }}
+              className="loginContainer"
             >
               <div
+                className="loginImageContainer"
                 style={{
                   width: "50%",
                 }}

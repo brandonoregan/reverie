@@ -33,46 +33,48 @@ function UsersTable({ setTab, setId, setMessage }) {
         ) : (
           <Row>
             <div className="scrollable-table-wrapper p-0 ">
-              <Table className="text-center scrollable-table" hover>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Staff</th>
-                    <th>Edit user</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user) => (
-                    <tr key={user.id} className="align-middle">
-                      <td>{user.id}</td>
-                      <td>{user.username}</td>
-                      <td>{user.email}</td>
-                      <td>{user.first_name} </td>
-                      <td>{user.last_name}</td>
-                      <td>
-                        {user.is_staff ? (
-                          <i className="fa-solid fa-check"></i>
-                        ) : (
-                          <i className="fa-solid fa-x"></i>
-                        )}
-                      </td>
-                      <td>
-                        <Button
-                          onClick={() => handleEditUser(user.id)}
-                          type="button"
-                          variant="light"
-                        >
-                          <i className="fas fa-edit"></i>
-                        </Button>
-                      </td>
+              <div class="user-table-container">
+                <Table className="text-center scrollable-table" hover>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>First name</th>
+                      <th>Last name</th>
+                      <th>Staff</th>
+                      <th>Edit user</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => (
+                      <tr key={user.id} className="align-middle">
+                        <td>{user.id}</td>
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.first_name} </td>
+                        <td>{user.last_name}</td>
+                        <td>
+                          {user.is_staff ? (
+                            <i className="fa-solid fa-check"></i>
+                          ) : (
+                            <i className="fa-solid fa-x"></i>
+                          )}
+                        </td>
+                        <td>
+                          <Button
+                            onClick={() => handleEditUser(user.id)}
+                            type="button"
+                            variant="light"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
             </div>
           </Row>
         )}

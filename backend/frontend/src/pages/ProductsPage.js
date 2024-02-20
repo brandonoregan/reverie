@@ -90,8 +90,6 @@ function ProductsPage() {
       </Row>
       <Container fluid>
         <Row className=" px-0 text-center">
-          {message && <Message variant="success">{message}</Message>}
-
           <Nav
             fill
             className={`ps-auto ${
@@ -130,10 +128,11 @@ function ProductsPage() {
             </Nav.Item>
           </Nav>
         </Row>
-        <Row>
+        <Row className="mt-2 d-flex justify-content-center ">
+          {message && <Message variant="success">{message}</Message>}
           <Col>
             {isLoading ? (
-              <div className="d-flex vh-100 align-content-center justify-content-center ">
+              <div className="d-flex vh-100 align-content-center justify-content-center ms-auto">
                 <Loader size={"200px"} />
               </div>
             ) : error ? (
@@ -141,7 +140,7 @@ function ProductsPage() {
             ) : selectedCategory === "candles" ? (
               <Row className="d-flex justify-content-center">
                 {candles.map((product, index) => (
-                  <Col md="auto" key={product.id}>
+                  <Col xs="auto" md="auto" key={product.id}>
                     <ProductCard product={product} />
                   </Col>
                 ))}
@@ -149,7 +148,7 @@ function ProductsPage() {
             ) : selectedCategory === "books" ? (
               <Row className="d-flex justify-content-center">
                 {books.map((product) => (
-                  <Col md="auto" key={product.id}>
+                  <Col xs="auto" md="auto" key={product.id}>
                     <ProductCard product={product} />
                   </Col>
                 ))}
@@ -157,7 +156,7 @@ function ProductsPage() {
             ) : (
               <Row className="d-flex justify-content-center">
                 {bundles.map((product) => (
-                  <Col md="auto" key={product.id}>
+                  <Col xs="auto" md="auto" key={product.id}>
                     <ProductCard product={product} />
                   </Col>
                 ))}
