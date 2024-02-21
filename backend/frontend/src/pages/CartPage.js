@@ -179,7 +179,7 @@ function CartPage() {
           )}
         </Row>
         {cartItems.length > 0 && (
-          <Row className="d-flex justify-content-around ">
+          <Row className="d-flex justify-content-around mt-2">
             <LinkContainer
               style={{
                 fontSize: "1rem",

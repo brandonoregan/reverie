@@ -258,7 +258,7 @@ class StripeChechOutView(APIView):
                 shipping_address_collection={
                     "allowed_countries": ["AU", "US", "CA"],
                 },
-                success_url="http://127.0.0.1:8000/products?success=true&session_id={CHECKOUT_SESSION_ID}",
+                success_url="http://127.0.0.1:8000/?success=true&session_id={CHECKOUT_SESSION_ID}",
                 cancel_url="http://127.0.0.1:8000/cart?canceled=true",
             )
             return Response({"checkout_url": checkout_session.url})
