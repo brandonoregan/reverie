@@ -23,11 +23,6 @@ TODO: Change OrderDetail into editable form
 
 TODO: Remove order upon stripe api error not just cancel
 
-TODO: Fix message banner after successful sale, it was places over the tabs
- 
-
-
-
 CONSIDER: Add tax prices and shipping cost to stripe checkout
 
 CONSIDER: Store cart for specific user 

@@ -224,3 +224,6 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 MEDIA_URL = "https://reverie-bucket.s3.amazonaws.com/media/"
+
+if os.getcwd() == "/app":
+    DEBUG = False
