@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "reverie-reading.onrender.com",
@@ -224,6 +224,3 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 MEDIA_URL = "https://reverie-bucket.s3.amazonaws.com/media/"
-
-if os.getcwd() == "/app":
-    DEBUG = False
