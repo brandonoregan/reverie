@@ -2,6 +2,7 @@ import { getUserOrders } from "../features/Order/orderSlice";
 import React, { useEffect, useState } from "react";
 import { Row, Button, Container, Table, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import BackButton from "../components/BackButton";
 
 function ProfilePage({ setTab, setId }) {
   const [showDetail, setShowDetail] = useState(false);
@@ -11,7 +12,7 @@ function ProfilePage({ setTab, setId }) {
   const { userOrders } = useSelector((state) => state.order);
 
   function handleOrderDetails(order_id) {
-    setShowDetail(true);
+    setShowDetail((current) => !current);
     setOrderId(order_id);
   }
 
@@ -109,6 +110,20 @@ function ProfilePage({ setTab, setId }) {
                 </tr>
               </tbody>
             </Table>
+          </Row>
+          <Row className="d-flex justify-content-center ">
+            <Button
+              onClick={() => handleOrderDetails()}
+              variant="secondary"
+              className="w-25"
+              style={{
+                fontSize: "1rem",
+                fontWeight: 700,
+                padding: ".5rem",
+              }}
+            >
+              Back to orders
+            </Button>
           </Row>
         </Container>
       ) : (

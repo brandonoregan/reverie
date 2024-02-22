@@ -53,4 +53,6 @@ def updateOrder(payment_intent):
      {payment_intent.shipping.address.state},
      {payment_intent.shipping.address.country}"""
 
+    print("UPDATE ORDER FUNCTION: ", last_order)
+    print("UPDATE ORDER PAYMENT INTENT: ", last_order.payment_intent)
     last_order.save()

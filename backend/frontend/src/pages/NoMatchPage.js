@@ -5,7 +5,7 @@ import BackButton from "../components/BackButton";
 
 function NoMatchPage() {
   return (
-    <Container>
+    <Container fluid>
       <Message variant="danger">
         Unfortunately there was a network error because go back and try again.
         <BackButton toLink="/products">Go Back</BackButton>

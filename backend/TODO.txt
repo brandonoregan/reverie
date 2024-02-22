@@ -30,3 +30,7 @@ CONSIDER: Store cart for specific user
 CONSIDER: Order by for admin
 
 CONSIDER: Search bar for products in user and admin
+
+Check:
+- NoMatchPage container IS now fluid.
+- DEBUG is False

@@ -212,6 +212,7 @@ WEBHOOK_SIGNING_SECRET = settings.WEBHOOK_SIGNING_SECRET
 @csrf_exempt
 @require_POST
 def stripe_webhook(request):
+    print("WEBHOOK FIRED")
     event = None
     payload = request.body
     sig_header = request.headers["STRIPE_SIGNATURE"]
@@ -229,7 +230,9 @@ def stripe_webhook(request):
         # Handle the event
     if event.type == "payment_intent.succeeded":
         payment_intent = event.data.object
+        print("BEFORE updateOrder")
         updateOrder(payment_intent)
+        print("After updateOrder")
     else:
         print("Unhandled event type {}".format(event.type))
     if event.type == "checkout.session.completed":
