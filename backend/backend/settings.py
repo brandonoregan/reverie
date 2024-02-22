@@ -33,6 +33,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "reverie-reading.onrender.com",
+    "https://reverie-reading.onrender.com/"
     "https://reverie-reading-e7c071b91148.herokuapp.com/" "localhost",
     "127.0.0.1",
     "",
