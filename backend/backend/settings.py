@@ -153,6 +153,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# TODO: Specify allowed urls later
 CORS_ORIGIN_ALLOW_ALL = True
 
 SIMPLE_JWT = {
@@ -209,13 +210,7 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STORAGES = {
-    # ...
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # STATIC_URL = 'https://reverie-bucket.s3.amazonaws.com/static/'
 
