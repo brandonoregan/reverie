@@ -31,7 +31,7 @@ The backend of our project is powered by Python and Django, leveraging Django RE
 
 
 ## Access
-For quick access simply head to [http://concept-env-v5.eba-jmnuwas7.eu-west-1.elasticbeanstalk.com/](https://reverie-reading.onrender.com) 
+For quick access simply head to https://reverie-reading.onrender.com
 
 
 ## Contributing
