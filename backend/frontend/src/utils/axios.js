@@ -86,14 +86,19 @@ axiosInstance.interceptors.response.use(
         console.log("Refresh token not available.");
 
         // If a user was redirected from an external page set the login as that page else set it to home, then redirect to the login page
-        if (window.location.href !== "http://localhost:3000/login/") {
+        if (
+          window.location.href !== "https://reverie-reading.onrender.com/login/"
+        ) {
           localStorage.setItem("preLoginURL", window.location.href);
 
           console.log("Window Location", window.location.href);
 
           window.location.href = "/login/";
         } else {
-          localStorage.setItem("preLoginURL", "http://localhost:3000/");
+          localStorage.setItem(
+            "preLoginURL",
+            "https://reverie-reading.onrender.com"
+          );
           localStorage.setItem("loginError", error.response.data.detail);
 
           window.location.href = "/login/";

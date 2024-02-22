@@ -61,7 +61,7 @@ export function createOrder() {
       };
 
       const { data } = await axiosInstance.post(
-        `http://127.0.0.1:8000/api/order/`,
+        `https://reverie-reading.onrender.com/api/order/`,
         postData
       );
 
@@ -76,7 +76,7 @@ export function deleteOrder() {
   return async function (dispatch, getState) {
     try {
       const { data } = await axiosInstance.post(
-        `http://127.0.0.1:8000/api/order/delete/`
+        `https://reverie-reading.onrender.com/api/order/delete/`
       );
       console.log("CREATE ORDER: ", data);
     } catch (error) {
@@ -110,7 +110,7 @@ export function addToCart(id, quantity) {
   return async function (dispatch, getState) {
     try {
       const { data } = await axiosInstance.get(
-        `http://127.0.0.1:8000/api/products/${id}`
+        `https://reverie-reading.onrender.com/api/products/${id}`
       );
 
       console.log("DATA FETCHED:", data);

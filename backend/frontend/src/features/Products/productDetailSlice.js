@@ -31,7 +31,7 @@ export function getProduct(id) {
 
     try {
       const { data } = await axiosInstance.get(
-        `http://127.0.0.1:8000/api/products/${id}`
+        `https://reverie-reading.onrender.com/api/products/${id}`
       );
 
       console.log("ASYNC SINGLE PRODUCT:", data);
