@@ -5,6 +5,7 @@ import { loginUser } from "../features/Auth/authSlice";
 import { loginSchema } from "../schemas/index";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import Message from "../components/Message";
 
 function LoginPage() {
   // Redux Hooks
@@ -37,6 +38,7 @@ function LoginPage() {
   return (
     <>
       <Container fluid style={{ position: "relative" }}>
+        {error && <Message>error</Message>}
         <Row style={{ height: "20rem", backgroundColor: "#ece7db" }}>
           <Col className="d-flex justify-content-center">
             <div
