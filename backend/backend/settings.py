@@ -201,14 +201,15 @@ AWS_S3_SIGNATURE_NAME = ("s3v4",)
 AWS_S3_REGION_NAME = "us-east-1"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-AWS_S3_VERITY = True
+AWS_S3_VERIFY = True
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_URL = "s3://reverie-bucket/static/"
+STATIC_URL = 'https://reverie-bucket.s3.amazonaws.com/static/'
 # STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -223,6 +224,3 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 MEDIA_URL = "https://reverie-bucket.s3.amazonaws.com/media/"
-
-if os.getcwd() == "/app":
-    DEBUG = False
