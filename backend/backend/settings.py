@@ -33,7 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "https://reverie-reading.onrender.com/",
-    "http://reverie-bucket.s3-website-us-east-1.amazonaws.com"
+    "http://reverie-bucket.s3-website-us-east-1.amazonaws.com",
+    'reverie-reading.onrender.com'
 ]
 
 
