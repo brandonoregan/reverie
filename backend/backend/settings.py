@@ -29,14 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    "reverie-reading.onrender.com",
     "https://reverie-reading.onrender.com/"
-    "https://reverie-reading-e7c071b91148.herokuapp.com/" "localhost",
-    "127.0.0.1",
-    "",
 ]
 
 
@@ -209,9 +205,11 @@ AWS_S3_VERITY = True
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_URL = "/static/"
+STATIC_URL = "s3://reverie-bucket/static/"
+# STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
