@@ -32,7 +32,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "https://reverie-reading.onrender.com/"
+    "https://reverie-reading.onrender.com/",
+    "http://reverie-bucket.s3-website-us-east-1.amazonaws.com"
 ]
 
 
@@ -209,7 +210,7 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_URL = 'https://reverie-bucket.s3.amazonaws.com/'
+STATIC_URL = 'http://reverie-bucket.s3-website-us-east-1.amazonaws.com'
 # STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
