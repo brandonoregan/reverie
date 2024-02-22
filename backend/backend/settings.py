@@ -153,7 +153,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# TODO: Specify allowed urls later
 CORS_ORIGIN_ALLOW_ALL = True
 
 SIMPLE_JWT = {
