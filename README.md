@@ -33,6 +33,42 @@ The backend of our project is powered by Python and Django, leveraging Django RE
 ## Access
 For quick access simply head to https://reverie-reading.onrender.com
 
+## How to interact with the Reverie Reading application features: 
+
+<details>
+  
+  <summary>Admin functionality:</summary>
+  
+  The Admin user experience is different the customer user experience. To access and use the Admin functionality, use the following login credentials: 
+
+Username: admin 
+
+Password admin 
+</details>
+<details>
+  
+  <summary>Stripe API functionality: </summary>
+  
+  - To test and use the Stripe API you will need to be registered and logged in as a general user. Following login simply select an item from the Products page. You will then be redirected to the Product Detail page. 
+
+  - From the Product Detail page, click the Add to Cart button, this will redirect you to the cart page. 
+
+  - From the cart page, you can select to continue shopping and repeat steps one and two or continue to step 4. 
+
+  - Now select the Proceed to Checkout button, you will be redirected to the Stripe API payment and address confirmation page. 
+
+  - In the Stripe shipping and payment form, please use a fake email and shipping address. For the card information you can use the following details:
+    
+    Card Number: 4242 4242 4242 4242 
+    
+    DD/MM: 02/24 
+    
+    CVC: 123 
+
+  - If the payment is successful, you will be redirected to the home page. 
+  
+</details>
+
 
 ## Contributing
 Concept warmly welcome contributions. 
