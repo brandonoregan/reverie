@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "https://reverie-reading.onrender.com/",
@@ -208,10 +208,10 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# For serving all static files from s3 including build folder
+# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # STATIC_URL = 'https://reverie-bucket.s3.amazonaws.com/static/'
 
 
