@@ -161,4 +161,4 @@ cython_debug/
 
 backend/TODO.txt
 
-/staticfiles/
+# /staticfiles/

@@ -208,16 +208,14 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # For serving all static files from s3 including build folder
 # STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # STATIC_URL = 'https://reverie-bucket.s3.amazonaws.com/static/'
 
-
 STATIC_URL = "/static/"
-
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Tells collect static where else to look for static files
 STATICFILES_DIRS = [
