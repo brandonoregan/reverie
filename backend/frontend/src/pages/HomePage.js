@@ -42,9 +42,9 @@ function HomePage() {
 
   return (
     <div>
+      {message && <Message variant="success">{message}</Message>}
       <Slider />
       <Container>
-        {message && <Message variant="success">{message}</Message>}
         <Row className="d-flex justify-content-center my-4">
           {categories.map((cat) => (
             <Col

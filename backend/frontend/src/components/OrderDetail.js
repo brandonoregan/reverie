@@ -56,20 +56,6 @@ function OrderDetail({ orderId }) {
                   <td>${(item.price * item.quantity).toFixed(2)}</td>
                 </tr>
               ))}
-              {/* <tr
-                style={{ backgroundColor: "#ece7db" }}
-                className="align-middle"
-              >
-                <td style={{ fontSize: "1.3rem", backgroundColor: "#ece7db" }}>
-                  <strong>Order Total</strong>
-                </td>
-                <td style={{ backgroundColor: "#ece7db" }}></td>
-                <td style={{ backgroundColor: "#ece7db" }}></td>
-                <td style={{ backgroundColor: "#ece7db" }}></td>
-                <td style={{ fontSize: "1.3rem", backgroundColor: "#ece7db" }}>
-                  <strong>${orderObject.total_price}</strong>
-                </td>
-              </tr> */}
             </tbody>
           </Table>
         </Row>
