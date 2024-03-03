@@ -2,7 +2,6 @@ import { getUserOrders } from "../features/Order/orderSlice";
 import React, { useEffect, useState } from "react";
 import { Row, Button, Container, Table, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import BackButton from "../components/BackButton";
 
 function ProfilePage({ setTab, setId }) {
   const [showDetail, setShowDetail] = useState(false);
@@ -137,7 +136,7 @@ function ProfilePage({ setTab, setId }) {
                     <th>Payment Status</th>
                     <th>Delivered</th>
                     <th>Total Items</th>
-                    <th>Total Price</th>
+                    {/* <th>Total Price</th> */}
                     <th>Order Details</th>
                   </tr>
                 </thead>
@@ -150,7 +149,7 @@ function ProfilePage({ setTab, setId }) {
                       <td>{order.payment_status ? "Paid" : "Pending"}</td>
                       <td>{order.delivered ? "Delivered" : "On Route"} </td>
                       <td>{order.items.length} </td>
-                      <td>${order.total_price} </td>
+                      {/* <td>${order.total_price} </td> */}
                       <td>
                         <Button
                           onClick={() => handleOrderDetails(order.id)}
