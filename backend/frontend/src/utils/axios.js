@@ -1,6 +1,18 @@
 import axios from "axios";
 
-const baseURL = "https://reverie-reading.onrender.com/api/";
+// const baseURL = "https://reverie-reading.onrender.com/api/";
+
+// Conditionally set base url
+let baseURL;
+
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+) {
+  baseURL = "http://127.0.0.1:8000/api/";
+} else {
+  baseURL = "https://reverie-reading.onrender.com/api/";
+}
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
