@@ -1,8 +1,8 @@
 # Reverie Reading
-An eccommerce application.
+An eCommerce application.
 
 ## Description
-Reverie Reading is a simple yet elegant eccommerce application that contains all the necesssary features you would expect of an online shopping application.
+Reverie Reading is a simple yet elegant eCommerce application that contains all the necessary features you would expect of an online shopping application.
 
 
 ## Preview
@@ -27,7 +27,7 @@ Reverie Reading is a simple yet elegant eccommerce application that contains all
 - Redux
 - Postgres
 
-The backend of our project is powered by Python and Django, leveraging Django REST Framework (DRF) for its robust API capabilities, which is seamlessly consumed by our React frontend for dynamic interactions. PostgreSQL was chosen for its smooth integration with Django, ensuring efficient data handling. On the frontend, we combined React's interactive UI capabilities with Redux for state management, and React Bootstrap for responsive design, creating a cohesive and engaging user experience. HTML and CSS were utilized for foundational web structure and styling, rounding out our comprehensive tech stack for modern web development.
+The backend of our project is powered by Python and Django, leveraging Django REST Framework (DRF) for its robust API capabilities, which is seemlessly consumed by our React frontend for dynamic interactions. PostgreSQL was chosen for its smooth integration with Django, ensuring efficient data handling. On the frontend, we combined React's interactive UI capabilities with Redux for state management, and React Bootstrap for responsive design, creating a cohesive and engaging user experience. HTML and CSS were utilized for foundational web structure and styling, rounding out our comprehensive tech stack for modern web development.
 
 
 ## Access
@@ -71,7 +71,7 @@ Password admin
 
 
 ## Contributing
-Concept warmly welcome contributions. 
+Contributions are warmly welcomed. 
 
 <details>
   
@@ -107,7 +107,7 @@ Concept warmly welcome contributions.
   - Reference Issues (if applicable):
     - If your changes address specific issues or feature requests, reference them in the pull request description using #issue-number.
   
-  - Engage in Discussion:
+  - Engage in Discussions:
     - Be responsive to comments or feedback on your pull request. Engage in discussions, make necessary changes based on feedback, and ensure your code meets the project's guidelines.
 
   
